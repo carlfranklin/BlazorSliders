@@ -29,11 +29,35 @@
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content 1</h3>
+                        This demo initializes the size and location of the sliders as a percentage of the 
+                        initial width of the browser.
                     </div>
                 </TopChildContent>
                 <BottomChildContent>
                     <div style="padding:10px;">
                         <h3>Bottom Content 1</h3>
+                        <ul class="nav flex-column">
+                            <li class="nav-item px-3">
+                                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                                    <span class="oi oi-resize-width" aria-hidden="true"></span> Vertical
+                                </NavLink>
+                            </li>
+                            <li class="nav-item px-3">
+                                <NavLink class="nav-link" href="horizontals">
+                                    <span class="oi oi-resize-height" aria-hidden="true"></span> Horizontal
+                                </NavLink>
+                            </li>
+                            <li class="nav-item px-3">
+                                <NavLink class="nav-link" href="fourpanels">
+                                    <span class="oi oi-resize-both" aria-hidden="true"></span> 4 Panels
+                                </NavLink>
+                            </li>
+                            <li class="nav-item px-3">
+                                <NavLink class="nav-link" href="windowresize">
+                                    <span class="oi oi-resize-both" aria-hidden="true"></span> Percent Width
+                                </NavLink>
+                            </li>
+                        </ul>
                     </div>
                 </BottomChildContent>
             </HorizontalSliderPanel>

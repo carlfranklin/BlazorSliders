@@ -6,7 +6,7 @@
     <Authors>Carl Franklin</Authors>
     <Company></Company>
     <PackageId></PackageId>
-    <Description>Buld UI with multiple panels separated by sliding splitters</Description>
+    <Description>Create multiple panels separated by sliding splitters</Description>
     <Copyright>Copyright 2021 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
   </PropertyGroup>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Carl Franklin</Authors>
+    <Company>App vNext</Company>
+    <PackageId>AppvNext.BlazorSliders</PackageId>
+    <Description>BlazorSliders lets you create multiple panels with vertical and horizontal splitters to split them up.</Description>
+    <Copyright>Copyright 2021 by App vNext, LLC</Copyright>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.1" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,312 @@
+﻿@inject SliderInterop jsInterop
+
+<div id="@LeftPanelId" class="noselect"
+     style="@LeftStyleString
+    position:absolute;
+    overflow:auto;
+    top:0px;
+    left:0px;
+    height:@HeightPx;
+    width:@LeftPanelWidthPx;">
+    @LeftChildContent
+</div>
+
+<div id="@SliderId"
+     style="background-color: lightgray;
+    cursor: e-resize;
+    width: @SliderWidthPx;
+    position: absolute;
+    top: 0px;
+    left: @LeftPanelWidthPx;
+    height: @HeightPx;">
+</div>
+
+<div id="@RightPanelId" class="noselect"
+     style="@RightStyleString position:absolute;
+    overflow:auto;
+    top:0px;
+    left:@RightPanelLeftPx;
+    height:@HeightPx;
+    width:@RightPanelWidthPx;">
+    @RightChildContent
+</div>
+
+@code {
+
+    string sliderId = "";
+    [Parameter]
+    public string SliderId
+    {
+        get
+        {
+            if (sliderId == "")
+            {
+                sliderId = NewGuid();
+            }
+            return sliderId;
+        }
+        set
+        {
+            sliderId = value;
+        }
+    }
+
+    string leftPanelId = "";
+    [Parameter]
+    public string LeftPanelId
+    {
+        get
+        {
+            if (leftPanelId == "")
+            {
+                leftPanelId = NewGuid();
+            }
+            return leftPanelId;
+        }
+        set
+        {
+            leftPanelId = value;
+        }
+    }
+
+    string righPanelId = "";
+    [Parameter]
+    public string RightPanelId
+    {
+        get
+        {
+            if (righPanelId == "")
+            {
+                righPanelId = NewGuid();
+            }
+            return righPanelId;
+        }
+        set
+        {
+            righPanelId = value;
+        }
+    }
+
+    [Parameter]
+    public RenderFragment LeftChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment RightChildContent { get; set; }
+
+    [Parameter]
+    public string ParentId { get; set; } = "";
+
+    [Parameter]
+    public AbsolutePanel Container { get; set; }
+
+    [Parameter]
+    public string LeftStyleString { get; set; } = "";
+
+    [Parameter]
+    public string RightStyleString { get; set; } = "";
+
+    [Parameter]
+    public int SliderWidth { get; set; } = 5;
+
+    private int leftPanelWidth;
+    private int originalLeftPanelWidth;
+
+    [Parameter]
+    public int LeftPanelStartingWidth
+    {
+        get
+        {
+            return originalLeftPanelWidth;
+        }
+        set
+        {
+            if (originalLeftPanelWidth == 0)
+            {
+                originalLeftPanelWidth = value;
+                leftPanelWidth = value;
+            }
+        }
+    }
+
+    public int LeftPanelWidth
+    {
+        get
+        {
+            return leftPanelWidth;
+        }
+    }
+
+    [Parameter]
+    public int MinimumLeftPanelWidth { get; set; } = 200;
+
+    [Parameter]
+    public int MinimumRightPanelWidth { get; set; } = 200;
+
+    [Parameter]
+    public int Width
+    {
+        get
+        {
+            return LeftPanelWidth + SliderWidth + RightPanelWidth;
+        }
+        set
+        {
+            if (ParentWidth > 0)
+            {
+                var Diff = ParentWidth - value;
+                ParentWidth = value;
+                if (ParentLeft > 0)
+                    ParentLeft += Diff;
+            }
+        }
+    }
+
+    [Parameter]
+    public int Height
+    {
+        get
+        {
+            return ParentHeight;
+        }
+        set
+        {
+            if (ParentHeight > 0)
+            {
+                var Diff = ParentHeight - value;
+                ParentHeight = value;
+                if (ParentTop > 0)
+                    ParentTop += Diff;
+            }
+        }
+    }
+
+    private int ParentWidth { get; set; }
+    private int ParentHeight { get; set; }
+    private int ParentLeft { get; set; }
+    private int ParentTop { get; set; }
+
+    private string LeftPanelWidthPx { get { return leftPanelWidth.ToString() + "px"; } }
+    private string RightPanelWidthPx { get { return RightPanelWidth.ToString() + "px"; } }
+    private string RightPanelLeftPx { get { return (leftPanelWidth + SliderWidth).ToString() + "px"; } }
+    private string HeightPx { get { return ParentHeight.ToString() + "px"; } }
+    private string WidthPx { get { return ParentWidth.ToString() + "px"; } }
+    private string SliderWidthPx { get { return SliderWidth.ToString() + "px"; } }
+
+    public int RightPanelWidth
+    {
+        get
+        {
+            return ParentWidth - (LeftPanelWidth + SliderWidth);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentWidthChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentWidth = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentHeightChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentHeight = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentLeftChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentLeft = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentTopChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentTop = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task MouseDown(int X, int Y)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task MouseUp(int X, int Y)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task MouseMove(int X, int Y)
+    {
+        Resize(X);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Resize(int LeftPanelWidth)
+    {
+        int newX = LeftPanelWidth - ParentLeft;
+        if (Container != null)
+        {
+            newX -= Container.Left;
+        }
+
+        if (newX < MinimumLeftPanelWidth)
+            newX = MinimumLeftPanelWidth;
+        else if (newX > ParentWidth - MinimumRightPanelWidth)
+            newX = ParentWidth - MinimumRightPanelWidth;
+
+        leftPanelWidth = newX;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool FirstRender)
+    {
+        var myObject = DotNetObjectReference.Create(this);
+
+        if (FirstRender)
+        {
+            await jsInterop.RegisterVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, myObject);
+        }
+
+        if (ParentWidth == 0)
+            await jsInterop.GetVerticalParentWidth(ParentId, myObject);
+
+        if (ParentHeight == 0)
+            await jsInterop.GetVerticalParentHeight(ParentId, myObject);
+
+        if (ParentTop == 0)
+            await jsInterop.GetVerticalParentTop(ParentId, myObject);
+
+        if (ParentLeft == 0)
+            await jsInterop.GetVerticalParentLeft(ParentId, myObject);
+
+        Resize(LeftPanelWidth);
+    }
+
+    private string NewGuid()
+    {
+        var obj = new object();
+        int seed = obj.GetHashCode();
+        var rnd = new Random(seed);
+        var bytes = new byte[16];
+        rnd.NextBytes(bytes);
+        var guid = new Guid(bytes);
+        return guid.ToString();
+    }
+}

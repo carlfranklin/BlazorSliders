@@ -1,0 +1,23 @@
+﻿@inject SliderInterop SliderInterop
+
+@code {
+
+    [Parameter]
+    public EventCallback<Size> WindowResized { get; set; }
+
+    [JSInvokable]
+    public async Task OnWindowResized(int WindowWidth, int WindowHeight)
+    {
+        var size = new Size();
+        size.Width = WindowWidth;
+        size.Height = WindowHeight;
+        await WindowResized.InvokeAsync(size);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var myObject = DotNetObjectReference.Create(this);
+        await SliderInterop.RegisterWindow(myObject);
+        await SliderInterop.ForceResize(myObject);
+    }
+}

@@ -1,0 +1,98 @@
+﻿<div id="@Id" style="@StyleString position:absolute;
+    left:@LeftPx;
+    top:@TopPx;
+    width:@WidthPx;
+    height:@HeightPx;">
+    @ChildContent
+</div>
+
+<Window WindowResized="OnWindowResized" />
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public bool AutoResize { get; set; } = false;
+
+    [Parameter]
+    public int Left { get { return Position.Left; } set { Position.Left = value; } }
+
+    [Parameter]
+    public int Top { get { return Position.Top; } set { Position.Top = value; } }
+
+    [Parameter]
+    public int Height
+    {
+        get { return Size.Height; }
+        set
+        {
+            Size.Height = value;
+            if (OriginalHeight == 0)
+                OriginalHeight = value;
+        }
+    }
+
+    [Parameter]
+    public int Width
+    {
+        get { return Size.Width; }
+        set
+        {
+            Size.Width = value;
+            if (OriginalWidth == 0)
+                OriginalWidth = value;
+        }
+    }
+
+    [Parameter]
+    public string StyleString { get; set; } = "";
+
+    // We need these because you can't change parameters from inside the component
+    private Position Position { get; set; } = new Position();
+    private Size Size { get; set; } = new Size();
+
+    private int OriginalWidth;
+    private int OriginalHeight;
+
+    private string LeftPx { get { return Left.ToString() + "px"; } }
+    private string TopPx { get { return Top.ToString() + "px"; } }
+    private string HeightPx { get { return Height.ToString() + "px"; } }
+    private string WidthPx { get { return Width.ToString() + "px"; } }
+
+    /// <summary>
+    /// This happens when the user resizes the browser
+    /// </summary>
+    /// <param name="size"></param>
+    /// <returns></returns>
+    async Task OnWindowResized(Size size)
+    {
+        //await Task.Delay(0);
+        if (AutoResize)
+        {
+            //if (Position.Left + Size.Width >= size.Width)
+                Width = size.Width - Position.Left;
+            //else
+            //    Size.Width = OriginalWidth;
+
+            //if (Position.Top + Size.Height >= size.Height)
+                Height = size.Height - Position.Top;
+            //else
+            //    Size.Height = OriginalHeight;
+
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    //protected override void OnAfterRender(bool firstRender)
+    //{
+    //    if (firstRender && AutoResize)
+    //    {
+
+    //    }
+    //}
+}

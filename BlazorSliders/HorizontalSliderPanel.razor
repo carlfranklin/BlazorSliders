@@ -1,0 +1,306 @@
+﻿@inject SliderInterop jsInterop
+
+<div id="@TopPanelId" class="noselect"
+     style="@TopStyleString
+    position:absolute;
+    overflow:auto;
+    top:0px;
+    left:0px;
+    width:@WidthPx;
+    height:@TopPanelHeightPx;">
+    @TopChildContent
+</div>
+
+<div id="@SliderId"
+     style="background-color:lightgray;
+    cursor:n-resize;
+    position:absolute;
+    height:@SliderHeightPx;
+    top:@TopPanelHeightPx;
+    left:0px;
+    width:@WidthPx;">
+</div>
+
+<div id="@BottomPanelId" class="noselect"
+     style="@BottomStyleString
+    position:absolute;
+    overflow:auto;
+    top:@BottomPanelTopPx;
+    left:0px;
+    width:@WidthPx;
+    height:@BottomPanelHeightPx;">
+    @BottomChildContent
+</div>
+
+@code
+{
+    string sliderId = "";
+    [Parameter]
+    public string SliderId
+    {
+        get
+        {
+            if (sliderId == "")
+            {
+                sliderId = NewGuid();
+            }
+            return sliderId;
+        }
+        set
+        {
+            sliderId = value;
+        }
+    }
+
+    string topPanelId = "";
+    [Parameter]
+    public string TopPanelId
+    {
+        get
+        {
+            if (topPanelId == "")
+            {
+                topPanelId = NewGuid();
+            }
+            return topPanelId;
+        }
+        set
+        {
+            topPanelId = value;
+        }
+    }
+
+    string bottomPanelId = "";
+    [Parameter]
+    public string BottomPanelId
+    {
+        get
+        {
+            if (bottomPanelId == "")
+            {
+                bottomPanelId = NewGuid();
+            }
+            return bottomPanelId;
+        }
+        set
+        {
+            bottomPanelId = value;
+        }
+    }
+
+    [Parameter]
+    public RenderFragment TopChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment BottomChildContent { get; set; }
+
+    [Parameter]
+    public string ParentId { get; set; } = "";
+
+    [Parameter]
+    public AbsolutePanel Container { get; set; }
+
+    [Parameter]
+    public string TopStyleString { get; set; } = "";
+
+    [Parameter]
+    public string BottomStyleString { get; set; } = "";
+
+    [Parameter]
+    public int SliderHeight { get; set; } = 5;
+
+    private int topPanelHeight;
+    private int originalTopPanelHeight;
+
+    [Parameter]
+    public int TopPanelHeight
+    {
+        get
+        {
+            return topPanelHeight;
+        }
+        set
+        {
+            if (originalTopPanelHeight == 0)
+            {
+                originalTopPanelHeight = value;
+                topPanelHeight = value;
+            }
+        }
+    }
+
+    [Parameter]
+    public int MinimumTopPanelHeight { get; set; } = 200;
+
+    [Parameter]
+    public int MinimumBottomPanelHeight { get; set; } = 200;
+
+    [Parameter]
+    public int Width
+    {
+        get
+        {
+            return ParentWidth;
+        }
+        set
+        {
+            if (ParentWidth > 0)
+            {
+                var Diff = ParentWidth - value;
+                ParentWidth = value;
+                if (ParentLeft > 0)
+                    ParentLeft += Diff;
+                StateHasChanged();
+            }
+        }
+    }
+
+    [Parameter]
+    public int Height
+    {
+        get
+        {
+            return ParentHeight;
+        }
+        set
+        {
+
+            if (ParentHeight > 0)
+            {
+                var Diff = ParentHeight - value;
+                ParentHeight = value;
+                if (ParentTop > 0)
+                    ParentTop += Diff;
+            }
+        }
+    }
+
+    private int ParentWidth { get; set; }
+    private int ParentHeight { get; set; }
+    private int ParentTop { get; set; }
+    private int ParentLeft { get; set; }
+
+    private string TopPanelHeightPx { get { return topPanelHeight.ToString() + "px"; } }
+    private string BottomPanelHeightPx { get { return BottomPanelHeight.ToString() + "px"; } }
+    private string BottomPanelTopPx { get { return (topPanelHeight + SliderHeight).ToString() + "px"; } }
+    private string LeftPx { get { return ParentLeft.ToString() + "px"; } }
+    private string WidthPx { get { return ParentWidth.ToString() + "px"; } }
+    private string SliderHeightPx { get { return SliderHeight.ToString() + "px"; } }
+
+    public int BottomPanelHeight
+    {
+        get
+        {
+            return ParentHeight - (TopPanelHeight + SliderHeight);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentWidthChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentWidth = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentHeightChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentHeight = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentLeftChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentLeft = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task ParentTopChanged(string value)
+    {
+        if (value != "")
+        {
+            ParentTop = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    [JSInvokable]
+    public async Task MouseDown(int X, int Y)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task MouseUp(int X, int Y)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public async Task MouseMove(int X, int Y)
+    {
+        Resize(Y);
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Resize(int TopPanelHeight)
+    {
+        int newY = TopPanelHeight - ParentTop;
+
+        if (Container != null)
+        {
+            newY -= Container.Top;
+        }
+
+        if (newY < MinimumTopPanelHeight)
+            newY = MinimumTopPanelHeight;
+        else if (newY > ParentHeight - MinimumBottomPanelHeight)
+            newY = ParentHeight - MinimumBottomPanelHeight;
+
+        topPanelHeight = newY;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool FirstRender)
+    {
+        var myObject = DotNetObjectReference.Create(this);
+
+        if (FirstRender)
+        {
+            await jsInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
+        }
+
+        if (ParentWidth == 0)
+            await jsInterop.GetHorizontalParentWidth(ParentId, myObject);
+
+        if (ParentHeight == 0)
+            await jsInterop.GetHorizontalParentHeight(ParentId, myObject);
+
+        if (ParentLeft == 0)
+            await jsInterop.GetHorizontalParentLeft(ParentId, myObject);
+
+        if (ParentTop == 0)
+            await jsInterop.GetHorizontalParentTop(ParentId, myObject);
+    }
+
+    private string NewGuid()
+    {
+        var obj = new object();
+        int seed = obj.GetHashCode();
+        var rnd = new Random(seed);
+        var bytes = new byte[16];
+        rnd.NextBytes(bytes);
+        var guid = new Guid(bytes);
+        return guid.ToString();
+    }
+}

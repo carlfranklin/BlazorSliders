@@ -1,0 +1,68 @@
+﻿@page "/fourpanels"
+
+<AbsolutePanel @ref=absolutePanel
+               Id="ParentPanel"
+               AutoResize="true">
+    <VerticalSliderPanel @ref=verticalPanel
+                         Container=absolutePanel
+                         ParentId="ParentPanel"
+                         LeftPanelId="LeftPanel1"
+                         RightPanelId="RightPanel1"
+                         SliderWidth="10"
+                         Width="absolutePanel.Width"
+                         Height="absolutePanel.Height"
+                         LeftPanelStartingWidth="400">
+        <LeftChildContent>
+            <HorizontalSliderPanel Container=absolutePanel
+                                   ParentId="LeftPanel1"
+                                   BottomPanelId="BottomPanelId1"
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:antiquewhite;"
+                                   BottomStyleString="background-color:aliceblue;"
+                                   Width="@verticalPanel.LeftPanelWidth"
+                                   Height="@absolutePanel.Height"
+                                   TopPanelHeight="200">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 1</h3>
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 1</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel Container=absolutePanel
+                                   ParentId="RightPanel1"
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:orange;"
+                                   BottomStyleString="background-color:yellow;"
+                                   Width="@verticalPanel.RightPanelWidth"
+                                   Height="@absolutePanel.Height"
+                                   TopPanelHeight="400">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 2</h3>
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 2</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+
+
+@code
+{
+    AbsolutePanel absolutePanel { get; set; }
+    VerticalSliderPanel verticalPanel { get; set; }
+
+}
+

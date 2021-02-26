@@ -1,0 +1,33 @@
+﻿@page "/horizontals"
+
+<AbsolutePanel @ref=absolutePanel
+               Id="ParentPanel"
+               AutoResize="true">
+    <HorizontalSliderPanel @ref=horizontalPanel
+                           Container=absolutePanel
+                           ParentId="ParentPanel"
+                           TopPanelId="TopPanel1"
+                           BottomPanelId="BottomPanel1"
+                           SliderHeight="10"
+                           Width="absolutePanel.Width"
+                           Height="absolutePanel.Height"
+                           TopPanelHeight="400">
+        <TopChildContent>
+            <div id="TopPanel1" style="padding:10px;">
+                <h3>Top Content</h3>
+            </div>
+        </TopChildContent>
+        <BottomChildContent>
+            <div id="BottomPanel1" style="padding:10px;">
+                <h3>Bottom Content</h3>
+            </div>
+        </BottomChildContent>
+    </HorizontalSliderPanel>
+</AbsolutePanel>
+
+@code
+{
+    AbsolutePanel absolutePanel { get; set; }
+    HorizontalSliderPanel horizontalPanel { get; set; }
+}
+

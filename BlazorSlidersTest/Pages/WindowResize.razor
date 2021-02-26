@@ -1,0 +1,110 @@
+﻿@page "/windowresize"
+
+<Window WindowResized="OnWindowResized" />
+
+@(WindowSize != null)
+{
+<AbsolutePanel @ref=absolutePanel
+               Id="ParentPanel"
+               AutoResize="true">
+    <VerticalSliderPanel @ref=verticalPanel
+                         Container=absolutePanel
+                         ParentId="ParentPanel"
+                         LeftPanelId="LeftPanel1"
+                         RightPanelId="RightPanel1"
+                         SliderWidth="10"
+                         Width="absolutePanel.Width"
+                         Height="absolutePanel.Height"
+                         LeftPanelStartingWidth="@StartingWindowWidth">
+        <LeftChildContent>
+            <HorizontalSliderPanel Container=absolutePanel
+                                   ParentId="LeftPanel1"
+                                   BottomPanelId="BottomPanelId1"
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:antiquewhite;"
+                                   BottomStyleString="background-color:aliceblue;"
+                                   Width="@verticalPanel.LeftPanelWidth"
+                                   Height="@absolutePanel.Height"
+                                   TopPanelHeight="@StartingWindowHeight">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 1</h3>
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 1</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel Container=absolutePanel
+                                   ParentId="RightPanel1"
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:orange;"
+                                   BottomStyleString="background-color:yellow;"
+                                   Width="@verticalPanel.RightPanelWidth"
+                                   Height="@absolutePanel.Height"
+                                   TopPanelHeight="@StartingWindowHeight">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 2</h3>
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 2</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+}
+
+@code
+{
+    AbsolutePanel absolutePanel { get; set; }
+    VerticalSliderPanel verticalPanel { get; set; }
+    Size WindowSize { get; set; } = null;
+    int StartingWindowWidthPercent = 50;
+    int StartingWindowHeightPercent = 50;
+
+    int StartingWindowWidth
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                return WindowSize.Width * StartingWindowWidthPercent / 100;
+            }
+            else
+                return 0;
+        }
+    }
+
+    int StartingWindowHeight
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                return WindowSize.Height * StartingWindowHeightPercent / 100;
+            }
+            else
+                return 0;
+        }
+    }
+
+    void OnWindowResized(Size Size)
+    {
+        WindowSize = Size;
+    }
+}
+
+<h3>WindowResize</h3>
+
+@code {
+
+}

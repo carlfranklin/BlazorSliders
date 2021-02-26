@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30626.31
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliders", "BlazorSliders\BlazorSliders.csproj", "{A98EA7D0-4693-46E9-B264-57CD58473DE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSlidersTest", "BlazorSlidersTest\BlazorSlidersTest.csproj", "{2773E436-5B5E-41EC-A26B-73FA1AE2C8FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlidersTest", "BlazorSlidersTest\BlazorSlidersTest.csproj", "{2773E436-5B5E-41EC-A26B-73FA1AE2C8FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

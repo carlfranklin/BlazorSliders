@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Carl Franklin</Authors>
     <Company></Company>
     <PackageId></PackageId>
-    <Description></Description>
+    <Description>Buld UI with multiple panels separated by sliding splitters</Description>
     <Copyright>Copyright 2021 by App vNext, LLC</Copyright>
+    <Product>BlazorSliders</Product>
   </PropertyGroup>
   
   <ItemGroup>

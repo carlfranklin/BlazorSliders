@@ -3,7 +3,6 @@
 
     window.addEventListener("resize", function () {
         if (component != null)
-            //component.invokeMethodAsync("OnWindowResized", window.innerWidth, window.innerHeight)
             setTimeout(raiseEvent, 1, component, "OnWindowResized", window.innerWidth, window.innerHeight);
     });
 
@@ -16,53 +15,20 @@ export function forceResize(dotNetComponent) {
     dotNetComponent.invokeMethodAsync("OnWindowResized", window.innerWidth, window.innerHeight)
 }
 
-export function getParentWidth(Id, dotnetComponent) {
+export function getParentDimensions(Id, dotnetComponent) {
     var component = dotnetComponent;
-    setTimeout(getWidth, 10, Id);
-    function getWidth(Id) {
+    setTimeout(getDimensions, 10, Id);
+    function getDimensions(Id) {
         var element = document.getElementById(Id);
         if (element == null)
-            setTimeout(getWidth, 10, Id);
+            setTimeout(getDimensions, 10, Id);
         else {
-            component.invokeMethodAsync("ParentWidthChanged", element.style.width);
-        }
-    }
-}
-export function getParentHeight(Id, dotnetComponent) {
-    var component = dotnetComponent;
-    setTimeout(getHeight, 10, Id);
-    function getHeight(Id) {
-        var element = document.getElementById(Id);
-        if (element == null)
-            setTimeout(getHeight, 10, Id);
-        else {
-            component.invokeMethodAsync("ParentHeightChanged", element.style.height);
-        }
-    }
-}
-
-export function getParentLeft(Id, dotnetComponent) {
-    var component = dotnetComponent;
-    setTimeout(getLeft, 10, Id);
-    function getLeft(Id) {
-        var element = document.getElementById(Id);
-        if (element == null)
-            setTimeout(getLeft, 10, Id);
-        else {
-            component.invokeMethodAsync("ParentLeftChanged", element.style.left);
-        }
-    }
-}
-
-export function getParentTop(Id, dotnetComponent) {
-    var component = dotnetComponent;
-    setTimeout(getTop, 10, Id);
-    function getTop(Id) {
-        var element = document.getElementById(Id);
-        if (element == null)
-            setTimeout(getTop, 10, Id);
-        else {
-            component.invokeMethodAsync("ParentTopChanged", element.style.top);
+            let top = element.style.top.substring(0, element.style.top.length - 2);
+            let left = element.style.left.substring(0, element.style.left.length - 2);
+            let width = element.style.width.substring(0, element.style.width.length - 2);
+            let height = element.style.height.substring(0, element.style.height.length - 2);
+            let dimensions = { Top: parseInt(top), Left: parseInt(left), Width: parseInt(width), Height: parseInt(height) };
+            component.invokeMethodAsync("ParentDimensionsChanged", dimensions);
         }
     }
 }
@@ -204,7 +170,6 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                //component.invokeMethodAsync("MouseDown", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseDown", ev.clientX, ev.clientY);
             }
         });
@@ -214,20 +179,17 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                //component.invokeMethodAsync("MouseUp", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseUp", ev.clientX, ev.clientY);
             }
         });
 
         slider.addEventListener("mousemove", function (ev) {
             if (component != null && sliderIsMoving)
-                //component.invokeMethodAsync("MouseMove", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
         });
 
         window.addEventListener("mousemove", function (ev) {
             if (component != null && sliderIsMoving)
-                //component.invokeMethodAsync("MouseMove", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
         });
 
@@ -237,7 +199,6 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                //component.invokeMethodAsync("MouseDown", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseDown", ev.clientX, ev.clientY);
             }
         });
@@ -247,23 +208,19 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                //component.invokeMethodAsync("MouseUp", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseUp", ev.clientX, ev.clientY);
             }
         });
 
         slider.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving)
-                //component.invokeMethodAsync("MouseMove", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
         });
 
         window.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving)
-                //component.invokeMethodAsync("MouseMove", ev.clientX, ev.clientY)
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
         });
-
     }
 
     function raiseEvent(comp, eventname, x, y) {

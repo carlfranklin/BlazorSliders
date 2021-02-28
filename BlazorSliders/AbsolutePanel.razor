@@ -1,4 +1,6 @@
-﻿<div id="@Id" style="@StyleString position:absolute;
+﻿@inject IJSRuntime js
+
+<div id="@Id" style="@StyleString position:absolute;
     left:@LeftPx;
     top:@TopPx;
     width:@WidthPx;
@@ -71,28 +73,11 @@
     /// <returns></returns>
     async Task OnWindowResized(Size size)
     {
-        //await Task.Delay(0);
         if (AutoResize)
         {
-            //if (Position.Left + Size.Width >= size.Width)
-                Width = size.Width - Position.Left;
-            //else
-            //    Size.Width = OriginalWidth;
-
-            //if (Position.Top + Size.Height >= size.Height)
-                Height = size.Height - Position.Top;
-            //else
-            //    Size.Height = OriginalHeight;
-
+            Width = size.Width - Position.Left;
+            Height = size.Height - Position.Top;
             await InvokeAsync(StateHasChanged);
         }
     }
-
-    //protected override void OnAfterRender(bool firstRender)
-    //{
-    //    if (firstRender && AutoResize)
-    //    {
-
-    //    }
-    //}
 }

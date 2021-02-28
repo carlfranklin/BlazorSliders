@@ -201,41 +201,20 @@
     }
 
     [JSInvokable]
-    public async Task ParentWidthChanged(string value)
+    public async Task ParentDimensionsChanged(object value)
     {
-        if (value != "")
+        if (value != null)
         {
-            ParentWidth = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentHeightChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentHeight = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentLeftChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentLeft = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentTopChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentTop = Convert.ToInt32(value.Substring(0, value.Length - 2));
+            if (value.ToString().Contains("null")) return;
+            var dimensions = System.Text.Json.JsonSerializer.Deserialize<Dimensions>(value.ToString());
+            ParentTop = dimensions.Top;
+            ParentLeft = dimensions.Left;
+            ParentWidth = dimensions.Width;
+            ParentHeight = dimensions.Height;
+            if (ParentTop > 0 || ParentLeft > 0 || ParentWidth > 0 || ParentHeight > 0)
+            {
+                Resize(LeftPanelWidth);
+            }
             await InvokeAsync(StateHasChanged);
         }
     }
@@ -269,7 +248,7 @@
 
         if (newX < MinimumLeftPanelWidth)
             newX = MinimumLeftPanelWidth;
-        else if (newX > ParentWidth - MinimumRightPanelWidth)
+        else if (ParentWidth > 0 && newX > ParentWidth - MinimumRightPanelWidth)
             newX = ParentWidth - MinimumRightPanelWidth;
 
         leftPanelWidth = newX;
@@ -284,19 +263,10 @@
             await jsInterop.RegisterVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, myObject);
         }
 
-        if (ParentWidth == 0)
-            await jsInterop.GetVerticalParentWidth(ParentId, myObject);
-
-        if (ParentHeight == 0)
-            await jsInterop.GetVerticalParentHeight(ParentId, myObject);
-
-        if (ParentTop == 0)
-            await jsInterop.GetVerticalParentTop(ParentId, myObject);
-
-        if (ParentLeft == 0)
-            await jsInterop.GetVerticalParentLeft(ParentId, myObject);
-
-        Resize(LeftPanelWidth);
+        if (ParentTop == 0 && ParentLeft == 0 && ParentWidth == 0 && ParentHeight == 0)
+        {
+            await jsInterop.GetVerticalParentDimensions(ParentId, myObject);
+        }
     }
 
     private string NewGuid()

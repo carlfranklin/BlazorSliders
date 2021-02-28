@@ -28,12 +28,12 @@ namespace BlazorSliders
             await module.InvokeAsync<string>("forceResize", Component);
         }
 
-        public async Task GetVerticalParentWidth(string Id, DotNetObjectReference<VerticalSliderPanel> Component)
+        public async Task GetVerticalParentDimensions(string Id, DotNetObjectReference<VerticalSliderPanel> Component)
         {
             try
             {
                 var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentWidth", Id, Component);
+                await module.InvokeAsync<string>("getParentDimensions", Id, Component);
             }
             catch (Exception ex)
             {
@@ -41,90 +41,12 @@ namespace BlazorSliders
             }
         }
 
-        public async Task GetVerticalParentHeight(string Id, DotNetObjectReference<VerticalSliderPanel> Component)
+        public async Task GetHorizontalParentDimensions(string Id, DotNetObjectReference<HorizontalSliderPanel> Component)
         {
             try
             {
                 var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentHeight", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetVerticalParentTop(string Id, DotNetObjectReference<VerticalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentTop", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetVerticalParentLeft(string Id, DotNetObjectReference<VerticalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentLeft", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetHorizontalParentWidth(string Id, DotNetObjectReference<HorizontalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentWidth", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetHorizontalParentHeight(string Id, DotNetObjectReference<HorizontalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentHeight", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetHorizontalParentTop(string Id, DotNetObjectReference<HorizontalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentTop", Id, Component);
-            }
-            catch (Exception ex)
-            {
-                var msg = ex.Message;
-            }
-        }
-
-        public async Task GetHorizontalParentLeft(string Id, DotNetObjectReference<HorizontalSliderPanel> Component)
-        {
-            try
-            {
-                var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("getParentLeft", Id, Component);
+                await module.InvokeAsync<string>("getParentDimensions", Id, Component);
             }
             catch (Exception ex)
             {
@@ -152,11 +74,6 @@ namespace BlazorSliders
             await module.InvokeAsync<string>("registerHorizontalSliderPanel", SliderId, TopPanelId, BottomPanelId, Component);
         }
 
-        //public async Task ResizeElementAbsolute(string Id, int Top, int Left, int Width, int Height)
-        //{
-        //    var module = await moduleTask.Value;
-        //    await module.InvokeVoidAsync("resizeElementAbsolute", Id, Top, Left, Width, Height);
-        //}
 
         public async ValueTask DisposeAsync()
         {

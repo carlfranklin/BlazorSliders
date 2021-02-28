@@ -1,5 +1,5 @@
 ﻿@page "/windowresize"
-
+ 
 <Window WindowResized="OnWindowResized" />
 
 @(WindowSize != null)
@@ -114,7 +114,7 @@
         {
             if (WindowSize != null)
             {
-                var height = WindowSize.Height * StartingWindowHeightPercent / 100;
+                int height = WindowSize.Height* StartingWindowHeightPercent / 100;
                 return height;
             }
             else

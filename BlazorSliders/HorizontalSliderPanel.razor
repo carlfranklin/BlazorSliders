@@ -196,46 +196,6 @@
     }
 
     [JSInvokable]
-    public async Task ParentWidthChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentWidth = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentHeightChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentHeight = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentLeftChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentLeft = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
-    public async Task ParentTopChanged(string value)
-    {
-        if (value != "")
-        {
-            ParentTop = Convert.ToInt32(value.Substring(0, value.Length - 2));
-            await InvokeAsync(StateHasChanged);
-        }
-    }
-
-    [JSInvokable]
     public async Task MouseDown(int X, int Y)
     {
         await InvokeAsync(StateHasChanged);
@@ -254,6 +214,25 @@
         await InvokeAsync(StateHasChanged);
     }
 
+    [JSInvokable]
+    public async Task ParentDimensionsChanged(object value)
+    {
+        if (value != null)
+        {
+            if (value.ToString().Contains("null")) return;
+            var dimensions = System.Text.Json.JsonSerializer.Deserialize<Dimensions>(value.ToString());
+            ParentTop = dimensions.Top;
+            ParentLeft = dimensions.Left;
+            ParentWidth = dimensions.Width;
+            ParentHeight = dimensions.Height;
+            if (ParentTop > 0 || ParentLeft > 0 || ParentWidth > 0 || ParentHeight > 0)
+            {
+                Resize(TopPanelHeight);
+            }
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
     public void Resize(int TopPanelHeight)
     {
         int newY = TopPanelHeight - ParentTop;
@@ -265,10 +244,11 @@
 
         if (newY < MinimumTopPanelHeight)
             newY = MinimumTopPanelHeight;
-        else if (newY > ParentHeight - MinimumBottomPanelHeight)
+        else if (ParentHeight > 0 && newY > ParentHeight - MinimumBottomPanelHeight)
             newY = ParentHeight - MinimumBottomPanelHeight;
 
         topPanelHeight = newY;
+
     }
 
     protected override async Task OnAfterRenderAsync(bool FirstRender)
@@ -280,17 +260,9 @@
             await jsInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
         }
 
-        if (ParentWidth == 0)
-            await jsInterop.GetHorizontalParentWidth(ParentId, myObject);
+        if (ParentTop == 0 && ParentLeft == 0 && ParentWidth == 0 && ParentHeight == 0)
+            await jsInterop.GetHorizontalParentDimensions(ParentId, myObject);
 
-        if (ParentHeight == 0)
-            await jsInterop.GetHorizontalParentHeight(ParentId, myObject);
-
-        if (ParentLeft == 0)
-            await jsInterop.GetHorizontalParentLeft(ParentId, myObject);
-
-        if (ParentTop == 0)
-            await jsInterop.GetHorizontalParentTop(ParentId, myObject);
     }
 
     private string NewGuid()

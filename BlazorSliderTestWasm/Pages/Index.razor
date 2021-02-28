@@ -1,26 +1,26 @@
-﻿@page "/horizontals"
+﻿@page "/"
 
 <AbsolutePanel @ref=absolutePanel
                Id="ParentPanel"
                AutoResize="true">
-    <HorizontalSliderPanel @ref=horizontalPanel
-                           Container=absolutePanel
-                           ParentId="ParentPanel"
-                           TopPanelId="TopPanel1"
-                           BottomPanelId="BottomPanel1"
-                           SliderHeight="10"
-                           Width="absolutePanel.Width"
-                           Height="absolutePanel.Height"
-                           TopPanelHeight="200">
-        <TopChildContent>
-            <div id="TopPanel1" style="padding:10px;">
-                <h3>Top Content</h3>
-                This is a demo of a single horizontal slider panel.
+    <VerticalSliderPanel @ref=verticalPanel
+                         Container=absolutePanel
+                         ParentId="ParentPanel"
+                         LeftPanelId="LeftPanel1"
+                         RightPanelId="RightPanel1"
+                         SliderWidth="10"
+                         Width="absolutePanel.Width"
+                         Height="absolutePanel.Height"
+                         LeftPanelStartingWidth="400">
+        <LeftChildContent>
+            <div id="LeftPanel1" style="padding:10px;">
+                <h3>Left Content</h3>
+                This is a demo of a single vertical slider panel.
             </div>
-        </TopChildContent>
-        <BottomChildContent>
-            <div id="BottomPanel1" style="padding:10px;">
-                <h3>Bottom Content</h3>
+        </LeftChildContent>
+        <RightChildContent>
+            <div id="RightPanel1" style="padding:10px;">
+                <h3>Right Content</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item px-3">
                         <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -44,13 +44,13 @@
                     </li>
                 </ul>
             </div>
-        </BottomChildContent>
-    </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
 </AbsolutePanel>
 
 @code
 {
     AbsolutePanel absolutePanel { get; set; }
-    HorizontalSliderPanel horizontalPanel { get; set; }
+    VerticalSliderPanel verticalPanel { get; set; }
 }
 

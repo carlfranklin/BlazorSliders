@@ -10,7 +10,7 @@ Github: https://github.com/carlfranklin/BlazorSliders
 Install-Package BlazorSliders
 ```
 
-## Description
+### Description
 
 There are four main components:
 
@@ -34,13 +34,20 @@ Provides two content components and a horizontal splitter between the two. Handl
 
 ## Requirements
 
-**BlazorSliders currently only works with Blazor Server.** I am working on fixing issues with WASM projects.
-
 Add to *_Imports.razor*:
 
 ```c#
 @using BlazorSliders
 ```
+
+Change your *\Shared\MainLayout.razor* to the following:
+
+```
+@inherits LayoutComponentBase
+@Body
+```
+
+**For Blazor Server:**
 
 `ServerPrerendered` is not supported. In your *_Hosts.cshtml* file, set the following:
 
@@ -54,11 +61,12 @@ Add the following line to `ConfigureServices` in *Startup.cs*:
 services.AddScoped<SliderInterop>();
 ```
 
-You also might want to remove the default layout markup. Change your *\Shared\MainLayout.razor* to the following:
+**For Blazor WebAssembly:**
+
+Add the following to `Main()` in *Program.cs*:
 
 ```
-@inherits LayoutComponentBase
-@Body
+builder.Services.AddScoped<SliderInterop>();
 ```
 
 

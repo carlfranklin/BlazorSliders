@@ -2,6 +2,8 @@
 
 Create multiple panels separated by sliding splitters.
 
+Github: https://github.com/carlfranklin/BlazorSliders
+
 ## Install with NuGet:
 
 ```
@@ -27,6 +29,39 @@ Provides two content components and a vertical splitter between the two. Handles
 #### HorizontalSliderPanel
 
 Provides two content components and a horizontal splitter between the two. Handles all UI requirements.
+
+
+
+## Requirements
+
+**BlazorSliders currently only works with Blazor Server.** I am working on fixing issues with WASM projects.
+
+Add to *_Imports.razor*:
+
+```c#
+@using BlazorSliders
+```
+
+`ServerPrerendered` is not supported. In your *_Hosts.cshtml* file, set the following:
+
+```xml
+<component type="typeof(App)" render-mode="Server" />
+```
+
+Add the following line to `ConfigureServices` in *Startup.cs*:
+
+```c#
+services.AddScoped<SliderInterop>();
+```
+
+You also might want to remove the default layout markup. Change your *\Shared\MainLayout.razor* to the following:
+
+```
+@inherits LayoutComponentBase
+@Body
+```
+
+
 
 ### Simple Horizontal Split:
 

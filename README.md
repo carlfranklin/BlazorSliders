@@ -10,7 +10,7 @@ Github: https://github.com/carlfranklin/BlazorSliders
 Install-Package BlazorSliders
 ```
 
-### Description
+## Description
 
 There are four main components:
 

@@ -1,11 +1,14 @@
-﻿@inject IJSRuntime js
+﻿@inherits SliderPanelBase
+@inject IJSRuntime js
 
 <div id="@Id" style="@StyleString position:absolute;
     left:@LeftPx;
     top:@TopPx;
     width:@WidthPx;
     height:@HeightPx;">
-    @ChildContent
+    <CascadingValue Value=@this>
+        @ChildContent
+    </CascadingValue>
 </div>
 
 <Window WindowResized="OnWindowResized" />
@@ -16,55 +19,12 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string Id { get; set; }
-
-    [Parameter]
     public bool AutoResize { get; set; } = false;
-
-    [Parameter]
-    public int Left { get { return Position.Left; } set { Position.Left = value; } }
-
-    [Parameter]
-    public int Top { get { return Position.Top; } set { Position.Top = value; } }
-
-    [Parameter]
-    public int Height
-    {
-        get { return Size.Height; }
-        set
-        {
-            Size.Height = value;
-            if (OriginalHeight == 0)
-                OriginalHeight = value;
-        }
-    }
-
-    [Parameter]
-    public int Width
-    {
-        get { return Size.Width; }
-        set
-        {
-            Size.Width = value;
-            if (OriginalWidth == 0)
-                OriginalWidth = value;
-        }
-    }
 
     [Parameter]
     public string StyleString { get; set; } = "";
 
-    // We need these because you can't change parameters from inside the component
-    private Position Position { get; set; } = new Position();
-    private Size Size { get; set; } = new Size();
-
-    private int OriginalWidth;
-    private int OriginalHeight;
-
-    private string LeftPx { get { return Left.ToString() + "px"; } }
-    private string TopPx { get { return Top.ToString() + "px"; } }
-    private string HeightPx { get { return Height.ToString() + "px"; } }
-    private string WidthPx { get { return Width.ToString() + "px"; } }
+    public SliderPanelBase ChildPanel { get; set; }
 
     /// <summary>
     /// This happens when the user resizes the browser
@@ -75,9 +35,13 @@
     {
         if (AutoResize)
         {
-            Width = size.Width - Position.Left;
-            Height = size.Height - Position.Top;
-            await InvokeAsync(StateHasChanged);
+            Width = size.Width - Left;
+            Height = size.Height - Top;
         }
+        if (ChildPanel != null)
+        {
+            ChildPanel.ParentResized();
+        }
+        await InvokeAsync(StateHasChanged);
     }
 }

@@ -9,6 +9,9 @@
     <Description>Create multiple panels separated by sliding splitters</Description>
     <Copyright>Copyright 2021 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
+    <Version>1.2.0</Version>
+    <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
+    <RepositoryType>GitHub Public</RepositoryType>
   </PropertyGroup>
   
   <ItemGroup>

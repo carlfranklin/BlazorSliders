@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliders", "BlazorSlid
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlidersTest", "BlazorSlidersTest\BlazorSlidersTest.csproj", "{2773E436-5B5E-41EC-A26B-73FA1AE2C8FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorSliderTestWasm", "BlazorSliderTestWasm\BlazorSliderTestWasm.csproj", "{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliderTestWasm", "BlazorSliderTestWasm\BlazorSliderTestWasm.csproj", "{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

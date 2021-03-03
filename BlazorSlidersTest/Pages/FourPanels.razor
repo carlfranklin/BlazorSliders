@@ -1,26 +1,11 @@
 ﻿@page "/fourpanels"
 
-<AbsolutePanel @ref=absolutePanel
-               Id="ParentPanel"
-               AutoResize="true">
-    <VerticalSliderPanel @ref=verticalPanel
-                         Container=absolutePanel
-                         ParentId="ParentPanel"
-                         LeftPanelId="LeftPanel1"
-                         RightPanelId="RightPanel1"
-                         SliderWidth="10"
-                         Width="absolutePanel.Width"
-                         Height="absolutePanel.Height"
-                         LeftPanelStartingWidth="400">
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400">
         <LeftChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="LeftPanel1"
-                                   BottomPanelId="BottomPanelId1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
-                                   Width="@verticalPanel.LeftPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="200">
                 <TopChildContent>
                     <div style="padding:10px;">
@@ -31,40 +16,15 @@
                 <BottomChildContent>
                     <div style="padding:10px;">
                         <h3>Bottom Content 1</h3>
-                        <ul class="nav flex-column">
-                            <li class="nav-item px-3">
-                                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                                    <span class="oi oi-resize-width" aria-hidden="true"></span> Vertical
-                                </NavLink>
-                            </li>
-                            <li class="nav-item px-3">
-                                <NavLink class="nav-link" href="horizontals">
-                                    <span class="oi oi-resize-height" aria-hidden="true"></span> Horizontal
-                                </NavLink>
-                            </li>
-                            <li class="nav-item px-3">
-                                <NavLink class="nav-link" href="fourpanels">
-                                    <span class="oi oi-resize-both" aria-hidden="true"></span> 4 Panels
-                                </NavLink>
-                            </li>
-                            <li class="nav-item px-3">
-                                <NavLink class="nav-link" href="windowresize">
-                                    <span class="oi oi-resize-both" aria-hidden="true"></span> Percent Width
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <NavMenu />
                     </div>
                 </BottomChildContent>
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="RightPanel1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
-                                   Width="@verticalPanel.RightPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="400">
                 <TopChildContent>
                     <div style="padding:10px;">
@@ -80,12 +40,4 @@
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-
-
-@code
-{
-    AbsolutePanel absolutePanel { get; set; }
-    VerticalSliderPanel verticalPanel { get; set; }
-
-}
 

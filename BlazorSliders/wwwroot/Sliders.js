@@ -1,4 +1,7 @@
-﻿export function registerWindow(dotNetComponent) {
+﻿// Slider.js by Carl Franklin
+// Version 1.2.0
+
+export function registerWindow(dotNetComponent) {
     var component = dotNetComponent;
 
     window.addEventListener("resize", function () {
@@ -13,24 +16,6 @@
 
 export function forceResize(dotNetComponent) {
     dotNetComponent.invokeMethodAsync("OnWindowResized", window.innerWidth, window.innerHeight)
-}
-
-export function getParentDimensions(Id, dotnetComponent) {
-    var component = dotnetComponent;
-    setTimeout(getDimensions, 10, Id);
-    function getDimensions(Id) {
-        var element = document.getElementById(Id);
-        if (element == null)
-            setTimeout(getDimensions, 10, Id);
-        else {
-            let top = element.style.top.substring(0, element.style.top.length - 2);
-            let left = element.style.left.substring(0, element.style.left.length - 2);
-            let width = element.style.width.substring(0, element.style.width.length - 2);
-            let height = element.style.height.substring(0, element.style.height.length - 2);
-            let dimensions = { Top: parseInt(top), Left: parseInt(left), Width: parseInt(width), Height: parseInt(height) };
-            component.invokeMethodAsync("ParentDimensionsChanged", dimensions);
-        }
-    }
 }
 
 export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, dotNetComponent) {

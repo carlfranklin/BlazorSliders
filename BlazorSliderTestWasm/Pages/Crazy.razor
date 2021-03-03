@@ -1,0 +1,75 @@
+﻿@page "/crazy"
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400">
+        <LeftChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+                                   TopStyleString="background-color:antiquewhite;"
+                                   BottomStyleString="background-color:aliceblue;"
+                                   TopPanelHeight="200">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 1</h3>
+                        This is the craziest demo of all
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 1</h3>
+                        <NavMenu />
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+                                   BottomStyleString="background-color:violet;"
+                                   TopPanelHeight="400">
+                <TopChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Top"
+                                         LeftPanelStartingWidth="200">
+                        <LeftChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+                                                   TopStyleString="background-color:orange;"
+                                                   BottomStyleString="background-color:lightblue;"
+                                                   TopPanelHeight="200">
+                                <TopChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Top Content 2</h3>
+                                    </div>
+                                </TopChildContent>
+                                <BottomChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Bottom Content 2</h3>
+                                    </div>
+                                </BottomChildContent>
+                            </HorizontalSliderPanel>
+                        </LeftChildContent>
+                        <RightChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+                                                   TopStyleString="background-color:pink;"
+                                                   BottomStyleString="background-color:lightgreen;"
+                                                   TopPanelHeight="200">
+                                <TopChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Top Content 3</h3>
+                                    </div>
+                                </TopChildContent>
+                                <BottomChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Bottom Content 3</h3>
+                                    </div>
+                                </BottomChildContent>
+                            </HorizontalSliderPanel>
+                        </RightChildContent>
+                    </VerticalSliderPanel>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 4</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>

@@ -32,7 +32,7 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
         });
 
         // touch
-        leftPanel.addEventListener("touchup", function (ev) {
+        leftPanel.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
         });
     }
@@ -44,7 +44,7 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
         });
 
         // touch
-        rightPanel.addEventListener("touchup", function (ev) {
+        rightPanel.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
         });
     }
@@ -82,7 +82,7 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
         });
 
         // touch
-        slider.addEventListener("touchdown", function (ev) {
+        slider.addEventListener("touchstart", function (ev) {
             sliderIsMoving = true;
             if (component != null) {
                 leftPanel.style.cursor = "e-resize";
@@ -91,7 +91,7 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
             }
         });
 
-        slider.addEventListener("touchup", function (ev) {
+        slider.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
             if (component != null) {
                 leftPanel.style.cursor = "default";
@@ -130,7 +130,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
         });
 
         // touch
-        topPanel.addEventListener("touchup", function (ev) {
+        topPanel.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
         });
     }
@@ -142,7 +142,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
         });
 
         // touch
-        bottomPanel.addEventListener("touchup", function (ev) {
+        bottomPanel.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
         });
     }
@@ -179,7 +179,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
         });
 
         // touch
-        slider.addEventListener("touchdown", function (ev) {
+        slider.addEventListener("touchstart", function (ev) {
             sliderIsMoving = true;
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
@@ -188,7 +188,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             }
         });
 
-        slider.addEventListener("touchup", function (ev) {
+        slider.addEventListener("touchend", function (ev) {
             sliderIsMoving = false;
             if (component != null) {
                 topPanel.style.cursor = "default";

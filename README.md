@@ -2,8 +2,6 @@
 
 Create multiple panels separated by sliding splitters.
 
-Github: https://github.com/carlfranklin/BlazorSliders
-
 ## Install with NuGet:
 
 ```
@@ -76,37 +74,22 @@ builder.Services.AddScoped<SliderInterop>();
 ```xml
 @page "/"
 
-<AbsolutePanel @ref=absolutePanel
-               Id="ParentPanel"
-               AutoResize="true">
-    <VerticalSliderPanel @ref=verticalPanel
-                         Container=absolutePanel
-                         ParentId="ParentPanel"
-                         LeftPanelId="LeftPanel1"
-                         RightPanelId="RightPanel1"
-                         SliderWidth="10"
-                         Width="absolutePanel.Width"
-                         Height="absolutePanel.Height"
-                         LeftPanelStartingWidth="400">
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400">
         <LeftChildContent>
-            <div id="LeftPanel1" style="padding:10px;">
+            <div style="padding:10px;">
                 <h3>Left Content</h3>
                 This is a demo of a single vertical slider panel.
             </div>
         </LeftChildContent>
         <RightChildContent>
-            <div id="RightPanel1" style="padding:10px;">
+            <div style="padding:10px;">
                 <h3>Right Content</h3>
+                <NavMenu/>
             </div>
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-
-@code
-{
-    AbsolutePanel absolutePanel { get; set; }
-    VerticalSliderPanel verticalPanel { get; set; }
-}
 ```
 
 
@@ -116,37 +99,22 @@ builder.Services.AddScoped<SliderInterop>();
 ```xml
 @page "/horizontals"
 
-<AbsolutePanel @ref=absolutePanel
-               Id="ParentPanel"
-               AutoResize="true">
-    <HorizontalSliderPanel @ref=horizontalPanel
-                           Container=absolutePanel
-                           ParentId="ParentPanel"
-                           TopPanelId="TopPanel1"
-                           BottomPanelId="BottomPanel1"
-                           SliderHeight="10"
-                           Width="absolutePanel.Width"
-                           Height="absolutePanel.Height"
-                           TopPanelHeight="400">
+<AbsolutePanel AutoResize="true">
+    <HorizontalSliderPanel TopPanelHeight="200">
         <TopChildContent>
-            <div id="TopPanel1" style="padding:10px;">
+            <div style="padding:10px;">
                 <h3>Top Content</h3>
                 This is a demo of a single horizontal slider panel.
             </div>
         </TopChildContent>
         <BottomChildContent>
-            <div id="BottomPanel1" style="padding:10px;">
+            <div style="padding:10px;">
                 <h3>Bottom Content</h3>
+                <NavMenu />
             </div>
         </BottomChildContent>
     </HorizontalSliderPanel>
 </AbsolutePanel>
-
-@code
-{
-    AbsolutePanel absolutePanel { get; set; }
-    HorizontalSliderPanel horizontalPanel { get; set; }
-}
 ```
 
 
@@ -156,27 +124,12 @@ builder.Services.AddScoped<SliderInterop>();
 ```xml
 @page "/fourpanels"
 
-<AbsolutePanel @ref=absolutePanel
-               Id="ParentPanel"
-               AutoResize="true">
-    <VerticalSliderPanel @ref=verticalPanel
-                         Container=absolutePanel
-                         ParentId="ParentPanel"
-                         LeftPanelId="LeftPanel1"
-                         RightPanelId="RightPanel1"
-                         SliderWidth="10"
-                         Width="absolutePanel.Width"
-                         Height="absolutePanel.Height"
-                         LeftPanelStartingWidth="400">
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400">
         <LeftChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="LeftPanel1"
-                                   BottomPanelId="BottomPanelId1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
-                                   Width="@verticalPanel.LeftPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="200">
                 <TopChildContent>
                     <div style="padding:10px;">
@@ -187,18 +140,15 @@ builder.Services.AddScoped<SliderInterop>();
                 <BottomChildContent>
                     <div style="padding:10px;">
                         <h3>Bottom Content 1</h3>
+                        <NavMenu />
                     </div>
                 </BottomChildContent>
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="RightPanel1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
-                                   Width="@verticalPanel.RightPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="400">
                 <TopChildContent>
                     <div style="padding:10px;">
@@ -214,13 +164,6 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-
-@code
-{
-    AbsolutePanel absolutePanel { get; set; }
-    VerticalSliderPanel verticalPanel { get; set; }
-
-}
 ```
 
 
@@ -234,50 +177,32 @@ builder.Services.AddScoped<SliderInterop>();
 
 @(WindowSize != null)
 {
-<AbsolutePanel @ref=absolutePanel
-               Id="ParentPanel"
-               AutoResize="true">
-    <VerticalSliderPanel @ref=verticalPanel
-                         Container=absolutePanel
-                         ParentId="ParentPanel"
-                         LeftPanelId="LeftPanel1"
-                         RightPanelId="RightPanel1"
-                         SliderWidth="10"
-                         Width="absolutePanel.Width"
-                         Height="absolutePanel.Height"
-                         LeftPanelStartingWidth="@StartingWindowWidth">
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="@StartingWindowWidth">
         <LeftChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="LeftPanel1"
-                                   BottomPanelId="BottomPanelId1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
-                                   Width="@verticalPanel.LeftPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="@StartingWindowHeight">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content 1</h3>
-                        This demo initializes the size and location of the sliders as a percentage of the 
+                        This demo initializes the size and location of the sliders as a percentage of the
                         initial width of the browser.
                     </div>
                 </TopChildContent>
                 <BottomChildContent>
                     <div style="padding:10px;">
                         <h3>Bottom Content 1</h3>
+                        <NavMenu />
                     </div>
                 </BottomChildContent>
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel Container=absolutePanel
-                                   ParentId="RightPanel1"
-                                   SliderHeight="10"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
-                                   Width="@verticalPanel.RightPanelWidth"
-                                   Height="@absolutePanel.Height"
                                    TopPanelHeight="@StartingWindowHeight">
                 <TopChildContent>
                     <div style="padding:10px;">
@@ -297,8 +222,6 @@ builder.Services.AddScoped<SliderInterop>();
 
 @code
 {
-    AbsolutePanel absolutePanel { get; set; }
-    VerticalSliderPanel verticalPanel { get; set; }
     Size WindowSize { get; set; } = null;
     int StartingWindowWidthPercent = 50;
     int StartingWindowHeightPercent = 50;
@@ -322,7 +245,8 @@ builder.Services.AddScoped<SliderInterop>();
         {
             if (WindowSize != null)
             {
-                return WindowSize.Height * StartingWindowHeightPercent / 100;
+                var height = WindowSize.Height * StartingWindowHeightPercent / 100;
+                return height;
             }
             else
                 return 0;
@@ -335,3 +259,110 @@ builder.Services.AddScoped<SliderInterop>();
     }
 }
 ```
+
+
+
+### Complex Nesting:
+
+> Note: Currently you can only nest Horizontal panels inside Vertical panels, and vice versa.
+
+```xml
+@page "/crazy"
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400">
+        <LeftChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+                                   TopStyleString="background-color:antiquewhite;"
+                                   BottomStyleString="background-color:aliceblue;"
+                                   TopPanelHeight="200">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 1</h3>
+                        This is the craziest demo of all
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 1</h3>
+                        <NavMenu />
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+                                   BottomStyleString="background-color:violet;"
+                                   TopPanelHeight="400">
+                <TopChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Top"
+                                         LeftPanelStartingWidth="200">
+                        <LeftChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+                                                   TopStyleString="background-color:orange;"
+                                                   BottomStyleString="background-color:lightblue;"
+                                                   TopPanelHeight="200">
+                                <TopChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Top Content 2</h3>
+                                    </div>
+                                </TopChildContent>
+                                <BottomChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Bottom Content 2</h3>
+                                    </div>
+                                </BottomChildContent>
+                            </HorizontalSliderPanel>
+                        </LeftChildContent>
+                        <RightChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+                                                   TopStyleString="background-color:pink;"
+                                                   BottomStyleString="background-color:lightgreen;"
+                                                   TopPanelHeight="200">
+                                <TopChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Top Content 3</h3>
+                                    </div>
+                                </TopChildContent>
+                                <BottomChildContent>
+                                    <div style="padding:10px;">
+                                        <h3>Bottom Content 3</h3>
+                                    </div>
+                                </BottomChildContent>
+                            </HorizontalSliderPanel>
+                        </RightChildContent>
+                    </VerticalSliderPanel>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 4</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+```
+
+### NavMenu used in demos:
+
+```xml
+<div>
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        <span class="oi oi-resize-width" aria-hidden="true"></span> Vertical
+    </NavLink>
+    <NavLink class="nav-link" href="horizontals">
+        <span class="oi oi-resize-height" aria-hidden="true"></span> Horizontal
+    </NavLink>
+    <NavLink class="nav-link" href="fourpanels">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> 4 Panels
+    </NavLink>
+    <NavLink class="nav-link" href="windowresize">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Percent Width
+    </NavLink>
+    <NavLink class="nav-link" href="crazy">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Crazy
+    </NavLink>
+</div>
+```
+

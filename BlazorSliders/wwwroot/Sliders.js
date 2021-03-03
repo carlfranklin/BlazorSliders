@@ -87,8 +87,8 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
             if (component != null) {
                 leftPanel.style.cursor = "e-resize";
                 rightPanel.style.cursor = "e-resize";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
             }
         });
@@ -98,24 +98,24 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
             if (component != null) {
                 leftPanel.style.cursor = "default";
                 rightPanel.style.cursor = "default";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
             }
         });
 
         slider.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
         });
 
         window.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
         });
@@ -165,8 +165,8 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
             }
         });
@@ -176,8 +176,8 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
             }
         });
@@ -198,8 +198,8 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
             }
         });
@@ -209,24 +209,24 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
             }
         });
 
         slider.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
         });
 
         window.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
-                clientX = ev.touches[0].clientX;
-                clientY = ev.touches[0].clientY;
+                var clientX = ev.touches[0].clientX;
+                var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
         });

@@ -2,6 +2,10 @@
 
 Create multiple panels separated by sliding splitters.
 
+## Live Demo:
+
+https://blazorslidertest.azurewebsites.net/
+
 ## Install with NuGet:
 
 ```
@@ -69,7 +73,7 @@ builder.Services.AddScoped<SliderInterop>();
 
 
 
-### Simple Horizontal Split:
+### Simple Vertical Split:
 
 ```xml
 @page "/"
@@ -94,7 +98,7 @@ builder.Services.AddScoped<SliderInterop>();
 
 
 
-### Simple Vertical Split:
+### Simple Horizontal Split:
 
 ```xml
 @page "/horizontals"

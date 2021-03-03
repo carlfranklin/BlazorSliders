@@ -2,6 +2,10 @@
 
 Create multiple panels separated by sliding splitters.
 
+## Live Demo:
+
+https://blazorslidertest.azurewebsites.net/
+
 ## Install with NuGet:
 
 ```

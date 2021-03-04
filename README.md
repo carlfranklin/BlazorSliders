@@ -2,6 +2,8 @@
 
 Create multiple panels separated by sliding splitters.
 
+Github: https://github.com/carlfranklin/BlazorSliders
+
 ## Live Demo:
 
 https://blazorslidertest.azurewebsites.net/
@@ -297,15 +299,15 @@ builder.Services.AddScoped<SliderInterop>();
         <RightChildContent>
             <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                    BottomStyleString="background-color:violet;"
-                                   TopPanelHeight="400">
+                                   TopPanelHeight="600">
                 <TopChildContent>
                     <VerticalSliderPanel PanelPosition="PanelPosition.Top"
-                                         LeftPanelStartingWidth="200">
+                                         LeftPanelStartingWidth="700">
                         <LeftChildContent>
                             <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
                                                    TopStyleString="background-color:orange;"
                                                    BottomStyleString="background-color:lightblue;"
-                                                   TopPanelHeight="200">
+                                                   TopPanelHeight="300">
                                 <TopChildContent>
                                     <div style="padding:10px;">
                                         <h3>Top Content 2</h3>
@@ -322,7 +324,7 @@ builder.Services.AddScoped<SliderInterop>();
                             <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                                    TopStyleString="background-color:pink;"
                                                    BottomStyleString="background-color:lightgreen;"
-                                                   TopPanelHeight="200">
+                                                   TopPanelHeight="400">
                                 <TopChildContent>
                                     <div style="padding:10px;">
                                         <h3>Top Content 3</h3>
@@ -347,6 +349,7 @@ builder.Services.AddScoped<SliderInterop>();
     </VerticalSliderPanel>
 </AbsolutePanel>
 ```
+
 
 ### NavMenu used in demos:
 

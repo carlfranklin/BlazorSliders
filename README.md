@@ -8,6 +8,10 @@ Github: https://github.com/carlfranklin/BlazorSliders
 
 https://blazorslidertest.azurewebsites.net/
 
+## YouTube Demo (BlazorTrain):
+
+https://youtu.be/fNDd7moZJ4c
+
 ## Install with NuGet:
 
 ```

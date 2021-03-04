@@ -24,6 +24,32 @@
     [Parameter]
     public string StyleString { get; set; } = "";
 
+    [Parameter]
+    public new int Top
+    {
+        get
+        {
+            return base.Top;
+        }
+        set
+        {
+            base.Top = value;
+        }
+    }
+
+    [Parameter]
+    public new int Left
+    {
+        get
+        {
+            return base.Left;
+        }
+        set
+        {
+            base.Left = value;
+        }
+    }
+
     public SliderPanelBase ChildPanel { get; set; }
 
     /// <summary>

@@ -60,46 +60,49 @@ namespace BlazorSliders
             }
         }
 
-        public void Resize(int newValue)
+        /// <summary>
+        /// This is called when 
+        /// a) The window itself (browser) is resized, and
+        /// b) The slider is moved, in which case NewSliderValue will contain the new X or Y
+        /// </summary>
+        /// <param name="NewSliderValue"></param>
+        public void Resize(int NewSliderValue = 0)
         {
             if (this.GetType() == typeof(VerticalSliderPanel))
             {
                 var me = (VerticalSliderPanel)this;
-                SubtractLeft = 0;
-                GetSubtractLeft(this);
+                int SliderX = 0;
 
-                int NewWidth = newValue - SubtractLeft;
+                // Has someone moved the slider?
+                if (NewSliderValue > 0)
+                {
+                    // Yes! The new slider value becomes our new LEFT panel width
+                    SubtractLeft = 0;
+                    GetSubtractLeft(this);
+                    SliderX = NewSliderValue - SubtractLeft;
+                }
+                else
+                    SliderX = me.leftPanelWidth;
 
-                if (NewWidth < me.MinimumLeftPanelWidth)
-                    NewWidth = me.MinimumLeftPanelWidth;
-                else if (Parent != null && NewWidth > Parent.Width - me.MinimumRightPanelWidth)
-                    NewWidth = Parent.Width - me.MinimumRightPanelWidth;
+                // Ensure that we are not going under the minimum width
+                if (Parent != null)
+                {
+                    int minimumSliderX = 0;
+                    if (Parent.Width > me.MinimumRightPanelWidth)
+                        minimumSliderX = Parent.Height - me.MinimumRightPanelWidth;
+                    else
+                        minimumSliderX = me.MinimumRightPanelWidth;
 
-                me.leftPanelWidth = NewWidth;
-            }
-            else if (this.GetType() == typeof(HorizontalSliderPanel))
-            {
-                var me = (HorizontalSliderPanel)this;
-                
-                SubtractTop = 0;
-                GetSubtractTop(me);
+                    if (minimumSliderX != 0 && SliderX > minimumSliderX)
+                        SliderX = minimumSliderX;
+                }
+                else if (SliderX < me.MinimumLeftPanelWidth)
+                    SliderX = me.MinimumLeftPanelWidth;
 
-                int NewHeight = newValue - SubtractTop;
+                // Set the slider position (left panel width)
+                me.leftPanelWidth = SliderX;
 
-                if (NewHeight < me.MinimumTopPanelHeight)
-                    NewHeight = me.MinimumTopPanelHeight;
-                else if (Parent != null && NewHeight > Parent.Height - me.MinimumBottomPanelHeight)
-                    NewHeight = Parent.Height - me.MinimumBottomPanelHeight;
-                me.topPanelHeight = NewHeight;
-            }
-
-        }
-
-        public void ParentResized()
-        {
-            if (this.GetType() == typeof(VerticalSliderPanel))
-            {
-                var me = (VerticalSliderPanel)this;
+                // Now set my overall width and height
                 if (PanelPosition == PanelPosition.Top)
                 {
                     // I'm a vertical slider inside the top pane of a horizontal slider
@@ -122,17 +125,48 @@ namespace BlazorSliders
 
                 if (me.LeftPanel != null)
                 {
-                    me.LeftPanel.ParentResized();
+                    me.LeftPanel.Resize();
                 }
                 if (me.RightPanel != null)
                 {
-                    me.RightPanel.ParentResized();
+                    me.RightPanel.Resize();
                 }
             }
             else if (this.GetType() == typeof(HorizontalSliderPanel))
             {
                 var me = (HorizontalSliderPanel)this;
+                int SliderY = 0;
+                SubtractTop = 0;
+                GetSubtractTop(me);
 
+                // Has someone moved the slider?
+                if (NewSliderValue > 0)
+                {
+                    // Yes! The new slider value becomes our new TOP panel height
+                    SliderY = NewSliderValue - SubtractTop;
+                }
+                else
+                    SliderY = me.topPanelHeight;
+
+                // Ensure that we are not going under the minimum width
+                if (Parent != null)
+                {
+                    int minimumSliderY = 0;
+                    if (Parent.Height > me.MinimumBottomPanelHeight)
+                        minimumSliderY = Parent.Height - me.MinimumBottomPanelHeight;
+                    else
+                        minimumSliderY = me.MinimumBottomPanelHeight;
+
+                    if (minimumSliderY != 0 && SliderY > minimumSliderY)
+                        SliderY = minimumSliderY;
+                }
+                else if (SliderY < me.MinimumTopPanelHeight)
+                    SliderY = me.MinimumTopPanelHeight;
+
+                // Set the slider position (top panel height)
+                me.topPanelHeight = SliderY;
+
+                // Now set my overall width and height
                 if (PanelPosition == PanelPosition.Left)
                 {
                     // I'm a horizontal slider inside the left pane of a vertical slider
@@ -155,11 +189,11 @@ namespace BlazorSliders
 
                 if (me.TopPanel != null)
                 {
-                    me.TopPanel.ParentResized();
+                    me.TopPanel.Resize();
                 }
                 if (me.BottomPanel != null)
                 {
-                    me.BottomPanel.ParentResized();
+                    me.BottomPanel.Resize();
                 }
             }
         }

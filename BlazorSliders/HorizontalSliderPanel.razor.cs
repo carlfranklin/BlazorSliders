@@ -112,7 +112,6 @@ namespace BlazorSliders
         public async Task MouseMove(int X, int Y)
         {
             Resize(Y);
-            ParentResized();
             await InvokeAsync(StateHasChanged);
         }
 

@@ -174,7 +174,7 @@ builder.Services.AddScoped<SliderInterop>();
 
 
 
-### Initial size and position based on width of browser:
+### Initial size and position based on percent size of browser:
 
 ```xml
 @page "/windowresize"
@@ -184,17 +184,17 @@ builder.Services.AddScoped<SliderInterop>();
 @(WindowSize != null)
 {
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="@StartingWindowWidth">
+    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth">
         <LeftChildContent>
             <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
-                                   TopPanelHeight="@StartingWindowHeight">
+                                   TopPanelHeight="@LeftHorizontalTopPanelHeight">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content 1</h3>
-                        This demo initializes the size and location of the sliders as a percentage of the
-                        initial width of the browser.
+                        This demo sets the location of the sliders based on a percentage of the
+                        initial size of the browser.
                     </div>
                 </TopChildContent>
                 <BottomChildContent>
@@ -209,7 +209,7 @@ builder.Services.AddScoped<SliderInterop>();
             <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
-                                   TopPanelHeight="@StartingWindowHeight">
+                                   TopPanelHeight="@RightHorizontalTopPanelHeight">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content 2</h3>
@@ -229,29 +229,45 @@ builder.Services.AddScoped<SliderInterop>();
 @code
 {
     Size WindowSize { get; set; } = null;
-    int StartingWindowWidthPercent = 50;
-    int StartingWindowHeightPercent = 50;
 
-    int StartingWindowWidth
+    int VerticalLeftPanelWidthPercent = 80;
+    int LeftHorizontal1TopPanelHeightPercent = 40;
+    int RightHorizontal1TopPanelHeightPercent = 60;
+
+    int VerticalLeftPanelWidth
     {
         get
         {
             if (WindowSize != null)
             {
-                return WindowSize.Width * StartingWindowWidthPercent / 100;
+                return WindowSize.Width * VerticalLeftPanelWidthPercent / 100;
             }
             else
                 return 0;
         }
     }
 
-    int StartingWindowHeight
+    int LeftHorizontalTopPanelHeight
     {
         get
         {
             if (WindowSize != null)
             {
-                var height = WindowSize.Height * StartingWindowHeightPercent / 100;
+                var height = WindowSize.Height * LeftHorizontal1TopPanelHeightPercent / 100;
+                return height;
+            }
+            else
+                return 0;
+        }
+    }
+
+    int RightHorizontalTopPanelHeight
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                var height = WindowSize.Height * RightHorizontal1TopPanelHeightPercent / 100;
                 return height;
             }
             else
@@ -349,6 +365,7 @@ builder.Services.AddScoped<SliderInterop>();
     </VerticalSliderPanel>
 </AbsolutePanel>
 ```
+
 
 
 ### NavMenu used in demos:

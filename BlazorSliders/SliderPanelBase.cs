@@ -89,14 +89,15 @@ namespace BlazorSliders
                 {
                     int minimumSliderX = 0;
                     if (Parent.Width > me.MinimumRightPanelWidth)
-                        minimumSliderX = Parent.Height - me.MinimumRightPanelWidth;
+                        minimumSliderX = Parent.Width - me.MinimumRightPanelWidth;
                     else
                         minimumSliderX = me.MinimumRightPanelWidth;
 
                     if (minimumSliderX != 0 && SliderX > minimumSliderX)
                         SliderX = minimumSliderX;
                 }
-                else if (SliderX < me.MinimumLeftPanelWidth)
+                
+                if (SliderX < me.MinimumLeftPanelWidth)
                     SliderX = me.MinimumLeftPanelWidth;
 
                 // Set the slider position (left panel width)
@@ -160,7 +161,8 @@ namespace BlazorSliders
                     if (minimumSliderY != 0 && SliderY > minimumSliderY)
                         SliderY = minimumSliderY;
                 }
-                else if (SliderY < me.MinimumTopPanelHeight)
+                
+                if (SliderY < me.MinimumTopPanelHeight)
                     SliderY = me.MinimumTopPanelHeight;
 
                 // Set the slider position (top panel height)

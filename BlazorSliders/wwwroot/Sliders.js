@@ -1,5 +1,5 @@
 ﻿// Slider.js by Carl Franklin
-// Version 1.2.4
+// Version 1.2.5
 
 export function registerWindow(dotNetComponent) {
     var component = dotNetComponent;

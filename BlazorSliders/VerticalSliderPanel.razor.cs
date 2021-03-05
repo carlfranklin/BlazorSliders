@@ -101,7 +101,12 @@ namespace BlazorSliders
             get
             {
                 if (Parent != null)
-                    return Parent.Width - (LeftPanelWidth + SliderWidth);
+                {
+                    if (this.GetType() == typeof(VerticalSliderPanel) && PanelPosition == PanelPosition.Left)
+                        return Width - (LeftPanelWidth + SliderWidth);
+                    else
+                        return Parent.Width - (LeftPanelWidth + SliderWidth);
+                }
                 else
                     return 0;
             }

@@ -79,8 +79,10 @@ namespace BlazorSliders
                     // Yes! The new slider value becomes our new LEFT panel width
                     SubtractLeft = 0;
                     GetSubtractLeft(this);
+                    
                     SliderX = NewSliderValue - SubtractLeft;
                 }
+         
                 else
                     SliderX = me.leftPanelWidth;
 
@@ -96,12 +98,6 @@ namespace BlazorSliders
                     if (minimumSliderX != 0 && SliderX > minimumSliderX)
                         SliderX = minimumSliderX;
                 }
-                
-                if (SliderX < me.MinimumLeftPanelWidth)
-                    SliderX = me.MinimumLeftPanelWidth;
-
-                // Set the slider position (left panel width)
-                me.leftPanelWidth = SliderX;
 
                 // Now set my overall width and height
                 if (PanelPosition == PanelPosition.Top)
@@ -122,7 +118,14 @@ namespace BlazorSliders
                 {
                     Height = Parent.Height;
                     Width = Parent.Width;
+
                 }
+
+                if (SliderX < me.MinimumLeftPanelWidth)
+                    SliderX = me.MinimumLeftPanelWidth;
+
+                // Set the slider position (left panel width)
+                me.leftPanelWidth = SliderX;
 
                 if (me.LeftPanel != null)
                 {
@@ -161,7 +164,7 @@ namespace BlazorSliders
                     if (minimumSliderY != 0 && SliderY > minimumSliderY)
                         SliderY = minimumSliderY;
                 }
-                
+
                 if (SliderY < me.MinimumTopPanelHeight)
                     SliderY = me.MinimumTopPanelHeight;
 
@@ -247,7 +250,6 @@ namespace BlazorSliders
                     dimensions.Width = value;
                 }
 
-                //dimensions.Width = value;
                 if (OriginalWidth == 0)
                     OriginalWidth = value;
             }

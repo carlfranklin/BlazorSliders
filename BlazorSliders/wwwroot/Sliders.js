@@ -1,5 +1,5 @@
 ﻿// Slider.js by Carl Franklin
-// Version 1.2.6
+// Version 1.2.7
 
 export function registerWindow(dotNetComponent) {
     var component = dotNetComponent;
@@ -78,7 +78,10 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
         window.addEventListener("mousemove", function (ev) {
             if (component != null && sliderIsMoving)
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
+        });
 
+        window.addEventListener("mouseup", function (ev) {
+            sliderIsMoving = false;
         });
 
         // touch
@@ -118,6 +121,10 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
                 var clientY = ev.touches[0].clientY;
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
+        });
+
+        window.addEventListener("touchend", function (ev) {
+            sliderIsMoving = false;
         });
     }
 
@@ -192,6 +199,10 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
                 setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
         });
 
+        window.addEventListener("mouseup", function (ev) {
+            sliderIsMoving = false;
+        });
+
         // touch
         slider.addEventListener("touchstart", function (ev) {
             sliderIsMoving = true;
@@ -230,6 +241,11 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
                 setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
             }
         });
+
+        window.addEventListener("touchend", function (ev) {
+            sliderIsMoving = false;
+        });
+
     }
 
     function raiseEvent(comp, eventname, x, y) {

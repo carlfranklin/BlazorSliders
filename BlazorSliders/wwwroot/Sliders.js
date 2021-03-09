@@ -1,5 +1,5 @@
 ﻿// Slider.js by Carl Franklin
-// Version 1.2.7
+// Version 1.2.8
 
 export function registerWindow(dotNetComponent) {
     var component = dotNetComponent;
@@ -172,9 +172,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                var clientX = ev.touches[0].clientX;
-                var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
+                setTimeout(raiseEvent, 1, component, "MouseDown", ev.clientX, ev.clientY);
             }
         });
 
@@ -183,9 +181,7 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                var clientX = ev.touches[0].clientX;
-                var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
+                setTimeout(raiseEvent, 1, component, "MouseUp", ev.clientX, ev.clientY);
             }
         });
 

@@ -1,4 +1,4 @@
-# <img src="/icon.png" height="40px">BlazorSliders
+# <img src="/icon.png" height="30px">BlazorSliders
 
 Create multiple panels separated by sliding splitters.
 

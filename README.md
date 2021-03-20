@@ -1,4 +1,4 @@
-# BlazorSliders
+# <img src="/icon.png" height="30px"> BlazorSliders
 
 Create multiple panels separated by sliding splitters.
 
@@ -87,17 +87,26 @@ Change your *\Shared\MainLayout.razor* to the following:
 
 Add the following line to `ConfigureServices` in *Startup.cs*:
 
-```c#
+<!-- snippet: AddSliderInteropServer -->
+<a id='snippet-addsliderinteropserver'></a>
+```cs
 services.AddScoped<SliderInterop>();
 ```
+<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
 
 **For Blazor WebAssembly:**
 
 Add the following to `Main()` in *Program.cs*:
 
-```
+<!-- snippet: AddSliderInteropWasm -->
+<a id='snippet-addsliderinteropwasm'></a>
+```cs
 builder.Services.AddScoped<SliderInterop>();
 ```
+<sup><a href='/BlazorSliderTestWasm/Program.cs#L22-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropwasm' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 
 ### Simple Vertical Split:
@@ -443,3 +452,9 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L17' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+
+## Icon
+
+[slide](https://thenounproject.com/term/slide/3631831/) designed by [Eucalyp](https://thenounproject.com/eucalyp) from [The Noun Project](https://thenounproject.com/). Licensed under [Creative Commons](https://creativecommons.org/licenses/by/3.0/us/legalcode).

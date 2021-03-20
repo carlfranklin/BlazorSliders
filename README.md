@@ -4,13 +4,31 @@ Create multiple panels separated by sliding splitters.
 
 Github: https://github.com/carlfranklin/BlazorSliders
 
+<!-- toc -->
+## Contents
+
+  * [Live Demo:](#live-demo)
+  * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
+  * [Install with NuGet:](#install-with-nuget)
+    * [Description](#description)
+  * [Requirements](#requirements)
+    * [Simple Vertical Split:](#simple-vertical-split)
+    * [Simple Horizontal Split:](#simple-horizontal-split)
+    * [Four Panels:](#four-panels)
+    * [Initial size and position based on percent size of browser:](#initial-size-and-position-based-on-percent-size-of-browser)
+    * [Complex Nesting:](#complex-nesting)
+    * [NavMenu used in demos:](#navmenu-used-in-demos)<!-- endToc -->
+
+
 ## Live Demo:
 
 https://blazorslidertest.azurewebsites.net/
 
+
 ## YouTube Demo (BlazorTrain):
 
 https://youtu.be/fNDd7moZJ4c
+
 
 ## Install with NuGet:
 
@@ -18,29 +36,33 @@ https://youtu.be/fNDd7moZJ4c
 Install-Package BlazorSliders
 ```
 
+
 ### Description
 
 There are four main components:
+
 
 #### AbsolutePanel
 
 AbsolutePanel is the container for a page. It provides events for when the window is resized.
 
+
 #### Window
 
 Window is used by the AbsolutePanel but can also be used on its own. It provides an event for when the window (browser) is resized, passing the Width and Height.
 
+
 #### VerticalSliderPanel
 
 Provides two content components and a vertical splitter between the two. Handles all UI requirements.
+
 
 #### HorizontalSliderPanel
 
 Provides two content components and a horizontal splitter between the two. Handles all UI requirements.
 
 
-
-## Requirements
+## Usage
 
 Add to *_Imports.razor*:
 
@@ -78,10 +100,11 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 
 
-
 ### Simple Vertical Split:
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Pages/Index.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/Index.razor'></a>
+```razor
 @page "/"
 
 <AbsolutePanel AutoResize="true">
@@ -95,18 +118,25 @@ builder.Services.AddScoped<SliderInterop>();
         <RightChildContent>
             <div style="padding:10px;">
                 <h3>Right Content</h3>
-                <NavMenu/>
+                <NavMenu />
             </div>
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-```
 
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+
+<img src="UnitTests/IntegrationTest.Vertical.01.verified.png" width="400px">
 
 
 ### Simple Horizontal Split:
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Pages/Horizontals.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/Horizontals.razor'></a>
+```razor
 @page "/horizontals"
 
 <AbsolutePanel AutoResize="true">
@@ -126,12 +156,17 @@ builder.Services.AddScoped<SliderInterop>();
     </HorizontalSliderPanel>
 </AbsolutePanel>
 ```
+<sup><a href='/BlazorSliderTestWasm/Pages/Horizontals.razor#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Horizontals.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
+<img src="UnitTests/IntegrationTest.Horizontals.01.verified.png" width="400px">
 
 
 ### Four Panels:
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Pages/FourPanels.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/FourPanels.razor'></a>
+```razor
 @page "/fourpanels"
 
 <AbsolutePanel AutoResize="true">
@@ -174,13 +209,19 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-```
 
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<img src="UnitTests/IntegrationTest.FourPanels.01.verified.png" width="400px">
 
 
 ### Initial size and position based on percent size of browser:
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Pages/WindowResize.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/WindowResize.razor'></a>
+```razor
 @page "/windowresize"
 
 <Window WindowResized="OnWindowResized" />
@@ -285,14 +326,19 @@ builder.Services.AddScoped<SliderInterop>();
     }
 }
 ```
+<sup><a href='/BlazorSliderTestWasm/Pages/WindowResize.razor#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/WindowResize.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
+<img src="UnitTests/IntegrationTest.WindowResize.01.verified.png" width="400px">
 
 
 ### Complex Nesting:
 
 > Note: Currently you can only nest Horizontal panels inside Vertical panels, and vice versa.
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Pages/Crazy.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/Crazy.razor'></a>
+```razor
 @page "/crazy"
 
 <AbsolutePanel AutoResize="true">
@@ -369,12 +415,15 @@ builder.Services.AddScoped<SliderInterop>();
     </VerticalSliderPanel>
 </AbsolutePanel>
 ```
-
+<sup><a href='/BlazorSliderTestWasm/Pages/Crazy.razor#L1-L75' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Crazy.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 
 ### NavMenu used in demos:
 
-```xml
+<!-- snippet: BlazorSliderTestWasm/Shared/NavMenu.razor -->
+<a id='snippet-BlazorSliderTestWasm/Shared/NavMenu.razor'></a>
+```razor
 <div>
     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
         <span class="oi oi-resize-width" aria-hidden="true"></span> Vertical
@@ -393,4 +442,5 @@ builder.Services.AddScoped<SliderInterop>();
     </NavLink>
 </div>
 ```
-
+<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L17' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->

@@ -15,6 +15,13 @@ public class IntegrationTest :
     }
 
     [Fact]
+    public async Task Vertical()
+    {
+        await LoadPage("/");
+        await Verifier.Verify(page);
+    }
+
+    [Fact]
     public async Task Crazy()
     {
         await LoadPage("crazy");

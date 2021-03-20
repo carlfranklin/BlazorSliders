@@ -17,7 +17,8 @@ Github: https://github.com/carlfranklin/BlazorSliders
     * [Four Panels:](#four-panels)
     * [Initial size and position based on percent size of browser:](#initial-size-and-position-based-on-percent-size-of-browser)
     * [Complex Nesting:](#complex-nesting)
-    * [NavMenu used in demos:](#navmenu-used-in-demos)<!-- endToc -->
+    * [NavMenu used in demos:](#navmenu-used-in-demos)
+  * [Icon](#icon)<!-- endToc -->
 
 
 ## Live Demo:

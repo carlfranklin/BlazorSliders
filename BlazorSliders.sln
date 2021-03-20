@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlidersTest", "Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliderTestWasm", "BlazorSliderTestWasm\BlazorSliderTestWasm.csproj", "{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{FD775FC9-E834-4125-81BB-D75DE1739CCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

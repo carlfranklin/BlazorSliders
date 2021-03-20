@@ -11,7 +11,7 @@ Github: https://github.com/carlfranklin/BlazorSliders
   * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
   * [Install with NuGet:](#install-with-nuget)
     * [Description](#description)
-  * [Requirements](#requirements)
+  * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
     * [Four Panels:](#four-panels)

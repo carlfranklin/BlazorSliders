@@ -12,8 +12,9 @@
     <Version>1.2.8</Version>
     <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
     <RepositoryType>GitHub Public</RepositoryType>
+	<PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
@@ -26,6 +27,7 @@
     <Content Update="wwwroot\Sliders.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+	<None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

@@ -19,7 +19,9 @@ namespace BlazorSliderTestWasm
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            #region AddSliderInteropWasm
             builder.Services.AddScoped<SliderInterop>();
+            #endregion
             await builder.Build().RunAsync();
         }
     }

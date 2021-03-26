@@ -20,14 +20,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Update="wwwroot\Sliders.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-	<None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\"/>
+	<None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

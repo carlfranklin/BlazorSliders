@@ -32,7 +32,7 @@ public class PlaywrightFixture :
         var baseDirectory = AppDomain.CurrentDomain.BaseDirectory!;
         var binPath = baseDirectory.Replace("UnitTests", "BlazorSliderTestWasm");
         var projectDir = Path.GetFullPath(Path.Combine(binPath, "../../../"));
-        ProcessStartInfo startInfo = new("dotnet", "run")
+        ProcessStartInfo startInfo = new("dotnet", "run --no-build --no-restore")
         {
             WorkingDirectory = projectDir
         };

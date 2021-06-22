@@ -90,7 +90,12 @@ namespace BlazorSliders
             get
             {
                 if (Parent != null)
-                    return Parent.Height - (TopPanelHeight + SliderHeight);
+                    if (this.GetType() == typeof(HorizontalSliderPanel) && PanelPosition == PanelPosition.Top)
+                        return Height - (TopPanelHeight + SliderHeight);
+                    else if (Parent.GetType() == typeof(HorizontalSliderPanel) && PanelPosition == PanelPosition.Bottom)
+                        return ((HorizontalSliderPanel)Parent).BottomPanelHeight - (TopPanelHeight + SliderHeight);
+                    else
+                        return Parent.Height - (TopPanelHeight + SliderHeight);
                 else
                     return 0;
             }

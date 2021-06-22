@@ -109,10 +109,24 @@ namespace BlazorSliders
                 }
                 else if (PanelPosition == PanelPosition.Bottom)
                 {
-                    // I'm a vertical slider inside the left pane of a horizontal slider
+                    // I'm a vertical slider inside the bottom pane of a horizontal slider
                     var parent = (HorizontalSliderPanel)Parent;
                     Height = Parent.Height - (parent.TopPanelHeight + parent.SliderHeight);
                     Width = parent.Width;
+                }
+                else if (PanelPosition == PanelPosition.Left)
+                {
+                    //I'm a vertical slider inside the left pane of a vertical slider
+                    var parent = (VerticalSliderPanel)Parent;
+                    Height = Parent.Height;
+                    Width = parent.LeftPanelWidth;
+                }
+                else if (PanelPosition == PanelPosition.Right)
+                {
+                    //I'm a vertical slider inside the right pane of a vertical slider
+                    var parent = (VerticalSliderPanel)Parent;
+                    Height = Parent.Height;
+                    Width = Parent.Width - (parent.LeftPanelWidth + parent.SliderWidth);
                 }
                 else
                 {
@@ -185,6 +199,20 @@ namespace BlazorSliders
                     var parent = (VerticalSliderPanel)Parent;
                     Width = Parent.Width - (parent.LeftPanelWidth + parent.SliderWidth);
                     Height = Parent.Height;
+                }
+                else if (PanelPosition == PanelPosition.Top)
+                {
+                    //I'm a horizontal slider inside the Top pane of a horizontal slider
+                    var parent = (HorizontalSliderPanel)Parent;
+                    Height = parent.TopPanelHeight;
+                    Width = Parent.Width;
+                }
+                else if (PanelPosition == PanelPosition.Bottom)
+                {
+                    //I'm a horizontal slider inside the bottom pane of a horizontal slider
+                    var parent = (HorizontalSliderPanel)Parent;
+                    Height = Parent.Height - (parent.TopPanelHeight + parent.SliderHeight);
+                    Width = Parent.Width;
                 }
                 else
                 {

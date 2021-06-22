@@ -11,6 +11,7 @@ public static class ModuleInitializer
         // remove some noise from the html snapshot
 
         VerifierSettings.ScrubEmptyLines();
+        VerifierSettings.ScrubInlineGuids();
         VerifierSettings.ScrubLinesWithReplace(s => s.Replace("<!--!-->", ""));
         HtmlPrettyPrint.All();
         VerifierSettings.ScrubLinesContaining("<script src=\"_framework/dotnet.");

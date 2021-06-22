@@ -345,7 +345,7 @@ builder.Services.AddScoped<SliderInterop>();
 
 ### Complex Nesting:
 
-> Note: Currently you can only nest Horizontal panels inside Vertical panels, and vice versa.
+> Note: Vertical nesting in vertical panels and horizontal nesting in horizontal panels has now been implemented as shown below.
 
 #### Vertical Panel Nested in Vertical Panel:
 

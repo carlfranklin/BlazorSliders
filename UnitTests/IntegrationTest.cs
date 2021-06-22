@@ -49,6 +49,20 @@ public class IntegrationTest :
         await Verifier.Verify(page);
     }
 
+    [Fact]
+    public async Task DoubleVertical()
+    {
+        await LoadPage("doublevertical");
+        await Verifier.Verify(page);
+    }
+
+    [Fact]
+    public async Task DoubleHorizontal()
+    {
+        await LoadPage("doublehorizontal");
+        await Verifier.Verify(page);
+    }
+
     Task LoadPage(string url)
     {
         return page.GoToAsync($"https://localhost:5001/{url}");

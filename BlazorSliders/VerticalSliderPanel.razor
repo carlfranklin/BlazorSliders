@@ -1,7 +1,7 @@
 ﻿@inherits SliderPanelBase
 @inject SliderInterop jsInterop
 
-<div id="@LeftPanelId" class="noselect"
+<div id="@LeftPanelId" class="noselect @LeftClassString"
      style="@LeftStyleString
     position:absolute;
     overflow:auto;
@@ -14,9 +14,8 @@
     </CascadingValue>
 </div>
 
-<div id="@SliderId"
-     style="background-color: lightgray;
-    cursor: e-resize;
+<div id="@SliderId" class="@DefaultSliderClass @SliderClassString"
+     style="
     width: @SliderWidthPx;
     position: absolute;
     top: 0px;
@@ -24,8 +23,9 @@
     height: @HeightPx;">
 </div>
 
-<div id="@RightPanelId" class="noselect"
-     style="@RightStyleString position:absolute;
+<div id="@RightPanelId" class="noselect @RightClassString"
+     style="@RightStyleString 
+    position:absolute;
     overflow:auto;
     top:0px;
     left:@RightPanelLeftPx;

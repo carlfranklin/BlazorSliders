@@ -48,3 +48,30 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+/*.sampleLeft {
+    background-color: aqua;
+}
+
+.sampleRight {
+    background-color: burlywood;
+}
+
+.sampleSlider {
+    background-color: red !important;
+}*/
+
+
+.sampleLeft {
+    background-color: aqua;
+}
+
+.sampleRight {
+    background-color: burlywood;
+}
+
+.sampleSlider {
+    background-color: red;
+    cursor: e-resize;
+}

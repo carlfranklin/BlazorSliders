@@ -1,7 +1,7 @@
 ﻿@inherits SliderPanelBase
 @inject IJSRuntime js
 
-<div id="@Id" style="@StyleString position:absolute;
+<div id="@Id" class="@ClassString" style="@StyleString position:absolute;
     left:@LeftPx;
     top:@TopPx;
     width:@WidthPx;
@@ -23,6 +23,9 @@
 
     [Parameter]
     public string StyleString { get; set; } = "";
+
+    [Parameter]
+    public string ClassString { get; set; } = "";
 
     [Parameter]
     public new int Top

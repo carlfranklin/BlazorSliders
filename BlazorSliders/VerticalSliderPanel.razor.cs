@@ -54,10 +54,24 @@ namespace BlazorSliders
         public string LeftStyleString { get; set; } = "";
 
         [Parameter]
+        public string LeftClassString { get; set; } = "";
+
+        [Parameter]
         public string RightStyleString { get; set; } = "";
 
         [Parameter]
+        public string RightClassString { get; set; } = "";
+
+        [Parameter]
         public int SliderWidth { get; set; } = 5;
+
+        [Parameter]
+        public string SliderClassString { get; set; } = "";
+
+        [Parameter]
+        public bool OverrideSliderStyle { get; set; }
+
+        public string DefaultSliderClass { get; set; }
 
 
         [Parameter]
@@ -145,6 +159,11 @@ namespace BlazorSliders
 
         protected override void OnInitialized()
         {
+            if (OverrideSliderStyle)
+                DefaultSliderClass = "";
+            else
+                DefaultSliderClass = "defaultSlider";
+
             if (Parent != null)
             {
                 if (Parent.GetType() == typeof(AbsolutePanel))

@@ -1,7 +1,7 @@
 ﻿@inherits SliderPanelBase
 @inject IJSRuntime js
 
-<div id="@Id" class="@ClassString" style="@StyleString position:absolute;
+<div id="@Id" class="AbsolutePanel @ClassString" style="@StyleString position:absolute;
     left:@LeftPx;
     top:@TopPx;
     width:@WidthPx;
@@ -11,15 +11,19 @@
     </CascadingValue>
 </div>
 
-<Window WindowResized="OnWindowResized" />
+<Window WindowResized="OnWindowResized" Id="@Id" ParentContained="ParentContained"/>
 
 @code {
+
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
     public bool AutoResize { get; set; } = false;
+
+    [Parameter]
+    public bool ParentContained { get; set; } = false;
 
     [Parameter]
     public string StyleString { get; set; } = "";
@@ -39,6 +43,7 @@
             base.Top = value;
         }
     }
+
 
     [Parameter]
     public new int Left
@@ -62,6 +67,7 @@
     /// <returns></returns>
     async Task OnWindowResized(Size size)
     {
+
         if (AutoResize)
         {
             Width = size.Width - Left;

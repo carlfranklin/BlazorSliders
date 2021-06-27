@@ -1,36 +1,38 @@
 ﻿@page "/doublehorizontal"
 
-<AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="400">
-        <TopChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
-                <TopChildContent>
-                    <div style="padding:10px;">
-                        <h3>Top Content in the Top Parent Panel</h3>
-                        This is a demo of a nested horizontal slider panel.
-                    </div>
-                </TopChildContent>
-                <BottomChildContent>
-                    <div style="padding:10px;">
-                        <h3>Bottom Content in the Top Parent Panel</h3>
-                    </div>
-                </BottomChildContent>
-            </HorizontalSliderPanel>
-        </TopChildContent>
-        <BottomChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
-                <TopChildContent>
-                    <div style="padding:10px;">
-                        <h3>Top Content in the Bottom Parent Panel</h3>
-                    </div>
-                </TopChildContent>
-                <BottomChildContent>
-                    <div style="padding:10px;">
-                        <h3>Bottom Content in the Bottom Parent Panel</h3>
-                        <NavMenu />
-                    </div>
-                </BottomChildContent>
-            </HorizontalSliderPanel>
-        </BottomChildContent>
-    </HorizontalSliderPanel>
-</AbsolutePanel>
+
+    <AbsolutePanel AutoResize="true">
+        <HorizontalSliderPanel TopPanelHeight="400">
+            <TopChildContent>
+                <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
+                    <TopChildContent>
+                        <div style="padding:10px;">
+                            <h3>Top Content in the Top Parent Panel</h3>
+                            This is a demo of a nested horizontal slider panel.
+                        </div>
+                    </TopChildContent>
+                    <BottomChildContent>
+                        <div style="padding:10px;">
+                            <h3>Bottom Content in the Top Parent Panel</h3>
+                        </div>
+                    </BottomChildContent>
+                </HorizontalSliderPanel>
+            </TopChildContent>
+            <BottomChildContent>
+                <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
+                    <TopChildContent>
+                        <div style="padding:10px;">
+                            <h3>Top Content in the Bottom Parent Panel</h3>
+                        </div>
+                    </TopChildContent>
+                    <BottomChildContent>
+                        <div style="padding:10px;">
+                            <h3>Bottom Content in the Bottom Parent Panel</h3>
+                            <NavMenu />
+                        </div>
+                    </BottomChildContent>
+                </HorizontalSliderPanel>
+            </BottomChildContent>
+        </HorizontalSliderPanel>
+    </AbsolutePanel>
+

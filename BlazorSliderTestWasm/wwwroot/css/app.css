@@ -50,28 +50,19 @@ a, .btn-link {
     }
 
 
-/*.sampleLeft {
-    background-color: aqua;
+.panel-base{
+    color: #B8C8C8;
 }
 
-.sampleRight {
-    background-color: burlywood;
+.left-panel{
+    background-color: #1E1E1E;
 }
 
-.sampleSlider {
-    background-color: red !important;
-}*/
-
-
-.sampleLeft {
-    background-color: aqua;
+.right-panel{
+    background-color: #181818;
 }
 
-.sampleRight {
-    background-color: burlywood;
-}
-
-.sampleSlider {
-    background-color: red;
+.custom-slider{
+    background-color: #3E3E42;
     cursor: e-resize;
 }

@@ -71,7 +71,7 @@ public class IntegrationTest :
     }
 
     [Fact]
-    public async Task ParentCopntained()
+    public async Task ParentContained()
     {
         await LoadPage("parentcontained");
         await Verifier.Verify(page);

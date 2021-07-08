@@ -6,8 +6,12 @@
     top:@TopPx;
     width:@WidthPx;
     height:@HeightPx;">
-    <CascadingValue Value=@this>
-        @ChildContent
+    <CascadingValue Value=this Name="directParent">
+        <CascadingValue Value=Width Name="directWidth">
+            <CascadingValue Value=Height Name="directHeight">
+                @ChildContent
+            </CascadingValue>
+        </CascadingValue>
     </CascadingValue>
 </div>
 
@@ -73,6 +77,7 @@
             Width = size.Width - Left;
             Height = size.Height - Top;
         }
+        await InvokeAsync(StateHasChanged);
         if (ChildPanel != null)
         {
             ChildPanel.Resize();

@@ -77,6 +77,13 @@ public class IntegrationTest :
         await Verifier.Verify(page);
     }
 
+    [Fact]
+    public async Task GoldenRatio()
+    {
+        await LoadPage("goldenratio");
+        await Verifier.Verify(page);
+    }
+
     Task LoadPage(string url)
     {
         return page.GoToAsync($"https://localhost:5001/{url}");

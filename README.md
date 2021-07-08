@@ -13,14 +13,23 @@ Github: https://github.com/carlfranklin/BlazorSliders
   * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
   * [Install with NuGet:](#install-with-nuget)
     * [Description](#description)
+      * [AbsolutePanel](#absolutepanel)
+      * [Window](#window)
+      * [VerticalSliderPanel](#verticalsliderpanel)
+      * [HorizontalSliderPanel](#horizontalsliderpanel)
   * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
     * [Four Panels:](#four-panels)
     * [Initial size and position based on percent size of browser:](#initial-size-and-position-based-on-percent-size-of-browser)
+      * [Alternate Method for Defining Panels by Percentage of Containing Element](#alternate-method-for-defining-panels-by-percentage-of-containing-element)
+      * [Define Width/Height by Rem Units](#define-widthheight-by-rem-units)
     * [Custom Class Setup:](#custom-class-setup)
     * [Containing the Panels to Its Parent Container:](#containing-the-panels-to-its-parent-container)
     * [Complex Nesting:](#complex-nesting)
+      * [Vertical Panel Nested in Vertical Panel:](#vertical-panel-nested-in-vertical-panel)
+      * [Horizontal Panel Nested in Horizontal Panel:](#horizontal-panel-nested-in-horizontal-panel)
+      * [Crazy Nesting Inception:](#crazy-nesting-inception)
     * [NavMenu used in demos:](#navmenu-used-in-demos)
   * [Icon](#icon)<!-- endToc -->
 
@@ -122,7 +131,7 @@ builder.Services.AddScoped<SliderInterop>();
 @page "/"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="75">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
@@ -137,6 +146,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -221,6 +231,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -342,6 +353,62 @@ builder.Services.AddScoped<SliderInterop>();
 
 <kbd><img src="UnitTests/IntegrationTest.WindowResize.01.verified.png" width="400px"></kbd>
 
+#### Alternate Method for Defining Panels by Percentage of Containing Element
+
+Alternatively, you can define the property `HeightUnit` or `WidthUnit` (depending on if you're defining a horizontal panel or vertical panel) to `SizeUnit.Percent` and then set the initial percent for either the `TopPanelHeight` or `LeftPanelStartingWidth` properties. 
+
+This method finds the width or height of the containing element and calculates the left panel's width or top panel's height.
+
+<!-- snippet: BlazorSliderTestWasm/Pages/GoldenRatio.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor'></a>
+```razor
+@page "/goldenratio"
+
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62">
+        <LeftChildContent>
+            <div style="padding:10px;">
+                <h3>Approximate Golden Ratio Example</h3>
+                <NavMenu />
+            </div>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="62">
+                <BottomChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="38">
+                        <LeftChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" HeightUnit="SizeUnit.Percent" TopPanelHeight="38">
+                                <TopChildContent>
+                                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62" MinimumRightPanelWidth="100" MinimumLeftPanelWidth="100">
+                                        <RightChildContent>
+                                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="50" MinimumBottomPanelHeight="100" MinimumTopPanelHeight="100">
+
+                                            </HorizontalSliderPanel>
+                                        </RightChildContent>
+                                    </VerticalSliderPanel>
+                                </TopChildContent>
+                            </HorizontalSliderPanel>
+                        </LeftChildContent>
+                    </VerticalSliderPanel>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+
+@code {
+
+}
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/GoldenRatio.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<kbd><img src="UnitTests/IntegrationTest.GoldeRatio.01.verified.png" width="400px"></kbd>
+
+#### Define Width/Height by Rem Units
+
+Another option for the `HeightUnit` and `WidthUnit` is `SizeUnit.Rem` which allows the user to define the initial width/height of a panel by rem units (this assumes the default of 16px per 1 rem).
 
 ### Custom Class Setup:
 
@@ -355,7 +422,11 @@ To add custom classes to the slider, set the `OverrideSliderStyle` parameter to 
 @page "/customclasses"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400" OverrideSliderStyle="true" LeftClassString="@leftClasses" RightClassString="@rightClasses" SliderClassString="custom-slider">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" 
+                         OverrideSliderStyle="true" 
+                         LeftClassString="@leftClasses" 
+                         RightClassString="@rightClasses" 
+                         SliderClassString="custom-slider">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
@@ -378,7 +449,7 @@ To add custom classes to the slider, set the `OverrideSliderStyle` parameter to 
 
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/CustomClasses.razor#L1-L25' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Pages/CustomClasses.razor#L1-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <kbd><img src="UnitTests/IntegrationTest.CustomClasses.01.verified.png" width="400px"></kbd>
@@ -518,9 +589,9 @@ body {
 
 
         <AbsolutePanel AutoResize="true">
-            <VerticalSliderPanel LeftPanelStartingWidth="600">
+            <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="50">
                 <LeftChildContent>
-                    <VerticalSliderPanel PanelPosition="PanelPosition.Left" LeftPanelStartingWidth="400">
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Left" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="25">
                         <LeftChildContent>
                             <div style="padding:10px;">
                                 <h3>Left Content in the Left Parent Panel</h3>
@@ -535,7 +606,7 @@ body {
                     </VerticalSliderPanel>
                 </LeftChildContent>
                 <RightChildContent>
-                    <VerticalSliderPanel PanelPosition="PanelPosition.Right" LeftPanelStartingWidth="400">
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Right" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="50">
                         <LeftChildContent>
                             <div style="padding:10px;">
                                 <h3>Left Content in the Right Parent Panel</h3>
@@ -586,7 +657,7 @@ body {
                 </HorizontalSliderPanel>
             </TopChildContent>
             <BottomChildContent>
-                <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
+                <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="600">
                     <TopChildContent>
                         <div style="padding:10px;">
                             <h3>Top Content in the Bottom Parent Panel</h3>
@@ -729,9 +800,12 @@ body {
     <NavLink class="nav-link" href="parentcontained">
         <span class="oi oi-resize-both" aria-hidden="true"></span> Parent Contained
     </NavLink>
+    <NavLink class="nav-link" href="goldenratio">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Golden Ratio
+    </NavLink>
 </div>
 ```
-<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

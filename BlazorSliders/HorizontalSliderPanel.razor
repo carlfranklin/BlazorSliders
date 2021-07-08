@@ -9,8 +9,13 @@
     left:0px;
     width:@WidthPx;
     height:@TopPanelHeightPx;">
-    <CascadingValue Value=@this>
-        @TopChildContent
+    <CascadingValue Value=this Name="directParent">
+        <CascadingValue Value=Width Name="directWidth">
+            <CascadingValue Value=TopPanelHeight Name="directHeight">
+                @TopChildContent
+            </CascadingValue>
+        </CascadingValue>
+        
     </CascadingValue>
 </div>
 
@@ -30,8 +35,13 @@
     left:0px;
     width:@WidthPx;
     height:@BottomPanelHeightPx;">
-    <CascadingValue Value=@this>
-        @BottomChildContent
+    <CascadingValue Value=this Name="directParent">
+        <CascadingValue Value=Width Name="directWidth">
+            <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                @BottomChildContent
+            </CascadingValue>
+        </CascadingValue>
+        
     </CascadingValue>
 </div>
 

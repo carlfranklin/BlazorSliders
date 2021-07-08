@@ -1,0 +1,38 @@
+﻿@page "/goldenratio"
+
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62">
+        <LeftChildContent>
+            <div style="padding:10px;">
+                <h3>Approximate Golden Ratio Example</h3>
+                <NavMenu />
+            </div>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="62">
+                <BottomChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="38">
+                        <LeftChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" HeightUnit="SizeUnit.Percent" TopPanelHeight="38">
+                                <TopChildContent>
+                                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62" MinimumRightPanelWidth="100" MinimumLeftPanelWidth="100">
+                                        <RightChildContent>
+                                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="50" MinimumBottomPanelHeight="100" MinimumTopPanelHeight="100">
+
+                                            </HorizontalSliderPanel>
+                                        </RightChildContent>
+                                    </VerticalSliderPanel>
+                                </TopChildContent>
+                            </HorizontalSliderPanel>
+                        </LeftChildContent>
+                    </VerticalSliderPanel>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+
+@code {
+
+}

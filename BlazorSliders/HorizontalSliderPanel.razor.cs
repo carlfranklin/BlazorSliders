@@ -52,24 +52,52 @@ namespace BlazorSliders
         public string TopStyleString { get; set; } = "";
 
         [Parameter]
+        public string TopClassString { get; set; } = "";
+
+        [Parameter]
         public string BottomStyleString { get; set; } = "";
+
+        [Parameter]
+        public string BottomClassString { get; set; } = "";
 
         [Parameter]
         public int SliderHeight { get; set; } = 5;
 
         [Parameter]
+        public string SliderClassString { get; set; } = "";
+
+        [Parameter]
+        public bool OverrideSliderStyle { get; set; }
+
+        public string DefaultSliderClass { get; set; }
+
+        [Parameter]
+        public SizeUnit HeightUnit { get; set; }
+
+        [Parameter]
         public int TopPanelHeight
         {
-            get
-            {
-                return topPanelHeight;
-            }
+            get => topPanelHeight;
             set
             {
-                if (originalTopPanelHeight == 0)
+                if (originalTopPanelHeight <= 0)
                 {
-                    originalTopPanelHeight = value;
-                    topPanelHeight = value;
+                    switch (HeightUnit)
+                    {
+                        case SizeUnit.Percent:
+                            originalTopPanelHeight = DirectHeight * value / 100;
+                            topPanelHeight = DirectHeight * value / 100;
+                            break;
+                        case SizeUnit.Rem:
+                            var pixelValue = value * 16;
+                            originalTopPanelHeight = pixelValue;
+                            topPanelHeight = pixelValue;
+                            break;
+                        default:
+                            originalTopPanelHeight = value;
+                            topPanelHeight = value;
+                            break;
+                    }
                 }
             }
         }
@@ -90,12 +118,7 @@ namespace BlazorSliders
             get
             {
                 if (Parent != null)
-                    if (this.GetType() == typeof(HorizontalSliderPanel) && PanelPosition == PanelPosition.Top)
-                        return Height - (TopPanelHeight + SliderHeight);
-                    else if (Parent.GetType() == typeof(HorizontalSliderPanel) && PanelPosition == PanelPosition.Bottom)
-                        return ((HorizontalSliderPanel)Parent).BottomPanelHeight - (TopPanelHeight + SliderHeight);
-                    else
-                        return Parent.Height - (TopPanelHeight + SliderHeight);
+                    return DirectHeight - (TopPanelHeight + SliderHeight);
                 else
                     return 0;
             }
@@ -127,40 +150,34 @@ namespace BlazorSliders
             var myObject = DotNetObjectReference.Create(this);
 
             if (FirstRender)
-            {
                 await jsInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
-            }
+
         }
 
         protected override void OnInitialized()
         {
+            if (OverrideSliderStyle)
+                DefaultSliderClass = "";
+            else
+                DefaultSliderClass = "defaultSlider";
+
             if (Parent != null)
             {
                 if (Parent.GetType() == typeof(AbsolutePanel))
-                {
                     ((AbsolutePanel)Parent).ChildPanel = this;
-                }
                 else if (Parent.GetType() == typeof(VerticalSliderPanel))
                 {
                     if (PanelPosition == PanelPosition.Left)
-                    {
                         ((VerticalSliderPanel)Parent).LeftPanel = this;
-                    }
                     else if (PanelPosition == PanelPosition.Right)
-                    {
                         ((VerticalSliderPanel)Parent).RightPanel = this;
-                    }
                 }
                 else if (Parent.GetType() == typeof(HorizontalSliderPanel))
                 {
                     if (PanelPosition == PanelPosition.Top)
-                    {
                         ((HorizontalSliderPanel)Parent).TopPanel = this;
-                    }
                     else if (PanelPosition == PanelPosition.Bottom)
-                    {
                         ((HorizontalSliderPanel)Parent).BottomPanel = this;
-                    }
                 }
             }
         }

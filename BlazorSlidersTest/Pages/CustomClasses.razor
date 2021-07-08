@@ -1,11 +1,11 @@
-﻿@page "/"
+﻿@page "/customclasses"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="75">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" OverrideSliderStyle="true" LeftClassString="@leftClasses" RightClassString="@rightClasses" SliderClassString="custom-slider">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
-                This is a demo of a single vertical slider panel.
+                This is a demo of custom class styling for the panels and slider.
             </div>
         </LeftChildContent>
         <RightChildContent>
@@ -17,3 +17,9 @@
     </VerticalSliderPanel>
 </AbsolutePanel>
 
+@code {
+
+    string leftClasses = "panel-base left-panel";
+    string rightClasses = "panel-base right-panel";
+
+}

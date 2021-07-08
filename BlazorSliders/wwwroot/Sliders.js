@@ -1,12 +1,23 @@
 ﻿// Slider.js by Carl Franklin
 // Version 1.2.8
 
-export function registerWindow(dotNetComponent) {
+export function registerWindow(dotNetComponent, id = "", parentContained = false) {
     var component = dotNetComponent;
 
     window.addEventListener("resize", function () {
-        if (component != null)
-            setTimeout(raiseEvent, 1, component, "OnWindowResized", window.innerWidth, window.innerHeight);
+        if (component != null) {
+            if (parentContained) {
+
+                var parentContainer = window.document.getElementById(id).parentElement;
+                var parentCalc = window.getComputedStyle(parentContainer);
+                var parentWidth = parseInt(parentCalc.width);
+                var parentHeight = parseInt(parentCalc.height);
+                setTimeout(raiseEvent, 1, component, "OnWindowResized", parentWidth, parentHeight);
+            } else {
+                setTimeout(raiseEvent, 1, component, "OnWindowResized", window.innerWidth, window.innerHeight);
+            }
+        }
+            
     });
 
     function raiseEvent(comp, eventname, x, y) {
@@ -14,8 +25,22 @@ export function registerWindow(dotNetComponent) {
     }
 }
 
-export function forceResize(dotNetComponent) {
-    dotNetComponent.invokeMethodAsync("OnWindowResized", window.innerWidth, window.innerHeight)
+export function forceResize(dotNetComponent, id = "", parentContained = false) {
+    var component = dotNetComponent;
+
+    if (parentContained) {
+        var doc = window.document;
+        var parentContainer = doc.getElementById(id).parentElement;
+        var parentCalc = window.getComputedStyle(parentContainer);
+        var parentWidth = parseInt(parentCalc.width);
+        var parentHeight = parseInt(parentCalc.height);
+
+        component.invokeMethodAsync("OnWindowResized", parentWidth, parentHeight)
+    } else
+        component.invokeMethodAsync("OnWindowResized", window.innerWidth, window.innerHeight)
+ 
+
+
 }
 
 export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, dotNetComponent) {
@@ -55,29 +80,70 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
         slider.addEventListener("mousedown", function (ev) {
             sliderIsMoving = true;
             if (component != null) {
+                var absoluteElement = ev.target;
+
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
                 leftPanel.style.cursor = "e-resize";
                 rightPanel.style.cursor = "e-resize";
-                setTimeout(raiseEvent, 1, component, "MouseDown", ev.clientX, ev.clientY);
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+                setTimeout(raiseEvent, 1, component, "MouseDown", relativeX, relativeY);
             }
         });
 
         slider.addEventListener("mouseup", function (ev) {
             sliderIsMoving = false;
             if (component != null) {
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
                 leftPanel.style.cursor = "default";
                 rightPanel.style.cursor = "default";
-                setTimeout(raiseEvent, 1, component, "MouseUp", ev.clientX, ev.clientY);
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+                setTimeout(raiseEvent, 1, component, "MouseUp", relativeX, relativeY);
             }
         });
 
         slider.addEventListener("mousemove", function (ev) {
-            if (component != null && sliderIsMoving)
-                setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
+            if (component != null && sliderIsMoving) {
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
+            }
+
+                
         });
 
+        function getAbsoluteParent(element) {
+            if (element.classList.contains("AbsolutePanel"))
+                return element;
+            else
+                return element.parentElement;
+        }
+
         window.addEventListener("mousemove", function (ev) {
-            if (component != null && sliderIsMoving)
-                setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
+            if (component != null && sliderIsMoving) {
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
+            }
+
         });
 
         window.addEventListener("mouseup", function (ev) {
@@ -90,9 +156,20 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
             if (component != null) {
                 leftPanel.style.cursor = "e-resize";
                 rightPanel.style.cursor = "e-resize";
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
+
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY) - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseDown", relativeX, relativeY);
             }
         });
 
@@ -101,25 +178,53 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
             if (component != null) {
                 leftPanel.style.cursor = "default";
                 rightPanel.style.cursor = "default";
-                var clientX = ev.touches[0].clientX;
-                var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
+                setTimeout(raiseEvent, 1, component, "MouseUp", parseInt(rect.left), parseInt(rect.top));
             }
         });
 
         slider.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
+
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY) - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
             }
         });
 
         window.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY)- parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
             }
         });
 
@@ -172,7 +277,17 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
-                setTimeout(raiseEvent, 1, component, "MouseDown", ev.clientX, ev.clientY);
+
+                var absoluteElement = ev.target;
+
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseDown", relativeX, relativeY);
             }
         });
 
@@ -181,18 +296,48 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                setTimeout(raiseEvent, 1, component, "MouseUp", ev.clientX, ev.clientY);
+
+                var absoluteElement = ev.target;
+
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseUp", relativeX, relativeY);
             }
         });
 
         slider.addEventListener("mousemove", function (ev) {
-            if (component != null && sliderIsMoving)
-                setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
+            if (component != null && sliderIsMoving) {
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
+            }
+                
         });
 
         window.addEventListener("mousemove", function (ev) {
-            if (component != null && sliderIsMoving)
-                setTimeout(raiseEvent, 1, component, "MouseMove", ev.clientX, ev.clientY);
+            if (component != null && sliderIsMoving) {
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+                var relativeX = ev.clientX - parseInt(rect.left);
+                var relativeY = ev.clientY - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
+            }
+                
         });
 
         window.addEventListener("mouseup", function (ev) {
@@ -205,9 +350,21 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
                 bottomPanel.style.cursor = "n-resize";
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseDown", clientX, clientY);
+
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY) - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseDown", relativeX, relativeY);
             }
         });
 
@@ -216,25 +373,54 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             if (component != null) {
                 topPanel.style.cursor = "default";
                 bottomPanel.style.cursor = "default";
-                var clientX = ev.touches[0].clientX;
-                var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseUp", clientX, clientY);
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
+                setTimeout(raiseEvent, 1, component, "MouseUp", parseInt(rect.left), parseInt(rect.top));
             }
         });
 
         slider.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
+
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY) - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
             }
         });
 
         window.addEventListener("touchmove", function (ev) {
             if (component != null && sliderIsMoving) {
+
+                var absoluteElement = ev.target;
+                while (!absoluteElement.classList.contains("AbsolutePanel")) {
+                    absoluteElement = getAbsoluteParent(absoluteElement);
+                }
+                var rect = absoluteElement.getBoundingClientRect();
+
                 var clientX = ev.touches[0].clientX;
                 var clientY = ev.touches[0].clientY;
-                setTimeout(raiseEvent, 1, component, "MouseMove", clientX, clientY);
+
+
+                var relativeX = parseInt(clientX) - parseInt(rect.left);
+                var relativeY = parseInt(clientY) - parseInt(rect.top);
+
+                setTimeout(raiseEvent, 1, component, "MouseMove", relativeX, relativeY);
             }
         });
 
@@ -246,5 +432,12 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
 
     function raiseEvent(comp, eventname, x, y) {
         comp.invokeMethodAsync(eventname, x, y);
+    }
+
+    function getAbsoluteParent(element) {
+        if (element.classList.contains("AbsolutePanel"))
+            return element;
+        else
+            return element.parentElement;
     }
 }

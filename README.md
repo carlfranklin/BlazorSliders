@@ -404,7 +404,7 @@ This method finds the width or height of the containing element and calculates t
 <sup><a href='/BlazorSliderTestWasm/Pages/GoldenRatio.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-<kbd><img src="UnitTests/IntegrationTest.GoldeRatio.01.verified.png" width="400px"></kbd>
+<kbd><img src="UnitTests/IntegrationTest.GoldenRatio.01.verified.png" width="400px"></kbd>
 
 #### Define Width/Height by Rem Units
 

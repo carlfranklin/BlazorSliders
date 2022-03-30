@@ -11,8 +11,7 @@ Github: https://github.com/carlfranklin/BlazorSliders
 
   * [Live Demo:](#live-demo)
   * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
-  * [Install with NuGet:](#install-with-nuget)
-    * [Description](#description)
+  * [Description](#description)
   * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
@@ -128,7 +127,6 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -213,7 +211,6 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
-
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->

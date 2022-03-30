@@ -92,8 +92,7 @@ In .NET 5: Add the following line to `ConfigureServices` in *Startup.cs* :
 
 <!-- snippet: AddSliderInteropServer -->
 <a id='snippet-addsliderinteropserver'></a>
-
-```C#
+```cs
 services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
@@ -103,11 +102,9 @@ In .NET 6: Add the following to *Program.cs*:
 
 <!-- snippet: AddSliderInteropServer -->
 <a id='snippet-addsliderinteropserver'></a>
-
-```C#
-builder.Services.AddScoped<SliderInterop>();
+```cs
+services.AddScoped<SliderInterop>();
 ```
-
 <sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 

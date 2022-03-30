@@ -129,11 +129,11 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/Index.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/Index.razor'></a>
-```razor
+```xml
 @page "/"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
@@ -159,11 +159,11 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/Horizontals.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/Horizontals.razor'></a>
-```razor
+```xml
 @page "/horizontals"
 
 <AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="200">
+    <HorizontalSliderPanel TopPanelHeight="200" SliderHeight="10">
         <TopChildContent>
             <div style="padding:10px;">
                 <h3>Top Content</h3>
@@ -189,13 +189,14 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/FourPanels.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/FourPanels.razor'></a>
-```razor
+```xml
 @page "/fourpanels"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10">
         <LeftChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
                                    TopPanelHeight="200">
@@ -214,7 +215,8 @@ builder.Services.AddScoped<SliderInterop>();
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
                                    TopPanelHeight="400">
@@ -243,7 +245,7 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/WindowResize.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/WindowResize.razor'></a>
-```razor
+```xml
 @page "/windowresize"
 
 <Window WindowResized="OnWindowResized" />
@@ -251,16 +253,19 @@ builder.Services.AddScoped<SliderInterop>();
 @(WindowSize != null)
 {
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth">
+    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth" 
+                         SliderWidth="10">
         <LeftChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
                                    TopPanelHeight="@LeftHorizontalTopPanelHeight">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content 1</h3>
-                        This demo sets the location of the sliders based on a percentage of the
+                        This demo sets the location of the sliders 
+                        based on a percentage of the
                         initial size of the browser.
                     </div>
                 </TopChildContent>
@@ -273,7 +278,8 @@ builder.Services.AddScoped<SliderInterop>();
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
                                    TopPanelHeight="@RightHorizontalTopPanelHeight">
@@ -307,7 +313,8 @@ builder.Services.AddScoped<SliderInterop>();
         {
             if (WindowSize != null)
             {
-                return WindowSize.Width * VerticalLeftPanelWidthPercent / 100;
+                return WindowSize.Width 
+                       * VerticalLeftPanelWidthPercent / 100;
             }
             else
                 return 0;
@@ -320,7 +327,8 @@ builder.Services.AddScoped<SliderInterop>();
         {
             if (WindowSize != null)
             {
-                var height = WindowSize.Height * LeftHorizontal1TopPanelHeightPercent / 100;
+                var height = WindowSize.Height 
+                    * LeftHorizontal1TopPanelHeightPercent / 100;
                 return height;
             }
             else
@@ -334,7 +342,8 @@ builder.Services.AddScoped<SliderInterop>();
         {
             if (WindowSize != null)
             {
-                var height = WindowSize.Height * RightHorizontal1TopPanelHeightPercent / 100;
+                var height = WindowSize.Height 
+                    * RightHorizontal1TopPanelHeightPercent / 100;
                 return height;
             }
             else
@@ -362,13 +371,16 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/DoubleVertical.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor'></a>
-```razor
+```xml
 @page "/doublevertical"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="600">
+    <VerticalSliderPanel LeftPanelStartingWidth="600" 
+                         SliderWidth="10">
         <LeftChildContent>
-            <VerticalSliderPanel PanelPosition="PanelPosition.Left" LeftPanelStartingWidth="400">
+            <VerticalSliderPanel PanelPosition="PanelPosition.Left" 
+                                 LeftPanelStartingWidth="400" 
+                                 SliderWidth="10">
                 <LeftChildContent>
                     <div style="padding:10px;">
                         <h3>Left Content in the Left Parent Panel</h3>
@@ -383,7 +395,9 @@ builder.Services.AddScoped<SliderInterop>();
             </VerticalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <VerticalSliderPanel PanelPosition="PanelPosition.Right" LeftPanelStartingWidth="400">
+            <VerticalSliderPanel PanelPosition="PanelPosition.Right" 
+                                 LeftPanelStartingWidth="400" 
+                                 SliderWidth="10">
                 <LeftChildContent>
                     <div style="padding:10px;">
                         <h3>Left Content in the Right Parent Panel</h3>
@@ -410,13 +424,16 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/DoubleHorizontal.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor'></a>
-```razor
+```xml
 @page "/doublehorizontal"
 
 <AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="400">
+    <HorizontalSliderPanel TopPanelHeight="400" 
+                           SliderHeight="10">
         <TopChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" 
+                                   TopPanelHeight="200" 
+                                   SliderHeight="10">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content in the Top Parent Panel</h3>
@@ -431,7 +448,9 @@ builder.Services.AddScoped<SliderInterop>();
             </HorizontalSliderPanel>
         </TopChildContent>
         <BottomChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" 
+                                   TopPanelHeight="200" 
+                                   SliderHeight="10">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content in the Bottom Parent Panel</h3>
@@ -457,13 +476,15 @@ builder.Services.AddScoped<SliderInterop>();
 
 <!-- snippet: BlazorSliderTestWasm/Pages/Crazy.razor -->
 <a id='snippet-BlazorSliderTestWasm/Pages/Crazy.razor'></a>
-```razor
+```xml
 @page "/crazy"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" 
+                         SliderWidth="10">
         <LeftChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
                                    TopPanelHeight="200">
@@ -482,17 +503,20 @@ builder.Services.AddScoped<SliderInterop>();
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
                                    BottomStyleString="background-color:violet;"
                                    TopPanelHeight="600">
                 <TopChildContent>
                     <VerticalSliderPanel PanelPosition="PanelPosition.Top"
+                                         SliderWidth="10"
                                          LeftPanelStartingWidth="700">
                         <LeftChildContent>
                             <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
-                                                   TopStyleString="background-color:orange;"
-                                                   BottomStyleString="background-color:lightblue;"
-                                                   TopPanelHeight="300">
+                                         SliderHeight="10"
+                                         TopStyleString="background-color:orange;"
+                                         BottomStyleString="background-color:lightblue;"
+                                         TopPanelHeight="300">
                                 <TopChildContent>
                                     <div style="padding:10px;">
                                         <h3>Top Content 2</h3>
@@ -506,10 +530,11 @@ builder.Services.AddScoped<SliderInterop>();
                             </HorizontalSliderPanel>
                         </LeftChildContent>
                         <RightChildContent>
-                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
-                                                   TopStyleString="background-color:pink;"
-                                                   BottomStyleString="background-color:lightgreen;"
-                                                   TopPanelHeight="400">
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                         SliderHeight="10"
+                                         TopStyleString="background-color:pink;"
+                                         BottomStyleString="background-color:lightgreen;"
+                                         TopPanelHeight="400">
                                 <TopChildContent>
                                     <div style="padding:10px;">
                                         <h3>Top Content 3</h3>

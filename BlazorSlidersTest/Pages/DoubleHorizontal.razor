@@ -1,9 +1,9 @@
 ﻿@page "/doublehorizontal"
 
 <AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="400">
+    <HorizontalSliderPanel TopPanelHeight="400" SliderHeight="10">
         <TopChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200" SliderHeight="10">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content in the Top Parent Panel</h3>
@@ -18,7 +18,7 @@
             </HorizontalSliderPanel>
         </TopChildContent>
         <BottomChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200" SliderHeight="10">
                 <TopChildContent>
                     <div style="padding:10px;">
                         <h3>Top Content in the Bottom Parent Panel</h3>

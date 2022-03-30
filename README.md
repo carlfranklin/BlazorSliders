@@ -33,14 +33,7 @@ https://blazorslidertest.azurewebsites.net/
 https://youtu.be/fNDd7moZJ4c
 
 
-## Install with NuGet:
-
-```
-Install-Package BlazorSliders
-```
-
-
-### Description
+## Description
 
 There are four main components:
 
@@ -135,6 +128,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -219,6 +213,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->

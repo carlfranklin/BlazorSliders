@@ -63,6 +63,27 @@ public class IntegrationTest :
         await Verifier.Verify(page);
     }
 
+    [Fact]
+    public async Task CustomClasses()
+    {
+        await LoadPage("customclasses");
+        await Verifier.Verify(page);
+    }
+
+    [Fact]
+    public async Task ParentContained()
+    {
+        await LoadPage("parentcontained");
+        await Verifier.Verify(page);
+    }
+
+    [Fact]
+    public async Task GoldenRatio()
+    {
+        await LoadPage("goldenratio");
+        await Verifier.Verify(page);
+    }
+
     Task LoadPage(string url)
     {
         return page.GoToAsync($"https://localhost:5001/{url}");

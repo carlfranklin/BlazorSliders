@@ -10,8 +10,14 @@ namespace BlazorSliders
 {
     public class SliderPanelBase : ComponentBase
     {
-        [CascadingParameter]
+        [CascadingParameter(Name ="directParent")]
         public SliderPanelBase Parent { get; set; }
+
+        [CascadingParameter(Name = "directWidth")]
+        public int DirectWidth { get; set; }
+
+        [CascadingParameter(Name ="directHeight")]
+        public int DirectHeight { get; set; }
 
         [Parameter]
         public PanelPosition PanelPosition { get; set; }
@@ -28,9 +34,7 @@ namespace BlazorSliders
             if (panel.Parent != null)
             {
                 if (panel.Parent.GetType() == typeof(AbsolutePanel))
-                {
                     SubtractLeft += panel.Parent.Left;
-                }
                 else if (panel.Parent.GetType() == typeof(VerticalSliderPanel))
                 {
                     var parent = (VerticalSliderPanel)panel.Parent;
@@ -47,9 +51,7 @@ namespace BlazorSliders
             if (panel.Parent != null)
             {
                 if (panel.Parent.GetType() == typeof(AbsolutePanel))
-                {
                     SubtractTop += panel.Parent.Top;
-                }
                 else if (panel.Parent.GetType() == typeof(HorizontalSliderPanel))
                 {
                     var parent = (HorizontalSliderPanel)panel.Parent;
@@ -82,7 +84,6 @@ namespace BlazorSliders
                     
                     SliderX = NewSliderValue - SubtractLeft;
                 }
-         
                 else
                     SliderX = me.leftPanelWidth;
 
@@ -90,66 +91,38 @@ namespace BlazorSliders
                 if (Parent != null)
                 {
                     int minimumSliderX = 0;
-                    if (Parent.Width > me.MinimumRightPanelWidth)
-                        minimumSliderX = Parent.Width - me.MinimumRightPanelWidth;
-                    else
-                        minimumSliderX = me.MinimumRightPanelWidth;
+                    if (DirectWidth > 0)
+                    {
+                        if (DirectWidth > me.MinimumRightPanelWidth)
+                            minimumSliderX = DirectWidth - me.MinimumRightPanelWidth;
+                        else
+                            minimumSliderX = me.MinimumRightPanelWidth;
+                    }
+                    
 
-                    if (minimumSliderX != 0 && SliderX > minimumSliderX)
+                    if (minimumSliderX > 0 && SliderX > minimumSliderX)
                         SliderX = minimumSliderX;
                 }
 
                 // Now set my overall width and height
-                if (PanelPosition == PanelPosition.Top)
+                if (DirectHeight > 0 && DirectWidth > 0)
                 {
-                    // I'm a vertical slider inside the top pane of a horizontal slider
-                    var parent = (HorizontalSliderPanel)Parent;
-                    Height = parent.TopPanelHeight;
-                    Width = parent.Width;
+                    Width = DirectWidth;
+                    Height = DirectHeight;
                 }
-                else if (PanelPosition == PanelPosition.Bottom)
-                {
-                    // I'm a vertical slider inside the bottom pane of a horizontal slider
-                    var parent = (HorizontalSliderPanel)Parent;
-                    Height = Parent.Height - (parent.TopPanelHeight + parent.SliderHeight);
-                    Width = parent.Width;
-                }
-                else if (PanelPosition == PanelPosition.Left)
-                {
-                    //I'm a vertical slider inside the left pane of a vertical slider
-                    var parent = (VerticalSliderPanel)Parent;
-                    Height = Parent.Height;
-                    Width = parent.LeftPanelWidth;
-                }
-                else if (PanelPosition == PanelPosition.Right)
-                {
-                    //I'm a vertical slider inside the right pane of a vertical slider
-                    var parent = (VerticalSliderPanel)Parent;
-                    Height = Parent.Height;
-                    Width = Parent.Width - (parent.LeftPanelWidth + parent.SliderWidth);
-                }
-                else
-                {
-                    Height = Parent.Height;
-                    Width = Parent.Width;
-
-                }
+                
 
                 if (SliderX < me.MinimumLeftPanelWidth)
                     SliderX = me.MinimumLeftPanelWidth;
 
                 // Set the slider position (left panel width)
                 me.leftPanelWidth = SliderX;
-
+                StateHasChanged();
                 if (me.LeftPanel != null)
-                {
                     me.LeftPanel.Resize();
-                }
                 if (me.RightPanel != null)
-                {
                     me.RightPanel.Resize();
-                }
-            }
+        }
             else if (this.GetType() == typeof(HorizontalSliderPanel))
             {
                 var me = (HorizontalSliderPanel)this;
@@ -170,12 +143,16 @@ namespace BlazorSliders
                 if (Parent != null)
                 {
                     int minimumSliderY = 0;
-                    if (Parent.Height > me.MinimumBottomPanelHeight)
-                        minimumSliderY = Parent.Height - me.MinimumBottomPanelHeight;
-                    else
-                        minimumSliderY = me.MinimumBottomPanelHeight;
+                    if (DirectHeight != 0)
+                    {
+                        if (DirectHeight > me.MinimumBottomPanelHeight)
+                            minimumSliderY = DirectHeight - me.MinimumBottomPanelHeight;
+                        else
+                            minimumSliderY = me.MinimumBottomPanelHeight;
+                    }
+                    
 
-                    if (minimumSliderY != 0 && SliderY > minimumSliderY)
+                    if (minimumSliderY > 0 && SliderY > minimumSliderY)
                         SliderY = minimumSliderY;
                 }
 
@@ -186,97 +163,55 @@ namespace BlazorSliders
                 me.topPanelHeight = SliderY;
 
                 // Now set my overall width and height
-                if (PanelPosition == PanelPosition.Left)
+                if (DirectHeight != 0 && DirectWidth != 0)
                 {
-                    // I'm a horizontal slider inside the left pane of a vertical slider
-                    var parent = (VerticalSliderPanel)Parent;
-                    Width = parent.LeftPanelWidth;
-                    Height = Parent.Height;
+                    Width = DirectWidth;
+                    Height = DirectHeight;
                 }
-                else if (PanelPosition == PanelPosition.Right)
-                {
-                    // I'm a horizontal slider inside the right pane of a vertical slider
-                    var parent = (VerticalSliderPanel)Parent;
-                    Width = Parent.Width - (parent.LeftPanelWidth + parent.SliderWidth);
-                    Height = Parent.Height;
-                }
-                else if (PanelPosition == PanelPosition.Top)
-                {
-                    //I'm a horizontal slider inside the Top pane of a horizontal slider
-                    var parent = (HorizontalSliderPanel)Parent;
-                    Height = parent.TopPanelHeight;
-                    Width = Parent.Width;
-                }
-                else if (PanelPosition == PanelPosition.Bottom)
-                {
-                    //I'm a horizontal slider inside the bottom pane of a horizontal slider
-                    var parent = (HorizontalSliderPanel)Parent;
-                    Height = Parent.Height - (parent.TopPanelHeight + parent.SliderHeight);
-                    Width = Parent.Width;
-                }
-                else
-                {
-                    Height = Parent.Height;
-                    Width = Parent.Width;
-                }
+                StateHasChanged();
 
                 if (me.TopPanel != null)
-                {
                     me.TopPanel.Resize();
-                }
                 if (me.BottomPanel != null)
-                {
                     me.BottomPanel.Resize();
-                }
             }
         }
 
         public int Top
         {
-            get
-            {
-                return dimensions.Top;
-            }
-            set
-            {
-                dimensions.Top = value;
-            }
+            get => dimensions.Top;
+            set { dimensions.Top = value; }
         }
 
         public int Left
         {
-            get
-            {
-                return dimensions.Left;
-            }
-            set
-            {
-                dimensions.Left = value;
-            }
+            get => dimensions.Left;
+            set { dimensions.Left = value; }
         }
 
         public int Width
         {
             get
             {
-                if (dimensions.Width == 0 && Parent != null)
-                    dimensions.Width = Parent.Width;
+                if (dimensions.Width <= 0 && Parent != null && DirectWidth > 0)
+                        dimensions.Width = DirectWidth;
+                           
                 return dimensions.Width;
             }
             set
             {
-                if (Parent != null && Parent.Width > 0)
+                if (Parent != null && DirectWidth > 0)
                 {
-                    var Diff = Parent.Width - value;
+                    var Diff = DirectWidth - value;
                     dimensions.Width = value;
                     if (Parent.Left > 0)
                         dimensions.Left += Diff;
                     StateHasChanged();
                 }
                 else
-                {
                     dimensions.Width = value;
-                }
+                    
+
 
                 if (OriginalWidth == 0)
                     OriginalWidth = value;
@@ -287,8 +222,9 @@ namespace BlazorSliders
         {
             get
             {
-                if (dimensions.Height == 0 && Parent != null)
-                    dimensions.Height = Parent.Height;
+                if (dimensions.Height == 0 && Parent != null && DirectHeight > 0)
+                    dimensions.Height = DirectHeight;
+
                 return dimensions.Height;
             }
             set

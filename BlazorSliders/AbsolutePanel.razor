@@ -1,19 +1,24 @@
 ﻿@inherits SliderPanelBase
 @inject IJSRuntime js
 
-<div id="@Id" style="@StyleString position:absolute;
+<div id="@Id" class="AbsolutePanel @ClassString" style="@StyleString position:absolute;
     left:@LeftPx;
     top:@TopPx;
     width:@WidthPx;
     height:@HeightPx;">
-    <CascadingValue Value=@this>
-        @ChildContent
+    <CascadingValue Value=this Name="directParent">
+        <CascadingValue Value=Width Name="directWidth">
+            <CascadingValue Value=Height Name="directHeight">
+                @ChildContent
+            </CascadingValue>
+        </CascadingValue>
     </CascadingValue>
 </div>
 
-<Window WindowResized="OnWindowResized" />
+<Window WindowResized="OnWindowResized" Id="@Id" ParentContained="ParentContained"/>
 
 @code {
+
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -22,7 +27,13 @@
     public bool AutoResize { get; set; } = false;
 
     [Parameter]
+    public bool ParentContained { get; set; } = false;
+
+    [Parameter]
     public string StyleString { get; set; } = "";
+
+    [Parameter]
+    public string ClassString { get; set; } = "";
 
     [Parameter]
     public new int Top
@@ -36,6 +47,7 @@
             base.Top = value;
         }
     }
+
 
     [Parameter]
     public new int Left
@@ -59,11 +71,13 @@
     /// <returns></returns>
     async Task OnWindowResized(Size size)
     {
+
         if (AutoResize)
         {
             Width = size.Width - Left;
             Height = size.Height - Top;
         }
+        await InvokeAsync(StateHasChanged);
         if (ChildPanel != null)
         {
             ChildPanel.Resize();

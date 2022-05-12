@@ -1,0 +1,41 @@
+﻿body {
+}
+
+.page{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-nav{
+    flex: 0 0 100%;
+    height: 2rem;
+    background-color: gray;
+
+}
+.top-nav ul{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20rem;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+}
+.top-nav li{
+    text-decoration: none;
+}
+
+.content-wrapper{
+    display: flex;
+}
+
+.side-sample{
+    width: 20rem;
+    height: calc(100vh - 2rem);
+    background-color: antiquewhite;
+}
+
+.panels-parent{
+    position: relative;
+    width: calc(100vw - 20rem);
+    height: calc(100vh - 2rem);
+}

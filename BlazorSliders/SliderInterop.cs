@@ -16,16 +16,16 @@ namespace BlazorSliders
                 "import", "./_content/BlazorSliders/Sliders.js").AsTask());
         }
 
-        public async Task RegisterWindow(DotNetObjectReference<Window> Component)
+        public async Task RegisterWindow(DotNetObjectReference<Window> Component, string Id, bool ParentContained)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("registerWindow", Component);
+            await module.InvokeAsync<string>("registerWindow", Component, Id, ParentContained);
         }
 
-        public async Task ForceResize(DotNetObjectReference<Window> Component)
+        public async Task ForceResize(DotNetObjectReference<Window> Component, string Id, bool ParentContained)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("forceResize", Component);
+            await module.InvokeAsync<string>("forceResize", Component, Id, ParentContained);
         }
 
         public async Task GetVerticalParentDimensions(string Id, DotNetObjectReference<VerticalSliderPanel> Component)

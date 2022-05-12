@@ -5,6 +5,12 @@
     [Parameter]
     public EventCallback<Size> WindowResized { get; set; }
 
+    [Parameter]
+    public string Id { get; set; }
+
+    [Parameter]
+    public bool ParentContained { get; set; }
+
     [JSInvokable]
     public async Task OnWindowResized(int WindowWidth, int WindowHeight)
     {
@@ -17,7 +23,7 @@
     protected override async Task OnInitializedAsync()
     {
         var myObject = DotNetObjectReference.Create(this);
-        await SliderInterop.RegisterWindow(myObject);
-        await SliderInterop.ForceResize(myObject);
+        await SliderInterop.RegisterWindow(myObject, Id, ParentContained);
+        await SliderInterop.ForceResize(myObject, Id, ParentContained);
     }
 }

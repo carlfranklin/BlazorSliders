@@ -12,11 +12,11 @@ Github: https://github.com/carlfranklin/BlazorSliders
   * [Live Demo:](#live-demo)
   * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
   * [Install with NuGet:](#install-with-nuget)
-    * [Description](#description)
-      * [AbsolutePanel](#absolutepanel)
-      * [Window](#window)
-      * [VerticalSliderPanel](#verticalsliderpanel)
-      * [HorizontalSliderPanel](#horizontalsliderpanel)
+  * [Description](#description)
+    * [AbsolutePanel](#absolutepanel)
+    * [Window](#window)
+    * [VerticalSliderPanel](#verticalsliderpanel)
+    * [HorizontalSliderPanel](#horizontalsliderpanel)
   * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
@@ -44,14 +44,7 @@ https://blazorslidertest.azurewebsites.net/
 https://youtu.be/fNDd7moZJ4c
 
 
-## Install with NuGet:
-
-```
-Install-Package BlazorSliders
-```
-
-
-### Description
+## Description
 
 There are four main components:
 
@@ -93,13 +86,31 @@ Change your *\Shared\MainLayout.razor* to the following:
 
 **For Blazor Server:**
 
-`ServerPrerendered` is not supported. In your *_Hosts.cshtml* file, set the following:
+`ServerPrerendered` is not supported. 
+
+In your *_Hosts.cshtml* file, set the following:
 
 ```xml
 <component type="typeof(App)" render-mode="Server" />
 ```
 
-Add the following line to `ConfigureServices` in *Startup.cs*:
+For .NET 6 projects, in your *_Hosts.cshtml* file, set the following:
+
+```xml
+<component type="typeof(HeadOutlet)" render-mode="Server" />
+```
+
+In .NET 5: Add the following line to `ConfigureServices` in *Startup.cs* :
+
+<!-- snippet: AddSliderInteropServer -->
+<a id='snippet-addsliderinteropserver'></a>
+```cs
+services.AddScoped<SliderInterop>();
+```
+<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+In .NET 6: Add the following to *Program.cs*:
 
 <!-- snippet: AddSliderInteropServer -->
 <a id='snippet-addsliderinteropserver'></a>

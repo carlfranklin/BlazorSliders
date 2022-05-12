@@ -5,9 +5,11 @@
 @(WindowSize != null)
 {
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth">
+    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth" 
+                         SliderWidth="10">
         <LeftChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
                                    TopPanelHeight="@LeftHorizontalTopPanelHeight">
@@ -27,7 +29,8 @@
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
                                    TopPanelHeight="@RightHorizontalTopPanelHeight">

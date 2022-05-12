@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Carl Franklin</Authors>
     <Company></Company>
     <PackageId></PackageId>
     <Description>Create multiple panels separated by sliding splitters</Description>
-    <Copyright>Copyright 2021 by App vNext, LLC</Copyright>
+    <Copyright>Copyright 2021-2022 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
-    <Version>1.2.8</Version>
+    <Version>1.3</Version>
     <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
     <RepositoryType>GitHub Public</RepositoryType>
 	<PackageIcon>icon.png</PackageIcon>
+	<PackageProjectUrl>https://github.com/carlfranklin/BlazorSliders</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

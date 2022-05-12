@@ -1,9 +1,10 @@
 ﻿@page "/fourpanels"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10">
         <LeftChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Left"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:antiquewhite;"
                                    BottomStyleString="background-color:aliceblue;"
                                    TopPanelHeight="200">
@@ -22,7 +23,8 @@
             </HorizontalSliderPanel>
         </LeftChildContent>
         <RightChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Right"
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
                                    TopStyleString="background-color:orange;"
                                    BottomStyleString="background-color:yellow;"
                                    TopPanelHeight="400">

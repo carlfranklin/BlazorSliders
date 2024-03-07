@@ -1,4 +1,4 @@
-# <img src="/icon.png" height="30px"> BlazorSliders
+# <img src="icon.png" height="30px"> BlazorSliders
 
 [![NuGet Status](https://img.shields.io/nuget/v/BlazorSliders.svg)](https://www.nuget.org/packages/BlazorSliders/)
 

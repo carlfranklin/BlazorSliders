@@ -12,8 +12,8 @@
     <Version>1.3</Version>
     <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
     <RepositoryType>GitHub Public</RepositoryType>
-	<PackageIcon>icon.png</PackageIcon>
-	<PackageProjectUrl>https://github.com/carlfranklin/BlazorSliders</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/carlfranklin/BlazorSliders</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,7 +28,7 @@
     <Content Update="wwwroot\Sliders.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-	<None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\" />
+    <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

@@ -91,21 +91,21 @@ For .NET 6 projects, in your *_Hosts.cshtml* file, set the following:
 In .NET 5: Add the following line to `ConfigureServices` in *Startup.cs* :
 
 <!-- snippet: AddSliderInteropServer -->
-<a id='snippet-addsliderinteropserver'></a>
+<a id='snippet-AddSliderInteropServer'></a>
 ```cs
 services.AddScoped<SliderInterop>();
 ```
-<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropServer' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 In .NET 6: Add the following to *Program.cs*:
 
 <!-- snippet: AddSliderInteropServer -->
-<a id='snippet-addsliderinteropserver'></a>
+<a id='snippet-AddSliderInteropServer'></a>
 ```cs
 services.AddScoped<SliderInterop>();
 ```
-<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropserver' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropServer' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -114,11 +114,11 @@ services.AddScoped<SliderInterop>();
 Add the following to `Main()` in *Program.cs*:
 
 <!-- snippet: AddSliderInteropWasm -->
-<a id='snippet-addsliderinteropwasm'></a>
+<a id='snippet-AddSliderInteropWasm'></a>
 ```cs
 builder.Services.AddScoped<SliderInterop>();
 ```
-<sup><a href='/BlazorSliderTestWasm/Program.cs#L22-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-addsliderinteropwasm' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Program.cs#L22-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropWasm' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

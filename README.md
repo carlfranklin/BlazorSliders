@@ -149,8 +149,6 @@ builder.Services.AddScoped<SliderInterop>();
 <sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-<kbd><img src="UnitTests/IntegrationTest.Vertical.01.verified.png" width="400px"></kbd>
-
 
 ### Simple Horizontal Split:
 
@@ -178,8 +176,6 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Horizontals.razor#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Horizontals.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
-
-<kbd><img src="UnitTests/IntegrationTest.Horizontals.01.verified.png" width="400px"></kbd>
 
 
 ### Four Panels:
@@ -232,8 +228,6 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
-
-<kbd><img src="UnitTests/IntegrationTest.FourPanels.01.verified.png" width="400px"></kbd>
 
 
 ### Initial size and position based on percent size of browser:
@@ -348,8 +342,6 @@ builder.Services.AddScoped<SliderInterop>();
 <sup><a href='/BlazorSliderTestWasm/Pages/WindowResize.razor#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/WindowResize.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-<kbd><img src="UnitTests/IntegrationTest.WindowResize.01.verified.png" width="400px"></kbd>
-
 
 ### Complex Nesting:
 
@@ -401,8 +393,6 @@ builder.Services.AddScoped<SliderInterop>();
 <sup><a href='/BlazorSliderTestWasm/Pages/DoubleVertical.razor#L1-L37' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-<kbd><img src="UnitTests/IntegrationTest.DoubleVertical.01.verified.png" width="400px"></kbd>
-
 #### Horizontal Panel Nested in Horizontal Panel:
 
 <!-- snippet: BlazorSliderTestWasm/Pages/DoubleHorizontal.razor -->
@@ -447,8 +437,6 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/DoubleHorizontal.razor#L1-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
-
-<kbd><img src="UnitTests/IntegrationTest.DoubleHorizontal.01.verified.png" width="400px"></kbd>
 
 #### Crazy Nesting Inception:
 
@@ -533,8 +521,6 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Crazy.razor#L1-L75' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Crazy.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
-
-<kbd><img src="UnitTests/IntegrationTest.Crazy.01.verified.png" width="400px"></kbd>
 
 
 ### NavMenu used in demos:

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30626.31
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliders", "BlazorSliders\BlazorSliders.csproj", "{A98EA7D0-4693-46E9-B264-57CD58473DE4}"
 EndProject
@@ -9,11 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSlidersTest", "Blazor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSliderTestWasm", "BlazorSliderTestWasm\BlazorSliderTestWasm.csproj", "{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{FD775FC9-E834-4125-81BB-D75DE1739CCC}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1448915B-8E11-4C79-B48D-AB1144FDDEAD}"
 	ProjectSection(SolutionItems) = preProject
-		mdsnippets.json = mdsnippets.json
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -35,10 +32,6 @@ Global
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1BAE6EA-403D-4599-85D1-D6B42B8AF718}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD775FC9-E834-4125-81BB-D75DE1739CCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

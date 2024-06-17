@@ -7,13 +7,14 @@
     <Company></Company>
     <PackageId></PackageId>
     <Description>Create multiple panels separated by sliding splitters</Description>
-    <Copyright>Copyright 2021-2022 by App vNext, LLC</Copyright>
+    <Copyright>Copyright 2021-2024 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
-    <Version>1.3</Version>
+    <Version>7.0</Version>
     <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
     <RepositoryType>GitHub Public</RepositoryType>
     <PackageIcon>icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/carlfranklin/BlazorSliders</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +30,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

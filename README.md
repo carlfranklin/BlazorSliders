@@ -1,6 +1,10 @@
 # <img src="icon.png" height="30px"> BlazorSliders
 
-[![NuGet Status](https://img.shields.io/nuget/v/BlazorSliders.svg)](https://www.nuget.org/packages/BlazorSliders/)
+**Nuget**: https://www.nuget.org/packages/BlazorSliders/
+
+```
+Install-Package BlazorSliders
+```
 
 Create multiple panels separated by sliding splitters.
 

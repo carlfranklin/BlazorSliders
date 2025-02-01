@@ -15,13 +15,25 @@ Github: https://github.com/carlfranklin/BlazorSliders
 
   * [Live Demo:](#live-demo)
   * [YouTube Demo (BlazorTrain):](#youtube-demo-blazortrain)
+  * [Install with NuGet:](#install-with-nuget)
   * [Description](#description)
+    * [AbsolutePanel](#absolutepanel)
+    * [Window](#window)
+    * [VerticalSliderPanel](#verticalsliderpanel)
+    * [HorizontalSliderPanel](#horizontalsliderpanel)
   * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
     * [Four Panels:](#four-panels)
     * [Initial size and position based on percent size of browser:](#initial-size-and-position-based-on-percent-size-of-browser)
+      * [Alternate Method for Defining Panels by Percentage of Containing Element](#alternate-method-for-defining-panels-by-percentage-of-containing-element)
+      * [Define Width/Height by Rem Units](#define-widthheight-by-rem-units)
+    * [Custom Class Setup:](#custom-class-setup)
+    * [Containing the Panels to Its Parent Container:](#containing-the-panels-to-its-parent-container)
     * [Complex Nesting:](#complex-nesting)
+      * [Vertical Panel Nested in Vertical Panel:](#vertical-panel-nested-in-vertical-panel)
+      * [Horizontal Panel Nested in Horizontal Panel:](#horizontal-panel-nested-in-horizontal-panel)
+      * [Crazy Nesting Inception:](#crazy-nesting-inception)
     * [NavMenu used in demos:](#navmenu-used-in-demos)
   * [Icon](#icon)<!-- endToc -->
 
@@ -134,7 +146,7 @@ builder.Services.AddScoped<SliderInterop>();
 @page "/"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400">
+    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="75">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
@@ -149,6 +161,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -229,6 +242,7 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
 ```
 <sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
@@ -346,6 +360,230 @@ builder.Services.AddScoped<SliderInterop>();
 <sup><a href='/BlazorSliderTestWasm/Pages/WindowResize.razor#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/WindowResize.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
+<kbd><img src="UnitTests/IntegrationTest.WindowResize.01.verified.png" width="400px"></kbd>
+
+#### Alternate Method for Defining Panels by Percentage of Containing Element
+
+Alternatively, you can define the property `HeightUnit` or `WidthUnit` (depending on if you're defining a horizontal panel or vertical panel) to `SizeUnit.Percent` and then set the initial percent for either the `TopPanelHeight` or `LeftPanelStartingWidth` properties. 
+
+This method finds the width or height of the containing element and calculates the left panel's width or top panel's height.
+
+<!-- snippet: BlazorSliderTestWasm/Pages/GoldenRatio.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor'></a>
+```razor
+@page "/goldenratio"
+
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62">
+        <LeftChildContent>
+            <div style="padding:10px;">
+                <h3>Approximate Golden Ratio Example</h3>
+                <NavMenu />
+            </div>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="62">
+                <BottomChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="38">
+                        <LeftChildContent>
+                            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" HeightUnit="SizeUnit.Percent" TopPanelHeight="38">
+                                <TopChildContent>
+                                    <VerticalSliderPanel PanelPosition="PanelPosition.Bottom" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="62" MinimumRightPanelWidth="100" MinimumLeftPanelWidth="100">
+                                        <RightChildContent>
+                                            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" HeightUnit="SizeUnit.Percent" TopPanelHeight="50" MinimumBottomPanelHeight="100" MinimumTopPanelHeight="100">
+
+                                            </HorizontalSliderPanel>
+                                        </RightChildContent>
+                                    </VerticalSliderPanel>
+                                </TopChildContent>
+                            </HorizontalSliderPanel>
+                        </LeftChildContent>
+                    </VerticalSliderPanel>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+
+@code {
+
+}
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/GoldenRatio.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<kbd><img src="UnitTests/IntegrationTest.GoldenRatio.01.verified.png" width="400px"></kbd>
+
+#### Define Width/Height by Rem Units
+
+Another option for the `HeightUnit` and `WidthUnit` is `SizeUnit.Rem` which allows the user to define the initial width/height of a panel by rem units (this assumes the default of 16px per 1 rem).
+
+### Custom Class Setup:
+
+To add custom classes to the panels, add classes with the parameter `TopClassString`, `BottomClassString`, `LeftClassString`, or `RightClassString`. These classes cannot be defined in the isolated page css file (i.e. *Page*.razor.css) as the nested component won't be recognized as part of the page at compile time.
+
+To add custom classes to the slider, set the `OverrideSliderStyle` parameter to `true` and add the classes to the parameter `SliderClassCss`. When overriding the slider's base css class, make sure to define a slider background color as well as a cursor to indicate the slider is draggable.
+
+<!-- snippet: BlazorSliderTestWasm/Pages/CustomClasses.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor'></a>
+```razor
+@page "/customclasses"
+
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" 
+                         OverrideSliderStyle="true" 
+                         LeftClassString="@leftClasses" 
+                         RightClassString="@rightClasses" 
+                         SliderClassString="custom-slider">
+        <LeftChildContent>
+            <div style="padding:10px;">
+                <h3>Left Content</h3>
+                This is a demo of custom class styling for the panels and slider.
+            </div>
+        </LeftChildContent>
+        <RightChildContent>
+            <div style="padding:10px;">
+                <h3>Right Content</h3>
+                <NavMenu />
+            </div>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+
+@code {
+
+    string leftClasses = "panel-base left-panel";
+    string rightClasses = "panel-base right-panel";
+
+}
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/CustomClasses.razor#L1-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<kbd><img src="UnitTests/IntegrationTest.CustomClasses.01.verified.png" width="400px"></kbd>
+
+
+### Containing the Panels to Its Parent Container:
+
+To contain the overall panel system to its parent container, set the parameter `ParentContained` to `true` in the Absolute Panel component. It is necessary to specify the parent's css position property to ensure the Absolute Panel will be contained within the parent div. 
+
+Ensure the parent container also has a defined height and width (in the example provided, the height is set to `100vh - 2rem` where 2rem is the height of the sample top bar and the width is set to `100vw - 20rem` where 20rem is the width of the sample side container).
+
+<!-- snippet: BlazorSliderTestWasm/Pages/ParentContained.razor -->
+<a id='snippet-BlazorSliderTestWasm/Pages/ParentContained.razor'></a>
+```razor
+@page "/parentcontained"
+
+<div class="page">
+    <div class="top-nav">
+        <ul>
+            <li> <a href="#">Link 1</a></li>
+            <li> <a href="#">Link 2</a></li>
+            <li> <a href="#">Link 3</a></li>
+        </ul>
+    </div>
+    <div class="content-wrapper">
+        <div class="side-sample">
+            <h3>This is a sample sidebar that doesn't live in the adjustable panels</h3>
+        </div>
+        <div class="panels-parent">
+            <AbsolutePanel AutoResize="true" ParentContained="true">
+                <VerticalSliderPanel LeftPanelStartingWidth="600">
+                    <LeftChildContent>
+                        <VerticalSliderPanel PanelPosition="PanelPosition.Left" LeftPanelStartingWidth="400">
+                            <LeftChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Left Content in the Left Parent Panel</h3>
+                                    This is a demo of a nested vertical slider panel.
+                                </div>
+                            </LeftChildContent>
+                            <RightChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Right Content in the Left Parent Panel</h3>
+                                </div>
+                            </RightChildContent>
+                        </VerticalSliderPanel>
+                    </LeftChildContent>
+                    <RightChildContent>
+                        <VerticalSliderPanel PanelPosition="PanelPosition.Right" LeftPanelStartingWidth="400">
+                            <LeftChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Left Content in the Right Parent Panel</h3>
+                                </div>
+                            </LeftChildContent>
+                            <RightChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Right Content in the Right Parent Panel</h3>
+                                    <NavMenu />
+                                </div>
+                            </RightChildContent>
+                        </VerticalSliderPanel>
+
+                    </RightChildContent>
+                </VerticalSliderPanel>
+            </AbsolutePanel>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+}
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/ParentContained.razor#L1-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/ParentContained.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<!-- snippet: BlazorSliderTestWasm/Pages/ParentContained.razor.css -->
+<a id='snippet-BlazorSliderTestWasm/Pages/ParentContained.razor.css'></a>
+```css
+body {
+}
+
+.page{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.top-nav{
+    flex: 0 0 100%;
+    height: 2rem;
+    background-color: gray;
+
+}
+.top-nav ul{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 20rem;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+}
+.top-nav li{
+    text-decoration: none;
+}
+
+.content-wrapper{
+    display: flex;
+}
+
+.side-sample{
+    width: 20rem;
+    height: calc(100vh - 2rem);
+    background-color: antiquewhite;
+}
+
+.panels-parent{
+    position: relative;
+    width: calc(100vw - 20rem);
+    height: calc(100vh - 2rem);
+}
+```
+<sup><a href='/BlazorSliderTestWasm/Pages/ParentContained.razor.css#L1-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/ParentContained.razor.css' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+<kbd><img src="UnitTests/IntegrationTest.ParentContained.01.verified.png" width="400px"></kbd>
 
 ### Complex Nesting:
 
@@ -358,43 +596,46 @@ builder.Services.AddScoped<SliderInterop>();
 ```razor
 @page "/doublevertical"
 
-<AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="600">
-        <LeftChildContent>
-            <VerticalSliderPanel PanelPosition="PanelPosition.Left" LeftPanelStartingWidth="400">
-                <LeftChildContent>
-                    <div style="padding:10px;">
-                        <h3>Left Content in the Left Parent Panel</h3>
-                        This is a demo of a nested vertical slider panel.
-                    </div>
-                </LeftChildContent>
-                <RightChildContent>
-                    <div style="padding:10px;">
-                        <h3>Right Content in the Left Parent Panel</h3>
-                    </div>
-                </RightChildContent>
-            </VerticalSliderPanel>
-        </LeftChildContent>
-        <RightChildContent>
-            <VerticalSliderPanel PanelPosition="PanelPosition.Right" LeftPanelStartingWidth="400">
-                <LeftChildContent>
-                    <div style="padding:10px;">
-                        <h3>Left Content in the Right Parent Panel</h3>
-                    </div>
-                </LeftChildContent>
-                <RightChildContent>
-                    <div style="padding:10px;">
-                        <h3>Right Content in the Right Parent Panel</h3>
-                        <NavMenu />
-                    </div>
-                </RightChildContent>
-            </VerticalSliderPanel>
 
-        </RightChildContent>
-    </VerticalSliderPanel>
-</AbsolutePanel>
+        <AbsolutePanel AutoResize="true">
+            <VerticalSliderPanel WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="50">
+                <LeftChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Left" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="25">
+                        <LeftChildContent>
+                            <div style="padding:10px;">
+                                <h3>Left Content in the Left Parent Panel</h3>
+                                This is a demo of a nested vertical slider panel.
+                            </div>
+                        </LeftChildContent>
+                        <RightChildContent>
+                            <div style="padding:10px;">
+                                <h3>Right Content in the Left Parent Panel</h3>
+                            </div>
+                        </RightChildContent>
+                    </VerticalSliderPanel>
+                </LeftChildContent>
+                <RightChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Right" WidthUnit="SizeUnit.Percent" LeftPanelStartingWidth="50">
+                        <LeftChildContent>
+                            <div style="padding:10px;">
+                                <h3>Left Content in the Right Parent Panel</h3>
+                            </div>
+                        </LeftChildContent>
+                        <RightChildContent>
+                            <div style="padding:10px;">
+                                <h3>Right Content in the Right Parent Panel</h3>
+                                <NavMenu />
+                            </div>
+                        </RightChildContent>
+                    </VerticalSliderPanel>
+
+                </RightChildContent>
+            </VerticalSliderPanel>
+        </AbsolutePanel>
+
+
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/DoubleVertical.razor#L1-L37' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Pages/DoubleVertical.razor#L1-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 #### Horizontal Panel Nested in Horizontal Panel:
@@ -404,42 +645,44 @@ builder.Services.AddScoped<SliderInterop>();
 ```razor
 @page "/doublehorizontal"
 
-<AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="400">
-        <TopChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
-                <TopChildContent>
-                    <div style="padding:10px;">
-                        <h3>Top Content in the Top Parent Panel</h3>
-                        This is a demo of a nested horizontal slider panel.
-                    </div>
-                </TopChildContent>
-                <BottomChildContent>
-                    <div style="padding:10px;">
-                        <h3>Bottom Content in the Top Parent Panel</h3>
-                    </div>
-                </BottomChildContent>
-            </HorizontalSliderPanel>
-        </TopChildContent>
-        <BottomChildContent>
-            <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="200">
-                <TopChildContent>
-                    <div style="padding:10px;">
-                        <h3>Top Content in the Bottom Parent Panel</h3>
-                    </div>
-                </TopChildContent>
-                <BottomChildContent>
-                    <div style="padding:10px;">
-                        <h3>Bottom Content in the Bottom Parent Panel</h3>
-                        <NavMenu />
-                    </div>
-                </BottomChildContent>
-            </HorizontalSliderPanel>
-        </BottomChildContent>
-    </HorizontalSliderPanel>
-</AbsolutePanel>
+
+    <AbsolutePanel AutoResize="true">
+        <HorizontalSliderPanel TopPanelHeight="400">
+            <TopChildContent>
+                <HorizontalSliderPanel PanelPosition="PanelPosition.Top" TopPanelHeight="200">
+                    <TopChildContent>
+                        <div style="padding:10px;">
+                            <h3>Top Content in the Top Parent Panel</h3>
+                            This is a demo of a nested horizontal slider panel.
+                        </div>
+                    </TopChildContent>
+                    <BottomChildContent>
+                        <div style="padding:10px;">
+                            <h3>Bottom Content in the Top Parent Panel</h3>
+                        </div>
+                    </BottomChildContent>
+                </HorizontalSliderPanel>
+            </TopChildContent>
+            <BottomChildContent>
+                <HorizontalSliderPanel PanelPosition="PanelPosition.Bottom" TopPanelHeight="600">
+                    <TopChildContent>
+                        <div style="padding:10px;">
+                            <h3>Top Content in the Bottom Parent Panel</h3>
+                        </div>
+                    </TopChildContent>
+                    <BottomChildContent>
+                        <div style="padding:10px;">
+                            <h3>Bottom Content in the Bottom Parent Panel</h3>
+                            <NavMenu />
+                        </div>
+                    </BottomChildContent>
+                </HorizontalSliderPanel>
+            </BottomChildContent>
+        </HorizontalSliderPanel>
+    </AbsolutePanel>
+
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/DoubleHorizontal.razor#L1-L36' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Pages/DoubleHorizontal.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 #### Crazy Nesting Inception:
@@ -554,9 +797,18 @@ builder.Services.AddScoped<SliderInterop>();
     <NavLink class="nav-link" href="doublehorizontal">
         <span class="oi oi-resize-both" aria-hidden="true"></span> Double Horizontal
     </NavLink>
+    <NavLink class="nav-link" href="customclasses">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Custom Classes
+    </NavLink>
+    <NavLink class="nav-link" href="parentcontained">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Parent Contained
+    </NavLink>
+    <NavLink class="nav-link" href="goldenratio">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Golden Ratio
+    </NavLink>
 </div>
 ```
-<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L23' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

@@ -1,0 +1,106 @@
+﻿@page "/windowresize"
+
+<Window WindowResized="OnWindowResized" />
+
+@(WindowSize != null)
+{
+<AbsolutePanel AutoResize="true">
+    <VerticalSliderPanel LeftPanelStartingWidth="@VerticalLeftPanelWidth" 
+                         SliderWidth="10">
+        <LeftChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Left" 
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:antiquewhite;"
+                                   BottomStyleString="background-color:aliceblue;"
+                                   TopPanelHeight="@LeftHorizontalTopPanelHeight">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 1</h3>
+                        This demo sets the location of the sliders based on a percentage of the
+                        initial size of the browser.
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 1</h3>
+                        <NavMenu />
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </LeftChildContent>
+        <RightChildContent>
+            <HorizontalSliderPanel PanelPosition="PanelPosition.Right" 
+                                   SliderHeight="10"
+                                   TopStyleString="background-color:orange;"
+                                   BottomStyleString="background-color:yellow;"
+                                   TopPanelHeight="@RightHorizontalTopPanelHeight">
+                <TopChildContent>
+                    <div style="padding:10px;">
+                        <h3>Top Content 2</h3>
+                    </div>
+                </TopChildContent>
+                <BottomChildContent>
+                    <div style="padding:10px;">
+                        <h3>Bottom Content 2</h3>
+                    </div>
+                </BottomChildContent>
+            </HorizontalSliderPanel>
+        </RightChildContent>
+    </VerticalSliderPanel>
+</AbsolutePanel>
+}
+
+@code
+{
+    Size WindowSize { get; set; } = null;
+
+    int VerticalLeftPanelWidthPercent = 80;
+    int LeftHorizontal1TopPanelHeightPercent = 40;
+    int RightHorizontal1TopPanelHeightPercent = 60;
+
+    int VerticalLeftPanelWidth
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                return WindowSize.Width * VerticalLeftPanelWidthPercent / 100;
+            }
+            else
+                return 0;
+        }
+    }
+
+    int LeftHorizontalTopPanelHeight
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                var height = WindowSize.Height * LeftHorizontal1TopPanelHeightPercent / 100;
+                return height;
+            }
+            else
+                return 0;
+        }
+    }
+
+    int RightHorizontalTopPanelHeight
+    {
+        get
+        {
+            if (WindowSize != null)
+            {
+                var height = WindowSize.Height * RightHorizontal1TopPanelHeightPercent / 100;
+                return height;
+            }
+            else
+                return 0;
+        }
+    }
+
+    void OnWindowResized(Size Size)
+    {
+        WindowSize = Size;
+    }
+}

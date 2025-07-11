@@ -78,65 +78,90 @@ Provides two content components and a horizontal splitter between the two. Handl
 Add to *_Imports.razor*:
 
 ```c#
-@using BlazorSliders
+@using BlazorSliders    
 ```
 
-Change your *\Shared\MainLayout.razor* to the following:
+For the demo, change your *\Shared\MainLayout.razor* to the following:
 
 ```
 @inherits LayoutComponentBase
 @Body
 ```
 
-**For Blazor Server:**
-
-`ServerPrerendered` is not supported. 
-
-In your *_Hosts.cshtml* file, set the following:
+For the demo, move *NavMenu.razor* from the *Layout* folder to the *Components* folder and change to this:
 
 ```xml
-<component type="typeof(App)" render-mode="Server" />
+<div>
+    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        <span class="oi oi-resize-width" aria-hidden="true"></span> Vertical
+    </NavLink>
+    <NavLink class="nav-link" href="horizontals">
+        <span class="oi oi-resize-height" aria-hidden="true"></span> Horizontal
+    </NavLink>
+    <NavLink class="nav-link" href="fourpanels">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> 4 Panels
+    </NavLink>
+    <NavLink class="nav-link" href="windowresize">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Percent Width
+    </NavLink>
+    <NavLink class="nav-link" href="crazy">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Crazy
+    </NavLink>
+    <NavLink class="nav-link" href="doublevertical">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Double Vertical
+    </NavLink>
+    <NavLink class="nav-link" href="doublehorizontal">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Double Horizontal
+    </NavLink>
+    <NavLink class="nav-link" href="customclasses">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Custom Classes
+    </NavLink>
+    <NavLink class="nav-link" href="parentcontained">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Parent Contained
+    </NavLink>
+    <NavLink class="nav-link" href="goldenratio">
+        <span class="oi oi-resize-both" aria-hidden="true"></span> Golden Ratio
+    </NavLink>
+</div>
 ```
 
-For .NET 6 projects, in your *_Hosts.cshtml* file, set the following:
+#### `Pre-rendering` is not supported. 
+
+**Blazor Server:**
+
+In your *App.razor* file, set the following:
 
 ```xml
-<component type="typeof(HeadOutlet)" render-mode="Server" />
+<HeadOutlet @rendermode="new InteractiveServerRenderMode(false)" />
+<Routes @rendermode="new InteractiveServerRenderMode(false)" />
 ```
 
-In .NET 5: Add the following line to `ConfigureServices` in *Startup.cs* :
+For the demo, Add styles to *wwwroot/css/app.css*:
 
-<!-- snippet: AddSliderInteropServer -->
-<a id='snippet-AddSliderInteropServer'></a>
-```cs
-services.AddScoped<SliderInterop>();
+```css
+.panel-base {
+    color: #B8C8C8;
+}
+
+.left-panel {
+    background-color: #1E1E1E;
+}
+
+.right-panel {
+    background-color: #181818;
+}
+
+.custom-slider {
+    background-color: #3E3E42;
+    cursor: e-resize;
+}
 ```
-<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropServer' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
 
-In .NET 6: Add the following to *Program.cs*:
+Add this to *Program.cs*
 
-<!-- snippet: AddSliderInteropServer -->
-<a id='snippet-AddSliderInteropServer'></a>
-```cs
-services.AddScoped<SliderInterop>();
-```
-<sup><a href='/BlazorSlidersTest/Startup.cs#L32-L34' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropServer' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
-
-**For Blazor WebAssembly:**
-
-Add the following to `Main()` in *Program.cs*:
-
-<!-- snippet: AddSliderInteropWasm -->
-<a id='snippet-AddSliderInteropWasm'></a>
-```cs
+```c#
 builder.Services.AddScoped<SliderInterop>();
 ```
-<sup><a href='/BlazorSliderTestWasm/Program.cs#L22-L24' title='Snippet source file'>snippet source</a> | <a href='#snippet-AddSliderInteropWasm' title='Start of snippet'>anchor</a></sup>
-<!-- endSnippet -->
-
 
 ### Simple Vertical Split:
 

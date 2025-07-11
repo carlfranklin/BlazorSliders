@@ -1,0 +1,58 @@
+﻿@page "/parentcontained"
+
+<div class="page">
+    <div class="top-nav">
+        <ul>
+            <li> <a href="#">Link 1</a></li>
+            <li> <a href="#">Link 2</a></li>
+            <li> <a href="#">Link 3</a></li>
+        </ul>
+    </div>
+    <div class="content-wrapper">
+        <div class="side-sample">
+            <h3>This is a sample sidebar that doesn't live in the adjustable panels</h3>
+        </div>
+        <div class="panels-parent">
+            <AbsolutePanel AutoResize="true" ParentContained="true">
+                <VerticalSliderPanel LeftPanelStartingWidth="600">
+                    <LeftChildContent>
+                        <VerticalSliderPanel PanelPosition="PanelPosition.Left" LeftPanelStartingWidth="400">
+                            <LeftChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Left Content in the Left Parent Panel</h3>
+                                    This is a demo of a nested vertical slider panel.
+                                </div>
+                            </LeftChildContent>
+                            <RightChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Right Content in the Left Parent Panel</h3>
+                                </div>
+                            </RightChildContent>
+                        </VerticalSliderPanel>
+                    </LeftChildContent>
+                    <RightChildContent>
+                        <VerticalSliderPanel PanelPosition="PanelPosition.Right" LeftPanelStartingWidth="400">
+                            <LeftChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Left Content in the Right Parent Panel</h3>
+                                </div>
+                            </LeftChildContent>
+                            <RightChildContent>
+                                <div style="padding:10px;">
+                                    <h3>Right Content in the Right Parent Panel</h3>
+                                    <NavMenu />
+                                </div>
+                            </RightChildContent>
+                        </VerticalSliderPanel>
+
+                    </RightChildContent>
+                </VerticalSliderPanel>
+            </AbsolutePanel>
+        </div>
+    </div>
+
+</div>
+
+@code {
+
+}

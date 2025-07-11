@@ -48,3 +48,21 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+
+.panel-base{
+    color: #B8C8C8;
+}
+
+.left-panel{
+    background-color: #1E1E1E;
+}
+
+.right-panel{
+    background-color: #181818;
+}
+
+.custom-slider{
+    background-color: #3E3E42;
+    cursor: e-resize;
+}

@@ -127,9 +127,7 @@ For the demo, move *NavMenu.razor* from the *Layout* folder to the *Components* 
 
 #### `Pre-rendering` is not supported. 
 
-**Blazor Server:**
-
-In your *App.razor* file, set the following:
+If running in server render mode, set the following in your *App.razor* file:
 
 ```xml
 <HeadOutlet @rendermode="new InteractiveServerRenderMode(false)" />
@@ -165,8 +163,9 @@ builder.Services.AddScoped<SliderInterop>();
 
 ### Simple Vertical Split:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/Index.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/Index.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/Index.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/Index.razor'></a>
+
 ```razor
 @page "/"
 
@@ -188,14 +187,14 @@ builder.Services.AddScoped<SliderInterop>();
 </AbsolutePanel>
 
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/Index.razor#L1-L19' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 ### Simple Horizontal Split:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/Horizontals.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/Horizontals.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/Horizontals.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/Horizontals.razor'></a>
 ```razor
 @page "/horizontals"
 
@@ -216,14 +215,14 @@ builder.Services.AddScoped<SliderInterop>();
     </HorizontalSliderPanel>
 </AbsolutePanel>
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/Horizontals.razor#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Horizontals.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/Horizontals.razor#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Horizontals.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 ### Four Panels:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/FourPanels.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/FourPanels.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/FourPanels.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/FourPanels.razor'></a>
 ```razor
 @page "/fourpanels"
 
@@ -269,14 +268,14 @@ builder.Services.AddScoped<SliderInterop>();
 </AbsolutePanel>
 
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/FourPanels.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/FourPanels.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 ### Initial size and position based on percent size of browser:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/WindowResize.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/WindowResize.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/WindowResize.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/WindowResize.razor'></a>
 ```razor
 @page "/windowresize"
 
@@ -382,7 +381,7 @@ builder.Services.AddScoped<SliderInterop>();
     }
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/WindowResize.razor#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/WindowResize.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/WindowResize.razor#L1-L103' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/WindowResize.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <kbd><img src="UnitTests/IntegrationTest.WindowResize.01.verified.png" width="400px"></kbd>
@@ -393,8 +392,8 @@ Alternatively, you can define the property `HeightUnit` or `WidthUnit` (dependin
 
 This method finds the width or height of the containing element and calculates the left panel's width or top panel's height.
 
-<!-- snippet: BlazorSliderTestWasm/Pages/GoldenRatio.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/GoldenRatio.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/GoldenRatio.razor'></a>
 ```razor
 @page "/goldenratio"
 
@@ -435,7 +434,7 @@ This method finds the width or height of the containing element and calculates t
 
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/GoldenRatio.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/GoldenRatio.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/GoldenRatio.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/GoldenRatio.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <kbd><img src="UnitTests/IntegrationTest.GoldenRatio.01.verified.png" width="400px"></kbd>
@@ -450,8 +449,8 @@ To add custom classes to the panels, add classes with the parameter `TopClassStr
 
 To add custom classes to the slider, set the `OverrideSliderStyle` parameter to `true` and add the classes to the parameter `SliderClassCss`. When overriding the slider's base css class, make sure to define a slider background color as well as a cursor to indicate the slider is draggable.
 
-<!-- snippet: BlazorSliderTestWasm/Pages/CustomClasses.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/CustomClasses.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/CustomClasses.razor'></a>
 ```razor
 @page "/customclasses"
 
@@ -483,7 +482,7 @@ To add custom classes to the slider, set the `OverrideSliderStyle` parameter to 
 
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/CustomClasses.razor#L1-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/CustomClasses.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/CustomClasses.razor#L1-L29' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/CustomClasses.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <kbd><img src="UnitTests/IntegrationTest.CustomClasses.01.verified.png" width="400px"></kbd>
@@ -495,8 +494,8 @@ To contain the overall panel system to its parent container, set the parameter `
 
 Ensure the parent container also has a defined height and width (in the example provided, the height is set to `100vh - 2rem` where 2rem is the height of the sample top bar and the width is set to `100vw - 20rem` where 20rem is the width of the sample side container).
 
-<!-- snippet: BlazorSliderTestWasm/Pages/ParentContained.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/ParentContained.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/ParentContained.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/ParentContained.razor'></a>
 ```razor
 @page "/parentcontained"
 
@@ -557,11 +556,11 @@ Ensure the parent container also has a defined height and width (in the example 
 
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/ParentContained.razor#L1-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/ParentContained.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/ParentContained.razor#L1-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/ParentContained.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
-<!-- snippet: BlazorSliderTestWasm/Pages/ParentContained.razor.css -->
-<a id='snippet-BlazorSliderTestWasm/Pages/ParentContained.razor.css'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/ParentContained.razor.css -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/ParentContained.razor.css'></a>
 ```css
 body {
 }
@@ -605,7 +604,7 @@ body {
     height: calc(100vh - 2rem);
 }
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/ParentContained.razor.css#L1-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/ParentContained.razor.css' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/ParentContained.razor.css#L1-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/ParentContained.razor.css' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 <kbd><img src="UnitTests/IntegrationTest.ParentContained.01.verified.png" width="400px"></kbd>
@@ -616,8 +615,8 @@ body {
 
 #### Vertical Panel Nested in Vertical Panel:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/DoubleVertical.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/DoubleVertical.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/DoubleVertical.razor'></a>
 ```razor
 @page "/doublevertical"
 
@@ -660,13 +659,13 @@ body {
 
 
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/DoubleVertical.razor#L1-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleVertical.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/DoubleVertical.razor#L1-L40' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/DoubleVertical.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 #### Horizontal Panel Nested in Horizontal Panel:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/DoubleHorizontal.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/DoubleHorizontal.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/DoubleHorizontal.razor'></a>
 ```razor
 @page "/doublehorizontal"
 
@@ -707,13 +706,13 @@ body {
     </AbsolutePanel>
 
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/DoubleHorizontal.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/DoubleHorizontal.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/DoubleHorizontal.razor#L1-L38' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/DoubleHorizontal.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 #### Crazy Nesting Inception:
 
-<!-- snippet: BlazorSliderTestWasm/Pages/Crazy.razor -->
-<a id='snippet-BlazorSliderTestWasm/Pages/Crazy.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/Crazy.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/Crazy.razor'></a>
 ```razor
 @page "/crazy"
 
@@ -791,14 +790,14 @@ body {
     </VerticalSliderPanel>
 </AbsolutePanel>
 ```
-<sup><a href='/BlazorSliderTestWasm/Pages/Crazy.razor#L1-L75' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Pages/Crazy.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/Crazy.razor#L1-L75' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Crazy.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
 ### NavMenu used in demos:
 
-<!-- snippet: BlazorSliderTestWasm/Shared/NavMenu.razor -->
-<a id='snippet-BlazorSliderTestWasm/Shared/NavMenu.razor'></a>
+<!-- snippet: BlazorSlidersWasmTestApp/Shared/NavMenu.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Shared/NavMenu.razor'></a>
 ```razor
 <div>
     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
@@ -833,7 +832,7 @@ body {
     </NavLink>
 </div>
 ```
-<sup><a href='/BlazorSliderTestWasm/Shared/NavMenu.razor#L1-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSliderTestWasm/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Shared/NavMenu.razor#L1-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Shared/NavMenu.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

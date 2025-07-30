@@ -42,13 +42,16 @@ namespace BlazorSliders
             }
         }
 
-        [Parameter]
+		[Parameter]
         public RenderFragment TopChildContent { get; set; }
 
         [Parameter]
         public RenderFragment BottomChildContent { get; set; }
 
-        [Parameter]
+		[Parameter]
+		public RenderFragment SliderContent { get; set; }
+
+		[Parameter]
         public string TopStyleString { get; set; } = "";
 
         [Parameter]

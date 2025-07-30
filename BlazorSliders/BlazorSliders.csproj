@@ -1,20 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Carl Franklin</Authors>
     <Company></Company>
     <PackageId></PackageId>
     <Description>Create multiple panels separated by sliding splitters</Description>
     <Copyright>Copyright 2021-2024 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
-    <Version>7.0</Version>
-    <RepositoryUrl>https://github.com/carlfranklin/BlazorSliders/</RepositoryUrl>
-    <RepositoryType>GitHub Public</RepositoryType>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/carlfranklin/BlazorSliders</PackageProjectUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>9.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,10 +30,11 @@
     <Content Update="wwwroot\Sliders.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="\" />
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

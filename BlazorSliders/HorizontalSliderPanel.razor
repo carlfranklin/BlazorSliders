@@ -4,19 +4,34 @@
 <div id="@TopPanelId" class="noselect @TopClassString"
      style="@TopStyleString
     position:absolute;
-    overflow:auto;
+    overflow:hidden;
     top:0px;
     left:0px;
     width:@WidthPx;
     height:@TopPanelHeightPx;">
-    <CascadingValue Value=this Name="directParent">
-        <CascadingValue Value=Width Name="directWidth">
-            <CascadingValue Value=TopPanelHeight Name="directHeight">
-                @TopChildContent
+    <div style="height:100%; overflow:auto;">
+        @if (TopHeaderContent != null)
+        {
+            <div class="panel-header" style="position:sticky; top:0; z-index:10; background:inherit;">
+                <CascadingValue Value=this Name="directParent">
+                    <CascadingValue Value=Width Name="directWidth">
+                        <CascadingValue Value=TopPanelHeight Name="directHeight">
+                            @TopHeaderContent
+                        </CascadingValue>
+                    </CascadingValue>
+                </CascadingValue>
+            </div>
+        }
+        <div class="panel-content">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=TopPanelHeight Name="directHeight">
+                        @TopChildContent
+                    </CascadingValue>
+                </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
-        
-    </CascadingValue>
+        </div>
+    </div>
 </div>
 
 <div id="@SliderId" class="@DefaultSliderClass @SliderClassString"
@@ -32,18 +47,33 @@
 <div id="@BottomPanelId" class="noselect @BottomClassString"
      style="@BottomStyleString
     position:absolute;
-    overflow:auto;
+    overflow:hidden;
     top:@BottomPanelTopPx;
     left:0px;
     width:@WidthPx;
     height:@BottomPanelHeightPx;">
-    <CascadingValue Value=this Name="directParent">
-        <CascadingValue Value=Width Name="directWidth">
-            <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                @BottomChildContent
+    <div style="height:100%; overflow:auto;">
+        @if (BottomHeaderContent != null)
+        {
+            <div class="panel-header" style="position:sticky; top:0; z-index:10; background:inherit;">
+                <CascadingValue Value=this Name="directParent">
+                    <CascadingValue Value=Width Name="directWidth">
+                        <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                            @BottomHeaderContent
+                        </CascadingValue>
+                    </CascadingValue>
+                </CascadingValue>
+            </div>
+        }
+        <div class="panel-content">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                        @BottomChildContent
+                    </CascadingValue>
+                </CascadingValue>
             </CascadingValue>
-        </CascadingValue>
-        
-    </CascadingValue>
+        </div>
+    </div>
 </div>
 

@@ -151,7 +151,7 @@ namespace BlazorSliders
             var myObject = DotNetObjectReference.Create(this);
 
             if (FirstRender)
-                await jsInterop.RegisterVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, myObject);
+                await SliderInterop.RegisterVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, myObject);
         }
 
         protected override void OnInitialized()

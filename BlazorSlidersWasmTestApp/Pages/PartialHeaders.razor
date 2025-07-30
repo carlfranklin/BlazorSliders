@@ -1,0 +1,32 @@
+﻿@page "/partialheaders"
+
+<AbsolutePanel AutoResize="true">
+    <HorizontalSliderPanel TopPanelHeight="250" SliderHeight="10">
+        <TopHeaderContent>
+            <div style="padding:10px; background-color:#d4edda; border-bottom:1px solid #c3e6cb;">
+                <h4 style="margin:0; color:#155724;">Top Panel Has Header</h4>
+                <p style="margin:5px 0 0 0; color:#155724;">Only the top panel has a sticky header defined</p>
+            </div>
+        </TopHeaderContent>
+        <TopChildContent>
+            <div style="padding:10px;">
+                <h3>Top Scrollable Content</h3>
+                <p>This content is below the sticky header and scrolls normally.</p>
+                @for (int i = 1; i <= 15; i++)
+                {
+                    <p>Top content line @i. This demonstrates mixed usage where only one panel has a header.</p>
+                }
+            </div>
+        </TopChildContent>
+        <BottomChildContent>
+            <div style="padding:10px;">
+                <h3>Bottom Content (No Header)</h3>
+                <p>This bottom panel has no header - it works exactly like the original behavior.</p>
+                @for (int i = 1; i <= 20; i++)
+                {
+                    <p>Bottom content line @i. No header here, just scrollable content as before.</p>
+                }
+            </div>
+        </BottomChildContent>
+    </HorizontalSliderPanel>
+</AbsolutePanel>

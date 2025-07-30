@@ -12,3 +12,14 @@
     background-color: lightgray;
     cursor: n-resize;
 }
+
+.panel-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: inherit;
+}
+
+.panel-content {
+    /* Content area below sticky header */
+}

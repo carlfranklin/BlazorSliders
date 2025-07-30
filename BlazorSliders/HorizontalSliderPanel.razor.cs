@@ -43,7 +43,13 @@ namespace BlazorSliders
         }
 
 		[Parameter]
+        public RenderFragment TopHeaderContent { get; set; }
+
+		[Parameter]
         public RenderFragment TopChildContent { get; set; }
+
+        [Parameter]
+        public RenderFragment BottomHeaderContent { get; set; }
 
         [Parameter]
         public RenderFragment BottomChildContent { get; set; }
@@ -153,7 +159,7 @@ namespace BlazorSliders
             var myObject = DotNetObjectReference.Create(this);
 
             if (FirstRender)
-                await jsInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
+                await SliderInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
 
         }
 

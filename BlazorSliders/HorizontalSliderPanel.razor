@@ -1,5 +1,5 @@
 ﻿@inherits SliderPanelBase
-@inject SliderInterop jsInterop
+@inject SliderInterop SliderInterop
 
 <div id="@TopPanelId" class="noselect @TopClassString"
      style="@TopStyleString
@@ -9,14 +9,27 @@
     left:0px;
     width:@WidthPx;
     height:@TopPanelHeightPx;">
-    <CascadingValue Value=this Name="directParent">
-        <CascadingValue Value=Width Name="directWidth">
-            <CascadingValue Value=TopPanelHeight Name="directHeight">
-                @TopChildContent
+    @if (TopHeaderContent != null)
+    {
+        <div class="panel-header">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=TopPanelHeight Name="directHeight">
+                        @TopHeaderContent
+                    </CascadingValue>
+                </CascadingValue>
+            </CascadingValue>
+        </div>
+    }
+    <div class="panel-content">
+        <CascadingValue Value=this Name="directParent">
+            <CascadingValue Value=Width Name="directWidth">
+                <CascadingValue Value=TopPanelHeight Name="directHeight">
+                    @TopChildContent
+                </CascadingValue>
             </CascadingValue>
         </CascadingValue>
-        
-    </CascadingValue>
+    </div>
 </div>
 
 <div id="@SliderId" class="@DefaultSliderClass @SliderClassString"
@@ -37,13 +50,26 @@
     left:0px;
     width:@WidthPx;
     height:@BottomPanelHeightPx;">
-    <CascadingValue Value=this Name="directParent">
-        <CascadingValue Value=Width Name="directWidth">
-            <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                @BottomChildContent
+    @if (BottomHeaderContent != null)
+    {
+        <div class="panel-header">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                        @BottomHeaderContent
+                    </CascadingValue>
+                </CascadingValue>
+            </CascadingValue>
+        </div>
+    }
+    <div class="panel-content">
+        <CascadingValue Value=this Name="directParent">
+            <CascadingValue Value=Width Name="directWidth">
+                <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                    @BottomChildContent
+                </CascadingValue>
             </CascadingValue>
         </CascadingValue>
-        
-    </CascadingValue>
+    </div>
 </div>
 

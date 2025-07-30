@@ -24,6 +24,7 @@ Github: https://github.com/carlfranklin/BlazorSliders
   * [Usage](#usage)
     * [Simple Vertical Split:](#simple-vertical-split)
     * [Simple Horizontal Split:](#simple-horizontal-split)
+    * [Horizontal Split with Sticky Headers:](#horizontal-split-with-sticky-headers)
     * [Four Panels:](#four-panels)
     * [Initial size and position based on percent size of browser:](#initial-size-and-position-based-on-percent-size-of-browser)
       * [Alternate Method for Defining Panels by Percentage of Containing Element](#alternate-method-for-defining-panels-by-percentage-of-containing-element)
@@ -71,6 +72,12 @@ Provides two content components and a vertical splitter between the two. Handles
 #### HorizontalSliderPanel
 
 Provides two content components and a horizontal splitter between the two. Handles all UI requirements.
+
+**New in this version**: Added support for sticky headers that remain at the top of panels when content is scrollable:
+- `TopHeaderContent` - Optional sticky header for the top panel
+- `BottomHeaderContent` - Optional sticky header for the bottom panel
+
+These headers use CSS `position: sticky` to remain visible at the top of their respective panels when the content below scrolls.
 
 
 ## Usage
@@ -217,6 +224,63 @@ builder.Services.AddScoped<SliderInterop>();
 ```
 <sup><a href='/BlazorSlidersWasmTestApp/Pages/Horizontals.razor#L1-L18' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Horizontals.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
+
+
+### Horizontal Split with Sticky Headers:
+
+The HorizontalSliderPanel now supports optional sticky headers that remain at the top of panels when content scrolls:
+
+<!-- snippet: BlazorSlidersWasmTestApp/Pages/StickyHeaders.razor -->
+<a id='snippet-BlazorSlidersWasmTestApp/Pages/StickyHeaders.razor'></a>
+```razor
+@page "/stickyheaders"
+
+<AbsolutePanel AutoResize="true">
+    <HorizontalSliderPanel TopPanelHeight="300" SliderHeight="10">
+        <TopHeaderContent>
+            <div style="padding:10px; background-color:#f0f0f0; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Top Panel Sticky Header</h4>
+                <p style="margin:5px 0 0 0;">This header sticks to the top when content scrolls</p>
+            </div>
+        </TopHeaderContent>
+        <TopChildContent>
+            <div style="padding:10px;">
+                <h3>Top Content (Scrollable)</h3>
+                <p>This content scrolls while the header above stays fixed.</p>
+                @for (int i = 1; i <= 20; i++)
+                {
+                    <p>Scrollable content line @i...</p>
+                }
+            </div>
+        </TopChildContent>
+        <BottomHeaderContent>
+            <div style="padding:10px; background-color:#e0e0e0; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Bottom Panel Sticky Header</h4>
+                <p style="margin:5px 0 0 0;">This header also sticks to the top of its panel</p>
+            </div>
+        </BottomHeaderContent>
+        <BottomChildContent>
+            <div style="padding:10px;">
+                <h3>Bottom Content (Scrollable)</h3>
+                <p>This content also scrolls while the header above stays fixed.</p>
+                @for (int i = 1; i <= 30; i++)
+                {
+                    <p>More scrollable content line @i...</p>
+                }
+            </div>
+        </BottomChildContent>
+    </HorizontalSliderPanel>
+</AbsolutePanel>
+```
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/StickyHeaders.razor#L1-L35' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/StickyHeaders.razor' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
+
+**Key Features:**
+- Headers are completely optional - existing code works unchanged
+- Headers use CSS `position: sticky` for smooth scrolling performance  
+- Headers automatically inherit panel background styling
+- Can be used on either panel independently (mixed usage)
+- Content scrolls normally while headers remain visible
 
 
 ### Four Panels:

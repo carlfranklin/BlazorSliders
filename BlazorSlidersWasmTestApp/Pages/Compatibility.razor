@@ -1,0 +1,26 @@
+﻿@page "/compatibility"
+
+<AbsolutePanel AutoResize="true">
+    <HorizontalSliderPanel TopPanelHeight="200" SliderHeight="10">
+        <TopChildContent>
+            <div style="padding:10px;">
+                <h3>Top Content (No Header)</h3>
+                <p>This demonstrates backward compatibility - no headers are defined, so it works exactly as before.</p>
+                @for (int i = 1; i <= 15; i++)
+                {
+                    <p>Scrollable content line @i without any header. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                }
+            </div>
+        </TopChildContent>
+        <BottomChildContent>
+            <div style="padding:10px;">
+                <h3>Bottom Content (No Header)</h3>
+                <p>This bottom panel also has no header and should work exactly as before.</p>
+                @for (int i = 1; i <= 20; i++)
+                {
+                    <p>More content line @i. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                }
+            </div>
+        </BottomChildContent>
+    </HorizontalSliderPanel>
+</AbsolutePanel>

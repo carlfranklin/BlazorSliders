@@ -1,0 +1,38 @@
+﻿@page "/stickyheaders"
+
+<AbsolutePanel AutoResize="true">
+    <HorizontalSliderPanel TopPanelHeight="300" SliderHeight="10">
+        <TopHeaderContent>
+            <div style="padding:10px; background-color:#f0f0f0; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Top Panel Sticky Header</h4>
+                <p style="margin:5px 0 0 0;">This header sticks to the top when content scrolls</p>
+            </div>
+        </TopHeaderContent>
+        <TopChildContent>
+            <div style="padding:10px;">
+                <h3>Top Content (Scrollable)</h3>
+                <p>This content scrolls while the header above stays fixed.</p>
+                @for (int i = 1; i <= 20; i++)
+                {
+                    <p>Scrollable content line @i. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                }
+            </div>
+        </TopChildContent>
+        <BottomHeaderContent>
+            <div style="padding:10px; background-color:#e0e0e0; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Bottom Panel Sticky Header</h4>
+                <p style="margin:5px 0 0 0;">This header also sticks to the top of its panel</p>
+            </div>
+        </BottomHeaderContent>
+        <BottomChildContent>
+            <div style="padding:10px;">
+                <h3>Bottom Content (Scrollable)</h3>
+                <p>This content also scrolls while the header above stays fixed.</p>
+                @for (int i = 1; i <= 30; i++)
+                {
+                    <p>More scrollable content line @i. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                }
+            </div>
+        </BottomChildContent>
+    </HorizontalSliderPanel>
+</AbsolutePanel>

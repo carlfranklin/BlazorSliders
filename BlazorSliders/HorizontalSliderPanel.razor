@@ -4,33 +4,31 @@
 <div id="@TopPanelId" class="noselect @TopClassString"
      style="@TopStyleString
     position:absolute;
-    overflow:hidden;
+    overflow:auto;
     top:0px;
     left:0px;
     width:@WidthPx;
     height:@TopPanelHeightPx;">
-    <div style="height:100%; overflow:auto;">
-        @if (TopHeaderContent != null)
-        {
-            <div class="panel-header">
-                <CascadingValue Value=this Name="directParent">
-                    <CascadingValue Value=Width Name="directWidth">
-                        <CascadingValue Value=TopPanelHeight Name="directHeight">
-                            @TopHeaderContent
-                        </CascadingValue>
-                    </CascadingValue>
-                </CascadingValue>
-            </div>
-        }
-        <div class="panel-content">
+    @if (TopHeaderContent != null)
+    {
+        <div class="panel-header">
             <CascadingValue Value=this Name="directParent">
                 <CascadingValue Value=Width Name="directWidth">
                     <CascadingValue Value=TopPanelHeight Name="directHeight">
-                        @TopChildContent
+                        @TopHeaderContent
                     </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </div>
+    }
+    <div class="panel-content">
+        <CascadingValue Value=this Name="directParent">
+            <CascadingValue Value=Width Name="directWidth">
+                <CascadingValue Value=TopPanelHeight Name="directHeight">
+                    @TopChildContent
+                </CascadingValue>
+            </CascadingValue>
+        </CascadingValue>
     </div>
 </div>
 
@@ -47,33 +45,31 @@
 <div id="@BottomPanelId" class="noselect @BottomClassString"
      style="@BottomStyleString
     position:absolute;
-    overflow:hidden;
+    overflow:auto;
     top:@BottomPanelTopPx;
     left:0px;
     width:@WidthPx;
     height:@BottomPanelHeightPx;">
-    <div style="height:100%; overflow:auto;">
-        @if (BottomHeaderContent != null)
-        {
-            <div class="panel-header">
-                <CascadingValue Value=this Name="directParent">
-                    <CascadingValue Value=Width Name="directWidth">
-                        <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                            @BottomHeaderContent
-                        </CascadingValue>
-                    </CascadingValue>
-                </CascadingValue>
-            </div>
-        }
-        <div class="panel-content">
+    @if (BottomHeaderContent != null)
+    {
+        <div class="panel-header">
             <CascadingValue Value=this Name="directParent">
                 <CascadingValue Value=Width Name="directWidth">
                     <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                        @BottomChildContent
+                        @BottomHeaderContent
                     </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </div>
+    }
+    <div class="panel-content">
+        <CascadingValue Value=this Name="directParent">
+            <CascadingValue Value=Width Name="directWidth">
+                <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                    @BottomChildContent
+                </CascadingValue>
+            </CascadingValue>
+        </CascadingValue>
     </div>
 </div>
 

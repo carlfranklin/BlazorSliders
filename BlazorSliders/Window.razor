@@ -20,10 +20,13 @@
         await WindowResized.InvokeAsync(size);
     }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        var myObject = DotNetObjectReference.Create(this);
-        await SliderInterop.RegisterWindow(myObject, Id, ParentContained);
-        await SliderInterop.ForceResize(myObject, Id, ParentContained);
+        if (firstRender)
+        {
+            var myObject = DotNetObjectReference.Create(this);
+            await SliderInterop.RegisterWindow(myObject, Id, ParentContained);
+            await SliderInterop.ForceResize(myObject, Id, ParentContained);
+        }
     }
 }

@@ -116,7 +116,12 @@ namespace BlazorSliders
                     SliderX = me.MinimumLeftPanelWidth;
 
                 // Set the slider position (left panel width)
+                var oldPosition = me.leftPanelWidth;
                 me.leftPanelWidth = SliderX;
+                if (oldPosition != SliderX)
+                {
+                    me.SliderPositionChanged.InvokeAsync(SliderX);
+                }
                 StateHasChanged();
                 if (me.LeftPanel != null)
                     me.LeftPanel.Resize();
@@ -160,7 +165,12 @@ namespace BlazorSliders
                     SliderY = me.MinimumTopPanelHeight;
 
                 // Set the slider position (top panel height)
+                var oldPosition = me.topPanelHeight;
                 me.topPanelHeight = SliderY;
+                if (oldPosition != SliderY)
+                {
+                    me.SliderPositionChanged.InvokeAsync(SliderY);
+                }
 
                 // Now set my overall width and height
                 if (DirectHeight != 0 && DirectWidth != 0)

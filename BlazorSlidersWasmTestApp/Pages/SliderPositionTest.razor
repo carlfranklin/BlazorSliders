@@ -1,0 +1,115 @@
+@page "/sliderpositiontest"
+
+<h3>Slider Position Test</h3>
+
+<div style="margin-bottom: 20px;">
+    <h4>Current Positions:</h4>
+    <p>Horizontal Slider Position: @horizontalPosition</p>
+    <p>Vertical Slider Position: @verticalPosition</p>
+    
+    <h4>Position Change History:</h4>
+    <div style="height: 100px; overflow-y: scroll; border: 1px solid #ccc; padding: 5px;">
+        @foreach (var entry in positionHistory)
+        {
+            <div>@entry</div>
+        }
+    </div>
+    
+    <h4>Manual Position Control:</h4>
+    <div>
+        <label>Set Horizontal Position: </label>
+        <input type="number" @bind="newHorizontalPosition" min="100" max="400" />
+        <button @onclick="SetHorizontalPosition">Set</button>
+    </div>
+    <div>
+        <label>Set Vertical Position: </label>
+        <input type="number" @bind="newVerticalPosition" min="100" max="400" />
+        <button @onclick="SetVerticalPosition">Set</button>
+    </div>
+</div>
+
+<div style="height: 500px;">
+    <AbsolutePanel AutoResize="false">
+        <VerticalSliderPanel @ref="verticalSlider" 
+                           LeftPanelStartingWidth="250" 
+                           SliderWidth="10"
+                           SliderPosition="@verticalPosition"
+                           SliderPositionChanged="OnVerticalPositionChanged">
+            <LeftChildContent>
+                <HorizontalSliderPanel @ref="horizontalSlider"
+                                     PanelPosition="PanelPosition.Left"
+                                     TopPanelHeight="200"
+                                     SliderHeight="10"
+                                     SliderPosition="@horizontalPosition"
+                                     SliderPositionChanged="OnHorizontalPositionChanged">
+                    <TopChildContent>
+                        <div style="padding:10px; background-color: #f0f0f0;">
+                            <h4>Top Panel</h4>
+                            <p>Horizontal Position: @horizontalPosition</p>
+                        </div>
+                    </TopChildContent>
+                    <BottomChildContent>
+                        <div style="padding:10px; background-color: #e0e0e0;">
+                            <h4>Bottom Panel</h4>
+                            <p>This panel adjusts based on the horizontal slider position.</p>
+                        </div>
+                    </BottomChildContent>
+                </HorizontalSliderPanel>
+            </LeftChildContent>
+            <RightChildContent>
+                <div style="padding:10px; background-color: #d0d0d0;">
+                    <h4>Right Panel</h4>
+                    <p>Vertical Position: @verticalPosition</p>
+                    <p>This panel adjusts based on the vertical slider position.</p>
+                </div>
+            </RightChildContent>
+        </VerticalSliderPanel>
+    </AbsolutePanel>
+</div>
+
+@code {
+    private VerticalSliderPanel verticalSlider;
+    private HorizontalSliderPanel horizontalSlider;
+    
+    private int horizontalPosition = 200;
+    private int verticalPosition = 250;
+    
+    private int newHorizontalPosition = 200;
+    private int newVerticalPosition = 250;
+    
+    private List<string> positionHistory = new List<string>();
+
+    private async Task OnHorizontalPositionChanged(int newPosition)
+    {
+        horizontalPosition = newPosition;
+        positionHistory.Insert(0, $"Horizontal changed to: {newPosition} at {DateTime.Now:HH:mm:ss.fff}");
+        if (positionHistory.Count > 10)
+        {
+            positionHistory.RemoveAt(10);
+        }
+        StateHasChanged();
+    }
+
+    private async Task OnVerticalPositionChanged(int newPosition)
+    {
+        verticalPosition = newPosition;
+        positionHistory.Insert(0, $"Vertical changed to: {newPosition} at {DateTime.Now:HH:mm:ss.fff}");
+        if (positionHistory.Count > 10)
+        {
+            positionHistory.RemoveAt(10);
+        }
+        StateHasChanged();
+    }
+
+    private void SetHorizontalPosition()
+    {
+        horizontalPosition = newHorizontalPosition;
+        StateHasChanged();
+    }
+
+    private void SetVerticalPosition()
+    {
+        verticalPosition = newVerticalPosition;
+        StateHasChanged();
+    }
+}

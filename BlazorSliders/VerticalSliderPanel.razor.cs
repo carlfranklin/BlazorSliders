@@ -108,6 +108,24 @@ namespace BlazorSliders
         [Parameter]
         public int MinimumRightPanelWidth { get; set; } = 200;
 
+        [Parameter]
+        public int SliderPosition
+        {
+            get => leftPanelWidth;
+            set
+            {
+                if (leftPanelWidth != value)
+                {
+                    leftPanelWidth = value;
+                    SliderPositionChanged.InvokeAsync(value);
+                    StateHasChanged();
+                }
+            }
+        }
+
+        [Parameter]
+        public EventCallback<int> SliderPositionChanged { get; set; }
+
         protected string LeftPanelWidthPx { get { return leftPanelWidth.ToString() + "px"; } }
         protected string RightPanelWidthPx { get { return RightPanelWidth.ToString() + "px"; } }
         protected string RightPanelLeftPx { get { return (leftPanelWidth + SliderWidth).ToString() + "px"; } }
@@ -141,8 +159,13 @@ namespace BlazorSliders
         [JSInvokable]
         public async Task MouseMove(int X, int Y)
         {
+            var oldPosition = leftPanelWidth;
             await InvokeAsync(StateHasChanged);
             Resize(X);
+            if (leftPanelWidth != oldPosition)
+            {
+                await SliderPositionChanged.InvokeAsync(leftPanelWidth);
+            }
             await InvokeAsync(StateHasChanged);
         }
 

@@ -117,6 +117,24 @@ namespace BlazorSliders
         [Parameter]
         public int MinimumBottomPanelHeight { get; set; } = 200;
 
+        [Parameter]
+        public int SliderPosition
+        {
+            get => topPanelHeight;
+            set
+            {
+                if (topPanelHeight != value)
+                {
+                    topPanelHeight = value;
+                    SliderPositionChanged.InvokeAsync(value);
+                    StateHasChanged();
+                }
+            }
+        }
+
+        [Parameter]
+        public EventCallback<int> SliderPositionChanged { get; set; }
+
         protected string TopPanelHeightPx { get { return topPanelHeight.ToString() + "px"; } }
         protected string BottomPanelHeightPx { get { return BottomPanelHeight.ToString() + "px"; } }
         protected string BottomPanelTopPx { get { return (topPanelHeight + SliderHeight).ToString() + "px"; } }
@@ -148,7 +166,12 @@ namespace BlazorSliders
         [JSInvokable]
         public async Task MouseMove(int X, int Y)
         {
+            var oldPosition = topPanelHeight;
             Resize(Y);
+            if (topPanelHeight != oldPosition)
+            {
+                await SliderPositionChanged.InvokeAsync(topPanelHeight);
+            }
             await InvokeAsync(StateHasChanged);
         }
 

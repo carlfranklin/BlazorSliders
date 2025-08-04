@@ -126,20 +126,6 @@ namespace BlazorSliders
         public int CurrentSliderPosition => topPanelHeight;
 
         [Parameter]
-        public int SliderPosition
-        {
-            get => topPanelHeight;
-            set
-            {
-                if (topPanelHeight != value)
-                {
-                    topPanelHeight = value;
-                    StateHasChanged();
-                }
-            }
-        }
-
-        [Parameter]
         public EventCallback<int> SliderPositionChanged { get; set; }
 
         protected string TopPanelHeightPx { get { return topPanelHeight.ToString() + "px"; } }

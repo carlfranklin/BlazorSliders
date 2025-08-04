@@ -1,11 +1,15 @@
 @page "/horizontals"
 
 <AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="200" SliderHeight="10">
+    <HorizontalSliderPanel @ref=SliderPanel TopPanelHeight="200" SliderHeight="10" InitialSliderPosition="@InitialSliderPosition">
         <TopHeaderContent>
             <div style="padding:10px; background-color:#f0f0f0; border-bottom:1px solid #ccc;">
                 <h4 style="margin:0;">Sticky Top Header</h4>
                 <p style="margin:5px 0 0 0;">This header stays at the top when content scrolls</p>
+                @if (SliderPanel != null)
+                {
+                    <p>Slider Position: @SliderPanel.CurrentSliderPosition</p>
+                }
             </div>
         </TopHeaderContent>
         
@@ -41,3 +45,9 @@
         </BottomChildContent>
     </HorizontalSliderPanel>
 </AbsolutePanel>
+
+@code {
+
+    int InitialSliderPosition = 200;
+    HorizontalSliderPanel SliderPanel { get; set; }
+}

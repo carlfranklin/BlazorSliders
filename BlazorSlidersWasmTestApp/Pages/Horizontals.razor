@@ -1,18 +1,53 @@
 ﻿@page "/horizontals"
 
 <AbsolutePanel AutoResize="true">
-    <HorizontalSliderPanel TopPanelHeight="200" SliderHeight="10">
+    <HorizontalSliderPanel @ref=SliderPanel TopPanelHeight="200" SliderHeight="10" InitialSliderPosition="@InitialSliderPosition">
+        <TopHeaderContent>
+            <div style="padding:10px; background-color:#f0f0f0; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Sticky Top Header</h4>
+                <p style="margin:5px 0 0 0;">This header stays at the top when content scrolls</p>
+                @if (SliderPanel != null)
+                {
+                    <p>Slider Position: @SliderPanel.CurrentSliderPosition</p>
+                }
+            </div>
+        </TopHeaderContent>
+
         <TopChildContent>
             <div style="padding:10px;">
                 <h3>Top Content</h3>
-                This is a demo of a single horizontal slider panel.
+                <p>This is a demo of a single horizontal slider panel with scrollable content.</p>
+                @for (int i = 1; i <= 20; i++)
+                {
+                    <p>Content line @i - This line demonstrates scrollable content within the panel.</p>
+                }
             </div>
         </TopChildContent>
+
+        <BottomHeaderContent>
+            <div style="padding:10px; background-color:#e0f0ff; border-bottom:1px solid #ccc;">
+                <h4 style="margin:0;">Sticky Bottom Header</h4>
+                <p style="margin:5px 0 0 0;">This header stays at the top of the bottom panel</p>
+            </div>
+        </BottomHeaderContent>
+
         <BottomChildContent>
             <div style="padding:10px;">
                 <h3>Bottom Content</h3>
                 <NavMenu />
+                <div style="margin-top:20px;">
+                    @for (int i = 1; i <= 10; i++)
+                    {
+                        <p>Bottom panel content line @i</p>
+                    }
+                </div>
             </div>
         </BottomChildContent>
     </HorizontalSliderPanel>
 </AbsolutePanel>
+
+@code {
+
+    int InitialSliderPosition = 200;
+    HorizontalSliderPanel SliderPanel { get; set; }
+}

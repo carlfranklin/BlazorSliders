@@ -109,6 +109,14 @@ namespace BlazorSliders
         public int MinimumRightPanelWidth { get; set; } = 200;
 
         [Parameter]
+        public int InitialSliderPosition { get; set; }
+
+        /// <summary>
+        /// Gets the current slider position. Use this property to read the current position value.
+        /// </summary>
+        public int CurrentSliderPosition => leftPanelWidth;
+
+        [Parameter]
         public int SliderPosition
         {
             get => leftPanelWidth;
@@ -117,7 +125,6 @@ namespace BlazorSliders
                 if (leftPanelWidth != value)
                 {
                     leftPanelWidth = value;
-                    SliderPositionChanged.InvokeAsync(value);
                     StateHasChanged();
                 }
             }
@@ -202,6 +209,17 @@ namespace BlazorSliders
                     else if (PanelPosition == PanelPosition.Bottom)
                         ((HorizontalSliderPanel)Parent).BottomPanel = this;
                 }
+            }
+        }
+
+        protected override void OnParametersSet()
+        {
+            // Set initial slider position if provided - this takes priority over LeftPanelStartingWidth
+            if (InitialSliderPosition > 0)
+            {
+                leftPanelWidth = InitialSliderPosition;
+                if (originalLeftPanelWidth <= 0)
+                    originalLeftPanelWidth = InitialSliderPosition;
             }
         }
     }

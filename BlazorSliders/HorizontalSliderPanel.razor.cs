@@ -118,6 +118,14 @@ namespace BlazorSliders
         public int MinimumBottomPanelHeight { get; set; } = 200;
 
         [Parameter]
+        public int InitialSliderPosition { get; set; }
+
+        /// <summary>
+        /// Gets the current slider position. Use this property to read the current position value.
+        /// </summary>
+        public int CurrentSliderPosition => topPanelHeight;
+
+        [Parameter]
         public int SliderPosition
         {
             get => topPanelHeight;
@@ -126,7 +134,6 @@ namespace BlazorSliders
                 if (topPanelHeight != value)
                 {
                     topPanelHeight = value;
-                    SliderPositionChanged.InvokeAsync(value);
                     StateHasChanged();
                 }
             }
@@ -211,6 +218,17 @@ namespace BlazorSliders
                     else if (PanelPosition == PanelPosition.Bottom)
                         ((HorizontalSliderPanel)Parent).BottomPanel = this;
                 }
+            }
+        }
+
+        protected override void OnParametersSet()
+        {
+            // Set initial slider position if provided - this takes priority over TopPanelHeight
+            if (InitialSliderPosition > 0)
+            {
+                topPanelHeight = InitialSliderPosition;
+                if (originalTopPanelHeight <= 0)
+                    originalTopPanelHeight = InitialSliderPosition;
             }
         }
     }

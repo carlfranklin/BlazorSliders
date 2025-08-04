@@ -8,11 +8,11 @@
 </div>
 
 <div style="margin-bottom: 20px;">
-    <h4>Current Bound Positions (with @bind-SliderPosition):</h4>
+    <h4>Current Bound Positions (with SliderPosition + SliderPositionChanged):</h4>
     <div style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
         <p><strong>Horizontal Position:</strong> @horizontalPosition</p>
         <p><strong>Vertical Position:</strong> @verticalPosition</p>
-        <p><em>These values update automatically due to two-way binding</em></p>
+        <p><em>These values update through traditional SliderPositionChanged event handling</em></p>
     </div>
     
     <h4>Cyclical Binding Demonstration:</h4>
@@ -71,14 +71,14 @@
         <VerticalSliderPanel @ref="verticalSlider" 
                            LeftPanelStartingWidth="250" 
                            SliderWidth="10"
-                           @bind-SliderPosition="verticalPosition"
+                           SliderPosition="verticalPosition"
                            SliderPositionChanged="OnVerticalPositionChanged">
             <LeftChildContent>
                 <HorizontalSliderPanel @ref="horizontalSlider"
                                      PanelPosition="PanelPosition.Left"
                                      TopPanelHeight="200"
                                      SliderHeight="10"
-                                     @bind-SliderPosition="horizontalPosition"
+                                     SliderPosition="horizontalPosition"
                                      SliderPositionChanged="OnHorizontalPositionChanged">
                     <TopChildContent>
                         <div style="padding:15px; background-color: #e3f2fd; height: 100%; display: flex; flex-direction: column; justify-content: center;">
@@ -128,7 +128,7 @@
 
     protected override void OnInitialized()
     {
-        positionHistory.Add($"[{DateTime.Now:HH:mm:ss.fff}] Component initialized with traditional SliderPosition binding");
+        positionHistory.Add($"[{DateTime.Now:HH:mm:ss.fff}] Component initialized with traditional SliderPosition + SliderPositionChanged");
         positionHistory.Add($"[{DateTime.Now:HH:mm:ss.fff}] Initial positions - Horizontal: {horizontalPosition}, Vertical: {verticalPosition}");
     }
 

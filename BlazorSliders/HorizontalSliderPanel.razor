@@ -32,13 +32,14 @@
     </div>
 </div>
 
-<div id="@SliderId" class="@DefaultSliderClass @SliderClassString"
+<div id="@SliderId" class="@DefaultSliderClass @SliderClassString @(Disabled ? "disabled" : "")"
      style="position:absolute;
     overflow: hidden;
     height:@SliderHeightPx;
     top:@TopPanelHeightPx;
     left:0px;
-    width:@WidthPx;">
+    width:@WidthPx;
+    @(Disabled ? "cursor: not-allowed; opacity: 0.5;" : "")">
      @SliderContent
 </div>
 

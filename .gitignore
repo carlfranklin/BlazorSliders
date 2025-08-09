@@ -341,3 +341,6 @@ healthchecksdb
 
 #temp filed used by Verify
 *.received.*
+
+# Microsoft packages temporary files
+packages-microsoft-prod.deb

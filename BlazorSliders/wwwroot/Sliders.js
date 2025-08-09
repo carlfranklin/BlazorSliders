@@ -43,12 +43,12 @@ export function forceResize(dotNetComponent, id = "", parentContained = false) {
 
 }
 
-export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, dotNetComponent) {
+export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId, dotNetComponent, disabled = false) {
     var component = dotNetComponent;
     var sliderIsMoving = false;
     var leftPanel = document.getElementById(LeftPanelId);
     var rightPanel = document.getElementById(RightPanelId);
-    var slider = document.getElementById(SliderId)
+    var slider = document.getElementById(SliderId);
 
     if (leftPanel != null) {
         // mouse
@@ -75,6 +75,15 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
     }
 
     if (slider != null) {
+        // Apply disabled styling
+        if (disabled) {
+            slider.style.cursor = "not-allowed";
+            slider.style.opacity = "0.5";
+            slider.style.pointerEvents = "none";
+            if (leftPanel != null) leftPanel.style.cursor = "default";
+            if (rightPanel != null) rightPanel.style.cursor = "default";
+            return; // Skip event registration for disabled sliders
+        }
 
         // mouse
         slider.addEventListener("mousedown", function (ev) {
@@ -238,12 +247,12 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
     }
 }
 
-export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, dotNetComponent) {
+export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, dotNetComponent, disabled = false) {
     var component = dotNetComponent;
     var sliderIsMoving = false;
     var topPanel = document.getElementById(TopPanelId);
     var bottomPanel = document.getElementById(BottomPanelId);
-    var slider = document.getElementById(SliderId)
+    var slider = document.getElementById(SliderId);
 
     if (topPanel != null) {
         // mouse
@@ -270,6 +279,15 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
     }
 
     if (slider != null) {
+        // Apply disabled styling
+        if (disabled) {
+            slider.style.cursor = "not-allowed";
+            slider.style.opacity = "0.5";
+            slider.style.pointerEvents = "none";
+            if (topPanel != null) topPanel.style.cursor = "default";
+            if (bottomPanel != null) bottomPanel.style.cursor = "default";
+            return; // Skip event registration for disabled sliders
+        }
 
         // mouse
         slider.addEventListener("mousedown", function (ev) {
@@ -439,5 +457,20 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
             return element;
         else
             return element.parentElement;
+    }
+}
+
+export function updateSliderDisabledState(sliderId, disabled) {
+    var slider = document.getElementById(sliderId);
+    if (slider != null) {
+        if (disabled) {
+            slider.style.cursor = "not-allowed";
+            slider.style.opacity = "0.5";
+            slider.style.pointerEvents = "none";
+        } else {
+            slider.style.cursor = "";
+            slider.style.opacity = "";
+            slider.style.pointerEvents = "";
+        }
     }
 }

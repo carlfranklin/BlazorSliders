@@ -54,13 +54,13 @@ namespace BlazorSliders
             }
         }
 
-        public async Task RegisterVerticalSliderPanel(string SliderId, string LeftPanelId, string RightPanelId, DotNetObjectReference<VerticalSliderPanel> Component)
+        public async Task RegisterVerticalSliderPanel(string SliderId, string LeftPanelId, string RightPanelId, DotNetObjectReference<VerticalSliderPanel> Component, bool Disabled = false)
         {
             try
             {
                 
                 var module = await moduleTask.Value;
-                await module.InvokeAsync<string>("registerVerticalSliderPanel", SliderId, LeftPanelId, RightPanelId, Component);
+                await module.InvokeAsync<string>("registerVerticalSliderPanel", SliderId, LeftPanelId, RightPanelId, Component, Disabled);
             }
             catch (Exception ex)
             {
@@ -68,10 +68,16 @@ namespace BlazorSliders
             }
         }
 
-        public async Task RegisterHorizontalSliderPanel(string SliderId, string TopPanelId, string BottomPanelId, DotNetObjectReference<HorizontalSliderPanel> Component)
+        public async Task RegisterHorizontalSliderPanel(string SliderId, string TopPanelId, string BottomPanelId, DotNetObjectReference<HorizontalSliderPanel> Component, bool Disabled = false)
         {
             var module = await moduleTask.Value;
-            await module.InvokeAsync<string>("registerHorizontalSliderPanel", SliderId, TopPanelId, BottomPanelId, Component);
+            await module.InvokeAsync<string>("registerHorizontalSliderPanel", SliderId, TopPanelId, BottomPanelId, Component, Disabled);
+        }
+
+        public async Task UpdateSliderDisabledState(string SliderId, bool Disabled)
+        {
+            var module = await moduleTask.Value;
+            await module.InvokeAsync<string>("updateSliderDisabledState", SliderId, Disabled);
         }
 
 

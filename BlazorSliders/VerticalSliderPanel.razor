@@ -20,13 +20,14 @@
     </CascadingValue>
 </div>
 
-<div id="@SliderId" class="@DefaultSliderClass @SliderClassString"
+<div id="@SliderId" class="@DefaultSliderClass @SliderClassString @(Disabled ? "disabled" : "")"
      style="
     width: @SliderWidthPx;
     position: absolute;
     top: 0px;
     left: @LeftPanelWidthPx;
-    height: @HeightPx;">
+    height: @HeightPx;
+    @(Disabled ? "cursor: not-allowed; opacity: 0.5;" : "")">
 </div>
 
 <div id="@RightPanelId" class="noselect @RightClassString"

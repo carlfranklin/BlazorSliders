@@ -1,20 +1,47 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
-<AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10">
-        <LeftChildContent>
-            <div style="padding:10px;">
-                <h3>Left Content</h3>
-                This is a demo of a single vertical slider panel.
-            </div>
-        </LeftChildContent>
-        <RightChildContent>
-            <div style="padding:10px;">
-                <h3>Right Content</h3>
-                <NavMenu />
-            </div>
-        </RightChildContent>
-    </VerticalSliderPanel>
-</AbsolutePanel>
+<PageTitle>BlazorSliders - Disabled Feature Demo</PageTitle>
+
+<div style="padding: 20px; position: relative; z-index: 1000;">
+    <h1>BlazorSliders - Disabled Feature Demo</h1>
+    
+    <div style="margin-bottom: 20px;">
+        <button @onclick="ToggleDisabled" class="btn btn-primary">
+            @(isDisabled ? "Enable" : "Disable") Sliders
+        </button>
+        <span style="margin-left: 10px;">Current state: @(isDisabled ? "Disabled" : "Enabled")</span>
+    </div>
+</div>
+
+<div style="position: absolute; top: 120px; left: 0; right: 0; bottom: 0;">
+    <AbsolutePanel AutoResize="true">
+        <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10" Disabled="@isDisabled">
+            <LeftChildContent>
+                <div style="padding:10px;">
+                    <h3>Left Content</h3>
+                    This is a demo of a vertical slider panel with disable functionality.
+                    <p><strong>Status:</strong> @(isDisabled ? "Disabled - slider cannot be moved" : "Enabled - slider can be moved")</p>
+                </div>
+            </LeftChildContent>
+            <RightChildContent>
+                <div style="padding:10px;">
+                    <h3>Right Content</h3>
+                    <NavMenu />
+                    <p>Try to drag the slider bar when disabled vs enabled!</p>
+                </div>
+            </RightChildContent>
+        </VerticalSliderPanel>
+    </AbsolutePanel>
+</div>
+
+@code {
+    private bool isDisabled = false;
+
+    private void ToggleDisabled()
+    {
+        isDisabled = !isDisabled;
+    }
+}
 
 

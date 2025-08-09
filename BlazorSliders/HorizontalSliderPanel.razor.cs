@@ -147,18 +147,21 @@ namespace BlazorSliders
         [JSInvokable]
         public async Task MouseDown(int X, int Y)
         {
+            if (Disabled) return;
             await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
         public async Task MouseUp(int X, int Y)
         {
+            if (Disabled) return;
             await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
         public async Task MouseMove(int X, int Y)
         {
+            if (Disabled) return;
             var oldPosition = topPanelHeight;
             Resize(Y);
             if (topPanelHeight != oldPosition)
@@ -175,8 +178,11 @@ namespace BlazorSliders
             var myObject = DotNetObjectReference.Create(this);
 
             if (FirstRender)
-                await SliderInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject);
-
+            {
+                await SliderInterop.RegisterHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelId, myObject, Disabled);
+                firstRender = false;
+                previousDisabled = Disabled;
+            }
         }
 
         protected override void OnInitialized()
@@ -207,7 +213,7 @@ namespace BlazorSliders
             }
         }
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
             // Set initial slider position if provided - this takes priority over TopPanelHeight
             if (InitialSliderPosition > 0)
@@ -216,6 +222,16 @@ namespace BlazorSliders
                 if (originalTopPanelHeight <= 0)
                     originalTopPanelHeight = InitialSliderPosition;
             }
+            
+            // Update disabled state if it changed after first render
+            if (!firstRender && previousDisabled != Disabled)
+            {
+                await SliderInterop.UpdateSliderDisabledState(SliderId, Disabled);
+                previousDisabled = Disabled;
+            }
         }
+
+        private bool firstRender = true;
+        private bool previousDisabled = false;
     }
 }

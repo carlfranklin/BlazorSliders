@@ -22,6 +22,9 @@ namespace BlazorSliders
         [Parameter]
         public PanelPosition PanelPosition { get; set; }
 
+        [Parameter]
+        public bool Disabled { get; set; } = false;
+
         protected int SubtractLeft = 0;
         protected int SubtractTop = 0;
         private Dimensions dimensions = new Dimensions();

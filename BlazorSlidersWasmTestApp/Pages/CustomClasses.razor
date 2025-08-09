@@ -6,12 +6,24 @@
             <div style="padding:10px;">
                 <h3>Left Content</h3>
                 This is a demo of custom class styling for the panels and slider.
+                <br /><br />
+                <strong>New Feature Test:</strong> The slider now supports custom content via the SliderContent parameter.
             </div>
         </LeftChildContent>
+        <SliderContent>
+            <div style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; text-align: center; padding: 4px; font-size: 12px; border-radius: 2px;">
+                ⇔ CUSTOM SLIDER ⇔
+            </div>
+        </SliderContent>
         <RightChildContent>
             <div style="padding:10px;">
                 <h3>Right Content</h3>
                 <NavMenu />
+                <p style="margin-top: 20px;">
+                    <strong>SliderContent Demo:</strong> The slider between these panels now displays custom content
+                    (a colorful gradient bar with drag indicator), demonstrating the new SliderContent parameter
+                    that was added to match the functionality available in HorizontalSliderPanel.
+                </p>
             </div>
         </RightChildContent>
     </VerticalSliderPanel>

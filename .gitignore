@@ -341,3 +341,6 @@ healthchecksdb
 
 #temp filed used by Verify
 *.received.*
+
+# Local dotnet installation directory
+dotnet/

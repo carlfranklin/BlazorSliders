@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorSliders
 {
-    public partial class VerticalSliderPanel : SliderPanelBase
+    public partial class VerticalSliderPanel : SliderPanelBase, IDisposable
     {
         public SliderPanelBase LeftPanel { get; set; }
 
@@ -29,6 +29,7 @@ namespace BlazorSliders
         }
 
         string rightPanelId = "";
+
         public string RightPanelId
         {
             get
@@ -40,37 +41,27 @@ namespace BlazorSliders
 
         }
 
-        [Parameter]
-        public RenderFragment LeftChildContent { get; set; }
+        [Parameter] public RenderFragment LeftChildContent { get; set; }
 
-        [Parameter]
-        public RenderFragment RightChildContent { get; set; }
+        [Parameter] public RenderFragment RightChildContent { get; set; }
 
-        [Parameter]
-        public string LeftStyleString { get; set; } = "";
+        [Parameter] public string LeftStyleString { get; set; } = "";
 
-        [Parameter]
-        public string LeftClassString { get; set; } = "";
+        [Parameter] public string LeftClassString { get; set; } = "";
 
-        [Parameter]
-        public string RightStyleString { get; set; } = "";
+        [Parameter] public string RightStyleString { get; set; } = "";
 
-        [Parameter]
-        public string RightClassString { get; set; } = "";
+        [Parameter] public string RightClassString { get; set; } = "";
 
-        [Parameter]
-        public int SliderWidth { get; set; } = 5;
+        [Parameter] public int SliderWidth { get; set; } = 5;
 
-        [Parameter]
-        public string SliderClassString { get; set; } = "";
+        [Parameter] public string SliderClassString { get; set; } = "";
 
-        [Parameter]
-        public bool OverrideSliderStyle { get; set; }
+        [Parameter] public bool OverrideSliderStyle { get; set; }
 
         public string DefaultSliderClass { get; set; }
 
-        [Parameter]
-        public SizeUnit WidthUnit { get; set; }
+        [Parameter] public SizeUnit WidthUnit { get; set; }
 
         [Parameter]
         public int LeftPanelStartingWidth
@@ -100,16 +91,16 @@ namespace BlazorSliders
             }
         }
 
-        public int LeftPanelWidth { get => leftPanelWidth; }
+        public int LeftPanelWidth
+        {
+            get => leftPanelWidth;
+        }
 
-        [Parameter]
-        public int MinimumLeftPanelWidth { get; set; } = 200;
+        [Parameter] public int MinimumLeftPanelWidth { get; set; } = 200;
 
-        [Parameter]
-        public int MinimumRightPanelWidth { get; set; } = 200;
+        [Parameter] public int MinimumRightPanelWidth { get; set; } = 200;
 
-        [Parameter]
-        public int InitialSliderPosition { get; set; }
+        [Parameter] public int InitialSliderPosition { get; set; }
 
         /// <summary>
         /// Gets the current slider position. Use this property to read the current position value.
@@ -130,16 +121,30 @@ namespace BlazorSliders
             }
         }
 
-        [Parameter]
-        public EventCallback<int> SliderPositionChanged { get; set; }
+        [Parameter] public EventCallback<int> SliderPositionChanged { get; set; }
 
-        protected string LeftPanelWidthPx { get { return leftPanelWidth.ToString() + "px"; } }
-        protected string RightPanelWidthPx { get { return RightPanelWidth.ToString() + "px"; } }
-        protected string RightPanelLeftPx { get { return (leftPanelWidth + SliderWidth).ToString() + "px"; } }
-        protected string SliderWidthPx { get { return SliderWidth.ToString() + "px"; } }
+        protected string LeftPanelWidthPx
+        {
+            get { return leftPanelWidth.ToString() + "px"; }
+        }
+
+        protected string RightPanelWidthPx
+        {
+            get { return RightPanelWidth.ToString() + "px"; }
+        }
+
+        protected string RightPanelLeftPx
+        {
+            get { return (leftPanelWidth + SliderWidth).ToString() + "px"; }
+        }
+
+        protected string SliderWidthPx
+        {
+            get { return SliderWidth.ToString() + "px"; }
+        }
 
 
-        
+
         public int RightPanelWidth
         {
             get
@@ -173,6 +178,7 @@ namespace BlazorSliders
             {
                 await SliderPositionChanged.InvokeAsync(leftPanelWidth);
             }
+
             await InvokeAsync(StateHasChanged);
         }
 
@@ -220,6 +226,36 @@ namespace BlazorSliders
                 leftPanelWidth = InitialSliderPosition;
                 if (originalLeftPanelWidth <= 0)
                     originalLeftPanelWidth = InitialSliderPosition;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Clean up parent references when this panel is destroyed
+            if (Parent != null)
+            {
+                if (Parent.GetType() == typeof(VerticalSliderPanel))
+                {
+                    var parent = (VerticalSliderPanel)Parent;
+                    if (parent.LeftPanel == this)
+                        parent.LeftPanel = null;
+                    if (parent.RightPanel == this)
+                        parent.RightPanel = null;
+                }
+                else if (Parent.GetType() == typeof(HorizontalSliderPanel))
+                {
+                    var parent = (HorizontalSliderPanel)Parent;
+                    if (parent.TopPanel == this)
+                        parent.TopPanel = null;
+                    if (parent.BottomPanel == this)
+                        parent.BottomPanel = null;
+                }
+                else if (Parent.GetType() == typeof(AbsolutePanel))
+                {
+                    var parent = (AbsolutePanel)Parent;
+                    if (parent.ChildPanel == this)
+                        parent.ChildPanel = null;
+                }
             }
         }
     }

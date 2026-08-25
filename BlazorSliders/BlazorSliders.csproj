@@ -8,14 +8,14 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Authors>Carl Franklin</Authors>
     <Company></Company>
     <PackageId></PackageId>
     <Description>Create multiple panels separated by sliding splitters</Description>
-    <Copyright>Copyright 2021-2024 by App vNext, LLC</Copyright>
+    <Copyright>Copyright 2021-2026 by App vNext, LLC</Copyright>
     <Product>BlazorSliders</Product>
-    <Version>9.0</Version>
+    <Version>10.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -80,7 +80,18 @@ namespace BlazorSliders
             if (moduleTask != null && moduleTask.IsValueCreated)
             {
                 var module = await moduleTask.Value;
-                await module.DisposeAsync();
+                try
+                {
+                    await module.DisposeAsync();
+                }
+                catch (JSDisconnectedException)
+                {
+                    // The circuit is already gone - there is nothing left to clean up on the JS side
+                }
+                catch (OperationCanceledException)
+                {
+                    // Same as above - the JS runtime is shutting down
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 namespace BlazorSliders
 {
-    public partial class VerticalSliderPanel : SliderPanelBase
+    public partial class VerticalSliderPanel : SliderPanelBase, IDisposable
     {
         public SliderPanelBase LeftPanel { get; set; }
 
@@ -220,6 +220,37 @@ namespace BlazorSliders
                 leftPanelWidth = InitialSliderPosition;
                 if (originalLeftPanelWidth <= 0)
                     originalLeftPanelWidth = InitialSliderPosition;
+            }
+        }
+
+        public void Dispose()
+        {
+            // Clear stale parent references when this panel is removed from the render tree,
+            // so the parent no longer interacts with a disposed child
+            if (Parent == null)
+                return;
+
+            if (Parent.GetType() == typeof(VerticalSliderPanel))
+            {
+                var parent = (VerticalSliderPanel)Parent;
+                if (parent.LeftPanel == this)
+                    parent.LeftPanel = null;
+                if (parent.RightPanel == this)
+                    parent.RightPanel = null;
+            }
+            else if (Parent.GetType() == typeof(HorizontalSliderPanel))
+            {
+                var parent = (HorizontalSliderPanel)Parent;
+                if (parent.TopPanel == this)
+                    parent.TopPanel = null;
+                if (parent.BottomPanel == this)
+                    parent.BottomPanel = null;
+            }
+            else if (Parent.GetType() == typeof(AbsolutePanel))
+            {
+                var parent = (AbsolutePanel)Parent;
+                if (parent.ChildPanel == this)
+                    parent.ChildPanel = null;
             }
         }
     }

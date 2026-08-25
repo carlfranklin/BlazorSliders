@@ -1,0 +1,101 @@
+@page "/visibility"
+<div style="display: flex; flex-direction: column; height: 100vh; width: 100vw; background-color: #0a0a0a;">
+    <div style="padding: 10px; background-color: #252526; color: white; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; z-index: 100;">
+        <h3 style="margin: 0;">BlazorSliders Test Page</h3>
+        <button @onclick="ToggleBottomPanel" style="padding: 8px 16px; background-color: #0e639c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">
+            @(_showBottomPanel ? "Hide" : "Show") Bottom Panel
+        </button>
+    </div>
+
+    <div style="padding: 0 10px 8px 10px; background-color: #252526; color: #cccccc; font-size: 13px; flex-shrink: 0;">
+        This page is a regression test for toggling the visibility of nested panels. Use the button above to hide and show the bottom panel, then drag the sliders and resize the window to confirm the remaining panels continue to lay out correctly.
+    </div>
+
+    <div style="flex: 1; overflow: hidden; position: relative;">
+        <AbsolutePanel AutoResize="true">
+            <VerticalSliderPanel LeftPanelStartingWidth="300"
+                                 MinimumLeftPanelWidth="200"
+                                 MinimumRightPanelWidth="400">
+                <LeftChildContent>
+                    <div style="height: 100%; width: 100%; background-color: #ff4444; padding: 20px; overflow: auto; box-sizing: border-box;">
+                        <h2 style="color: white;">Left Panel (Red)</h2>
+                        <p style="color: white;">This should be visible with red background</p>
+                        @for (int i = 1; i <= 50; i++)
+                        {
+                            <p style="color: white;">Line @i</p>
+                        }
+                    </div>
+                </LeftChildContent>
+                <RightChildContent>
+                    <VerticalSliderPanel PanelPosition="PanelPosition.Right"
+                                         LeftPanelStartingWidth="800"
+                                         MinimumLeftPanelWidth="400"
+                                         MinimumRightPanelWidth="280">
+                        <LeftChildContent>
+                            <div style="height: 100%; width: 100%;">
+                                @if (_showBottomPanel)
+                                {
+                                    <HorizontalSliderPanel @key="@("horizontal-split")"
+                                                           PanelPosition="PanelPosition.Left"
+                                                           TopPanelHeight="300">
+                                        <TopChildContent>
+                                            <div style="height: 100%; width: 100%; background-color: #44ff44; padding: 20px; overflow: auto; box-sizing: border-box;">
+                                                <h2 style="color: black;">Top Panel (Green)</h2>
+                                                <p style="color: black;">This should be visible with green background</p>
+                                                @for (int i = 1; i <= 50; i++)
+                                                {
+                                                    <p style="color: black;">Top Line @i</p>
+                                                }
+                                            </div>
+                                        </TopChildContent>
+                                        <BottomChildContent>
+                                            <div style="height: 100%; width: 100%; background-color: #ff44ff; padding: 20px; overflow: auto; box-sizing: border-box;">
+                                                <h2 style="color: white;">Bottom Panel (Magenta)</h2>
+                                                <p style="color: white;">This should be visible with magenta background</p>
+                                                @for (int i = 1; i <= 50; i++)
+                                                {
+                                                    <p style="color: white;">Bottom Line @i</p>
+                                                }
+                                            </div>
+                                        </BottomChildContent>
+                                    </HorizontalSliderPanel>
+                                }
+                                else
+                                {
+                                    <div @key="@("single-panel")" style="height: 100%; width: 100%; background-color: #44ff44; padding: 20px; overflow: auto; box-sizing: border-box;">
+                                        <h2 style="color: black;">Center Panel (Green)</h2>
+                                        <p style="color: black;">This should be visible with green background - Bottom panel hidden</p>
+                                        @for (int i = 1; i <= 50; i++)
+                                        {
+                                            <p style="color: black;">Line @i</p>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </LeftChildContent>
+                        <RightChildContent>
+                            <div style="height: 100%; width: 100%; background-color: #4444ff; padding: 20px; overflow: auto; box-sizing: border-box;">
+                                <h2 style="color: white;">Right Panel (Blue)</h2>
+                                <p style="color: white;">This should be visible with blue background</p>
+                                @for (int i = 1; i <= 50; i++)
+                                {
+                                    <p style="color: white;">Right Line @i</p>
+                                }
+                            </div>
+                        </RightChildContent>
+                    </VerticalSliderPanel>
+                </RightChildContent>
+            </VerticalSliderPanel>
+        </AbsolutePanel>
+    </div>
+</div>
+
+@code {
+    private bool _showBottomPanel = true;
+
+    private async Task ToggleBottomPanel()
+    {
+        _showBottomPanel = !_showBottomPanel;
+        await InvokeAsync(StateHasChanged);
+    }
+}

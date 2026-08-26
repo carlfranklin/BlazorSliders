@@ -19,8 +19,16 @@ namespace BlazorSliders
         [CascadingParameter(Name ="directHeight")]
         public int DirectHeight { get; set; }
 
+        // The cell this panel actually occupies in its parent, cascaded from the
+        // parent's render tree. Derives the position from where the panel is placed
+        // so a wrong or missing PanelPosition attribute can't desync coordinates.
+        [CascadingParameter(Name = "directCell")]
+        public PanelPosition? DirectCell { get; set; }
+
         [Parameter]
         public PanelPosition PanelPosition { get; set; }
+
+        protected PanelPosition CellPosition => DirectCell ?? PanelPosition;
 
         protected int SubtractLeft = 0;
         protected int SubtractTop = 0;
@@ -38,7 +46,7 @@ namespace BlazorSliders
                 else if (panel.Parent.GetType() == typeof(VerticalSliderPanel))
                 {
                     var parent = (VerticalSliderPanel)panel.Parent;
-                    if (panel.PanelPosition == PanelPosition.Right)
+                    if (panel.CellPosition == PanelPosition.Right)
                         SubtractLeft += parent.LeftPanelWidth + parent.SliderWidth;
                 }
                 GetSubtractLeft(panel.Parent);
@@ -55,7 +63,7 @@ namespace BlazorSliders
                 else if (panel.Parent.GetType() == typeof(HorizontalSliderPanel))
                 {
                     var parent = (HorizontalSliderPanel)panel.Parent;
-                    if (panel.PanelPosition == PanelPosition.Bottom)
+                    if (panel.CellPosition == PanelPosition.Bottom)
                         SubtractTop += parent.TopPanelHeight + parent.SliderHeight;
                 }
                 GetSubtractTop(panel.Parent);
@@ -204,8 +212,10 @@ namespace BlazorSliders
             get
             {
                 if (dimensions.Width <= 0 && Parent != null && DirectWidth > 0)
+                {
                         dimensions.Width = DirectWidth;
-                           
+                }
+
                 return dimensions.Width;
             }
             set
@@ -233,7 +243,9 @@ namespace BlazorSliders
             get
             {
                 if (dimensions.Height == 0 && Parent != null && DirectHeight > 0)
+                {
                     dimensions.Height = DirectHeight;
+                }
 
                 return dimensions.Height;
             }

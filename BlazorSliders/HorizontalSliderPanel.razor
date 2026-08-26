@@ -12,20 +12,24 @@
     @if (TopHeaderContent != null)
     {
         <div class="panel-header">
-            <CascadingValue Value=this Name="directParent">
-                <CascadingValue Value=Width Name="directWidth">
-                    <CascadingValue Value=TopPanelHeight Name="directHeight">
-                        @TopHeaderContent
+            <CascadingValue Value=@PanelPosition.Top Name="directCell">
+                <CascadingValue Value=this Name="directParent">
+                    <CascadingValue Value=Width Name="directWidth">
+                        <CascadingValue Value=TopPanelHeight Name="directHeight">
+                            @TopHeaderContent
+                        </CascadingValue>
                     </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </div>
     }
     <div class="panel-content">
-        <CascadingValue Value=this Name="directParent">
-            <CascadingValue Value=Width Name="directWidth">
-                <CascadingValue Value=TopPanelHeight Name="directHeight">
-                    @TopChildContent
+        <CascadingValue Value=@PanelPosition.Top Name="directCell">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=TopPanelHeight Name="directHeight">
+                        @TopChildContent
+                    </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </CascadingValue>
@@ -53,20 +57,24 @@
     @if (BottomHeaderContent != null)
     {
         <div class="panel-header">
-            <CascadingValue Value=this Name="directParent">
-                <CascadingValue Value=Width Name="directWidth">
-                    <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                        @BottomHeaderContent
+            <CascadingValue Value=@PanelPosition.Bottom Name="directCell">
+                <CascadingValue Value=this Name="directParent">
+                    <CascadingValue Value=Width Name="directWidth">
+                        <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                            @BottomHeaderContent
+                        </CascadingValue>
                     </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </div>
     }
     <div class="panel-content">
-        <CascadingValue Value=this Name="directParent">
-            <CascadingValue Value=Width Name="directWidth">
-                <CascadingValue Value=BottomPanelHeight Name="directHeight">
-                    @BottomChildContent
+        <CascadingValue Value=@PanelPosition.Bottom Name="directCell">
+            <CascadingValue Value=this Name="directParent">
+                <CascadingValue Value=Width Name="directWidth">
+                    <CascadingValue Value=BottomPanelHeight Name="directHeight">
+                        @BottomChildContent
+                    </CascadingValue>
                 </CascadingValue>
             </CascadingValue>
         </CascadingValue>

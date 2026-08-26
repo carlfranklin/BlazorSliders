@@ -192,16 +192,16 @@ namespace BlazorSliders
                     ((AbsolutePanel)Parent).ChildPanel = this;
                 else if (Parent.GetType() == typeof(VerticalSliderPanel))
                 {
-                    if (PanelPosition == PanelPosition.Left)
+                    if (CellPosition == PanelPosition.Left)
                         ((VerticalSliderPanel)Parent).LeftPanel = this;
-                    else if (PanelPosition == PanelPosition.Right)
+                    else if (CellPosition == PanelPosition.Right)
                         ((VerticalSliderPanel)Parent).RightPanel = this;
                 }
                 else if (Parent.GetType() == typeof(HorizontalSliderPanel))
                 {
-                    if (PanelPosition == PanelPosition.Top)
+                    if (CellPosition == PanelPosition.Top)
                         ((HorizontalSliderPanel)Parent).TopPanel = this;
-                    else if (PanelPosition == PanelPosition.Bottom)
+                    else if (CellPosition == PanelPosition.Bottom)
                         ((HorizontalSliderPanel)Parent).BottomPanel = this;
                 }
             }

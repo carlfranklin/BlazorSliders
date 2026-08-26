@@ -78,6 +78,9 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
 
         // mouse
         slider.addEventListener("mousedown", function (ev) {
+            // Prevent native text selection / HTML5 drag from hijacking the gesture.
+            ev.preventDefault();
+            if (slider.classList.contains("disabled")) return;
             sliderIsMoving = true;
             if (component != null) {
                 var absoluteElement = ev.target;
@@ -152,6 +155,9 @@ export function registerVerticalSliderPanel(SliderId, LeftPanelId, RightPanelId,
 
         // touch
         slider.addEventListener("touchstart", function (ev) {
+            // Prevent native text selection / HTML5 drag from hijacking the gesture.
+            ev.preventDefault();
+            if (slider.classList.contains("disabled")) return;
             sliderIsMoving = true;
             if (component != null) {
                 leftPanel.style.cursor = "e-resize";
@@ -273,6 +279,9 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
 
         // mouse
         slider.addEventListener("mousedown", function (ev) {
+            // Prevent native text selection / HTML5 drag from hijacking the gesture.
+            ev.preventDefault();
+            if (slider.classList.contains("disabled")) return;
             sliderIsMoving = true;
             if (component != null) {
                 topPanel.style.cursor = "n-resize";
@@ -346,6 +355,9 @@ export function registerHorizontalSliderPanel(SliderId, TopPanelId, BottomPanelI
 
         // touch
         slider.addEventListener("touchstart", function (ev) {
+            // Prevent native text selection / HTML5 drag from hijacking the gesture.
+            ev.preventDefault();
+            if (slider.classList.contains("disabled")) return;
             sliderIsMoving = true;
             if (component != null) {
                 topPanel.style.cursor = "n-resize";

@@ -147,18 +147,21 @@ namespace BlazorSliders
         [JSInvokable]
         public async Task MouseDown(int X, int Y)
         {
+            if (Disabled) return;
             await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
         public async Task MouseUp(int X, int Y)
         {
+            if (Disabled) return;
             await InvokeAsync(StateHasChanged);
         }
 
         [JSInvokable]
         public async Task MouseMove(int X, int Y)
         {
+            if (Disabled) return;
             var oldPosition = topPanelHeight;
             Resize(Y);
             if (topPanelHeight != oldPosition)

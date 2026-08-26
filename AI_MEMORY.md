@@ -33,9 +33,17 @@ Durable knowledge from previous sessions: design decisions, non-obvious behavior
 - Debug technique that cracked it: temporary `Console.WriteLine` in `Resize()` (entry + clamped result) and Width/Height getters/setters, plus `console.log` in the JS `raiseEvent`; the server log showed the child's `Resize` receiving the correct fresh `DirectHeight` but clamping to its minimum → a coordinate-offset bug, not stale cascade state. All instrumentation was removed afterwards (Sliders.js byte-identical to pre-debug, verified via git diff).
 - Verification: headless Playwright drag test (`l6-test.js` in the session files dir; use `executablePath` to the existing chromium-1169 — the playwright 1.56.0-alpha CLI install is silently broken). After the fix, L6 moves on the first drag once an outer slider frees its range.
 
-## PR status (as of 2026-08-25)
+## PR status (as of 2026-08-26)
 - Closed #34 (community net10 PR — superseded by our local net10-only upgrade) and #32 (visibility fix — re-implemented on master, test pages kept).
-- Still open: stale Copilot-bot drafts #26 (Disabled property), #28 (SliderContent RenderFragment), #30 (Copilot instructions) from Aug 2025 — candidates for closing if Carl wants.
+- #28 (SliderContent RenderFragment) landed on master as 48d41f2 (2026-08-26) — stale draft PR can be closed.
+- #26 (Disabled property) re-implemented cleanly on master, in working tree awaiting commit (2026-08-26) — stale draft PR can be closed once it lands.
+- #30 (Copilot instructions) still open — stale .NET 9 refs, overlaps startup.md/AI memory system; recommend closing.
+
+## Disabled property and the native-drag hijack fix (2026-08-26)
+- API: `SliderPanelBase.Disabled` (bool parameter, default false) on both slider panels. When true: the slider div gets a `disabled` class (scoped CSS `.disabled { cursor: not-allowed; opacity: 0.5; }`), the JS slider `mousedown`/`touchstart` handlers early-return, and the C# `MouseDown`/`MouseUp`/`MouseMove` handlers early-return. Toggling at runtime works (class re-applies, drag re-allowed).
+- Native-drag quirk (the hard part): once the slider has child content (SliderContent from #28 — its host div covers the whole bar, so ANY mousedown on the slider lands on a classless, `user-select:auto` div), Chrome's FIRST mousedown+move over it starts a native text selection (`selectstart`), and every SUBSEQUENT mousedown+move starts a native HTML5 drag (`dragstart` → `mousemove` becomes `drag`, `mouseup` becomes `dragend`). During a native drag the app's mouse handlers never fire → the slider moves only one mousemove step. DOM/CSS was identical at working and non-working coordinates — the discriminator was gesture history (1st press vs 2nd+ press on the same node), not the element or coordinates.
+- Fix (in `Sliders.js`, both panels): `ev.preventDefault()` as the first line of the slider `mousedown` and `touchstart` handlers — suppresses the native selection/drag from ever starting; standard practice for custom drag widgets. After the fix, 3+ consecutive drags deliver all mousemove/mouseup and repeated presses work.
+- Diagnostic technique that cracked it: capture-phase spies on `dragstart`/`drag`/`dragend`/`selectstart`/`mousedown`/`mouseup` in an `addInitScript` (Blazor Server WS frames are binary ArrayBuffers — not inspectable via a `send` spy; a MutationObserver on the slider's style attribute counts .NET-processed MouseMoves).
 
 ## Non-obvious / gotchas
 - `global.json` pins SDK 10.0.400 with `rollForward: latestFeature`.

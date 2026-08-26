@@ -12,3 +12,8 @@
     background-color: lightgray;
     cursor: e-resize;
 }
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

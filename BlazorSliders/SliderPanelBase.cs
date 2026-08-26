@@ -28,6 +28,9 @@ namespace BlazorSliders
         [Parameter]
         public PanelPosition PanelPosition { get; set; }
 
+        [Parameter]
+        public bool Disabled { get; set; } = false;
+
         protected PanelPosition CellPosition => DirectCell ?? PanelPosition;
 
         protected int SubtractLeft = 0;

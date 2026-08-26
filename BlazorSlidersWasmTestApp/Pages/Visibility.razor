@@ -74,9 +74,10 @@
                             </div>
                         </LeftChildContent>
                         <RightChildContent>
-                            <div style="height: 100%; width: 100%; background-color: #4444ff; padding: 20px; overflow: auto; box-sizing: border-box;">
+                            <div class="blue-panel" style="height: 100%; width: 100%; background-color: #4444ff; padding: 20px; overflow: auto; box-sizing: border-box;">
                                 <h2 style="color: white;">Right Panel (Blue)</h2>
                                 <p style="color: white;">This should be visible with blue background</p>
+                                <NavMenu />
                                 @for (int i = 1; i <= 50; i++)
                                 {
                                     <p style="color: white;">Right Line @i</p>

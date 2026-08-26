@@ -47,6 +47,9 @@ namespace BlazorSliders
         public RenderFragment RightChildContent { get; set; }
 
         [Parameter]
+        public RenderFragment SliderContent { get; set; }
+
+        [Parameter]
         public string LeftStyleString { get; set; } = "";
 
         [Parameter]

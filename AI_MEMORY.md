@@ -35,9 +35,10 @@ Durable knowledge from previous sessions: design decisions, non-obvious behavior
 
 ## PR status (as of 2026-08-26)
 - Closed #34 (community net10 PR — superseded by our local net10-only upgrade) and #32 (visibility fix — re-implemented on master, test pages kept).
-- #28 (SliderContent RenderFragment) landed on master as 48d41f2 (2026-08-26) — stale draft PR can be closed.
-- #26 (Disabled property) re-implemented cleanly on master, in working tree awaiting commit (2026-08-26) — stale draft PR can be closed once it lands.
-- #30 (Copilot instructions) still open — stale .NET 9 refs, overlaps startup.md/AI memory system; recommend closing.
+- #28 (SliderContent RenderFragment) landed on master as 48d41f2 (2026-08-26); its stale draft PR closed the same day.
+- #26 (Disabled property) re-implemented cleanly on master (working tree awaiting commit, 2026-08-26); its stale draft PR closed the same day — the local implementation is NOT from the draft.
+- #30 (Copilot instructions) closed 2026-08-26 — stale .NET 9 refs, overlaps startup.md/AI memory system. **No open PRs remain.**
+- Issues #27 (SliderContent — landed 48d41f2), #33 (visibility fix), #29 (Copilot instructions — superseded by startup.md/AI memory), and #3 (Disabled property — implemented, in working tree) were all CLOSED 2026-08-26 with explanatory comments. Still open: #31 (parentContained window-resize listener throws after navigating away/back — `registerWindow` in Sliders.js lacks a null check on `getElementById(id)`) — the one actionable bug; #4 (2021 feature request: programmatic panel width) — Carl's call.
 
 ## Disabled property and the native-drag hijack fix (2026-08-26)
 - API: `SliderPanelBase.Disabled` (bool parameter, default false) on both slider panels. When true: the slider div gets a `disabled` class (scoped CSS `.disabled { cursor: not-allowed; opacity: 0.5; }`), the JS slider `mousedown`/`touchstart` handlers early-return, and the C# `MouseDown`/`MouseUp`/`MouseMove` handlers early-return. Toggling at runtime works (class re-applies, drag re-allowed).

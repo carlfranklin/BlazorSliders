@@ -183,6 +183,19 @@ builder.Services.AddScoped<SliderInterop>();
                 This is a demo of a single vertical slider panel.
             </div>
         </LeftChildContent>
+        <SliderContent>
+            <div style="display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        gap: 8px;">
+                <div style="width: 4px; height: 4px; background: white; border-radius: 50%;"></div>
+                <div style="width: 4px; height: 4px; background: white; border-radius: 50%;"></div>
+                <div style="width: 4px; height: 4px; background: white; border-radius: 50%;"></div>
+            </div>
+        </SliderContent>
         <RightChildContent>
             <div style="padding:10px;">
                 <h3>Right Content</h3>
@@ -192,7 +205,7 @@ builder.Services.AddScoped<SliderInterop>();
     </VerticalSliderPanel>
 </AbsolutePanel>
 ```
-<sup><a href='/BlazorSlidersWasmTestApp/Pages/Index.razor#L1-L20' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/Index.razor#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 

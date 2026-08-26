@@ -176,11 +176,12 @@ builder.Services.AddScoped<SliderInterop>();
 @page "/"
 
 <AbsolutePanel AutoResize="true">
-    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10">
+    <VerticalSliderPanel LeftPanelStartingWidth="400" SliderWidth="10" Disabled="@isDisabled">
         <LeftChildContent>
             <div style="padding:10px;">
                 <h3>Left Content</h3>
                 This is a demo of a single vertical slider panel.
+                <button @onclick="ToggleDisabled" style="margin-top:10px;">@(isDisabled ? "Enable" : "Disable") slider</button>
             </div>
         </LeftChildContent>
         <SliderContent>
@@ -204,8 +205,17 @@ builder.Services.AddScoped<SliderInterop>();
         </RightChildContent>
     </VerticalSliderPanel>
 </AbsolutePanel>
+
+@code {
+    private bool isDisabled;
+
+    private void ToggleDisabled()
+    {
+        isDisabled = !isDisabled;
+    }
+}
 ```
-<sup><a href='/BlazorSlidersWasmTestApp/Pages/Index.razor#L1-L33' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/BlazorSlidersWasmTestApp/Pages/Index.razor#L1-L43' title='Snippet source file'>snippet source</a> | <a href='#snippet-BlazorSlidersWasmTestApp/Pages/Index.razor' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
